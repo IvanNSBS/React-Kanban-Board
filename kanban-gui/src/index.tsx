@@ -2,7 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Card from '../../data/cards/card'
 import styled from 'styled-components'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
+const homePath = "/";
+const aboutPath = "/about";
 
 const card:Card = new Card("Example Card Name")
 const RedHeader = styled.h2`
@@ -10,16 +13,38 @@ const RedHeader = styled.h2`
     color: whitesmoke;
 `
 
-const CardName: React.FC<{text:string}> = (props) => {
+const CardName: React.FC = (props) => {
     return(
-      <h2>Card Name: {props.text}</h2>  
+        <div>
+            <RedHeader>Card Name: {card.name}</RedHeader>  
+            <Link to={homePath}>Home</Link>
+        </div>
     );
 }
 
+const RouteExample: React.FC = function(){
+    return(
+        <div>
+            Route Example!
+            <Link to={aboutPath}>About</Link>
+        </div>
+    );
+}
+
+const AppRouter: React.FC = function() {
+    return(
+        <React.StrictMode>
+            <BrowserRouter>
+                <Switch>
+                    <Route path={homePath} component={RouteExample} exact/>
+                    <Route path={aboutPath} component={CardName} exact/>
+                </Switch>
+            </BrowserRouter>
+        </React.StrictMode>
+    )
+}
 
 ReactDOM.render(
-    <h1>
-        <CardName text={card.name}></CardName>
-    </h1>,
+    <AppRouter />,
     document.getElementById('app-root'),
 )
