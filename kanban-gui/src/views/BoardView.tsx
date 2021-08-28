@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import Board from '../../../data/board/board';
 import { useHistory } from 'react-router-dom';
-import { AiFillStar } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
 
 interface BoardData{
     listId: string;
@@ -40,10 +40,11 @@ const ListItem = styled.li`
     }
 
     & svg {
-        transition: 0.7s ease-out;
+        transition: 0.2s ease-out;
         width: 100%;
         height: 100%;
         fill: transparent
+
     }
 `
 
@@ -61,6 +62,12 @@ const FavoriteButton = styled.button`
     width: 20px;
     height: 20px;
     padding: 0;
+
+    
+    &:hover svg {
+        transition: 0.1s ease-out;
+        transform: scale(1.3);
+    }
 `
 
 const LabelFont = styled.label<{weight: string, size: string}>`
@@ -77,7 +84,7 @@ const BoardView: React.FC<BoardData> = function(props) {
             <BottomContainer>
                 <LabelFont weight="normal" size="15px">{props.board.workspace}</LabelFont>
                 <FavoriteButton>
-                    <AiFillStar/>
+                    <AiOutlineStar/>
                 </FavoriteButton>
             </BottomContainer>
         </ListItem>
