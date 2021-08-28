@@ -12,7 +12,7 @@ interface BoardData{
 
 const ListItem = styled.li`
     background-color: red;
-    border-radius: 3px;
+    border-radius: 7px;
     width: 21%;
     min-width: 140px;
     height: 112px;
