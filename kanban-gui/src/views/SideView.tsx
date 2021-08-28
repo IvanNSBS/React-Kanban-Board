@@ -27,12 +27,16 @@ const FlexContainer = styled.div<FlexInterface>`
     align-items: ${(props) => props.align};
 `
 
+const MarginFlexContainer = styled(FlexContainer)<{margin: string}>`
+    margin: ${(props) => props.margin};
+`
+
 const FolderView: React.FC<{name: string}> = function(props) { 
     return(
-        <div>
+        <div style={{margin: "5px 0 10px 0"}}>
             <FlexContainer direction="row" justify="space-between" align="center">
                 <FlexContainer direction="row">
-                    <div style={{backgroundColor: "red", height: "20px", width: "20px"}}></div>
+                    <div style={{backgroundColor: "red", height: "20px", width: "20px", marginRight: "10px"}}></div>
                     <label>{props.name}</label>
                 </FlexContainer>
                 <button>V</button>
@@ -51,8 +55,10 @@ const SideView: React.FC = function() {
         <WorkspaceContainer>
             <Link to="/">Todos os Quadros</Link>
             <div>
-                <label>Pastas</label>
-                <button> + </button>
+                <MarginFlexContainer direction="row" justify="space-between" margin="5px 0 5px 0">
+                    <label>Pastas</label>
+                    <button> + </button>
+                </MarginFlexContainer>
                 <FolderView name="Geeko's Productions"></FolderView>
                 <FolderView name="Bethesda Softworks"></FolderView>
             </div>
