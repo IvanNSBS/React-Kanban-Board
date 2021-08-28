@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import React from 'react';
-import { useState } from 'react';
-
 import Account from '../../../data/account/account';
 import Board from '../../../data/board/board';
+import BoardView from './BoardView';
 
 const dummyaccount = new Account("Ivovski");
 const dummyBoard = new Board("Example Board");
+
 const x = 10;
 for(let i = 0; i < x; i++)
     dummyaccount.addBoard(dummyBoard);
@@ -28,27 +28,17 @@ const AccountContainer = styled.div`
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
-
-        & li {
-            background-color: red;
-            border-radius: 3px;
-            width: 23%;
-            height: 112px;
-            color: whitesmoke;
-            margin: 0 2% 2% 0;
-            padding: 0px;
-        }
     }
 `
+
 
 const HomeView: React.FC = function() 
 {
     const boardItems = dummyaccount.boards.map((board, idx) => {
         console.log("Board name: " + board.name);
+        board.workspace = board.name + "_" + idx;
         return (
-            <li key={board.name+"_"+idx}> 
-                {board.name} 
-            </li>
+            <BoardView listId={board.name+"_"+idx} board={board}/>
         )
     })
 
