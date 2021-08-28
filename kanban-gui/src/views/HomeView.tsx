@@ -3,6 +3,7 @@ import React from 'react';
 import Account from '../../../data/account/account';
 import Board from '../../../data/board/board';
 import BoardView from './BoardView';
+import SideView from './SideView';
 
 const dummyaccount = new Account("Ivovski");
 const dummyBoard = new Board("Example Board");
@@ -16,7 +17,7 @@ const AccountContainer = styled.div`
     justify-content: center;
     padding: 0;
     padding-top: 50px;
-    padding-left: 15%;
+    padding-left: 7.5%;
     padding-right: 15%;
 
     & ul {
@@ -46,6 +47,9 @@ const HomeView: React.FC = function()
 
     return(
         <AccountContainer>
+            <SideView>
+
+            </SideView>
             <ul>
                 {boardItems}
             </ul>
