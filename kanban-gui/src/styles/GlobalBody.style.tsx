@@ -5,6 +5,8 @@ interface BodyProps{
 }
 
 const BackgroundStyle = createGlobalStyle<BodyProps>`
+    font-family: Arial, Helvetica, sans-serif;
+    
     body {
         background-color: ${(props) => props.bgCol};
         width: 100vw;
