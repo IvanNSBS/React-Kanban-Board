@@ -16,8 +16,8 @@ const AccountContainer = styled.div`
     justify-content: center;
     padding: 0;
     padding-top: 50px;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 15%;
+    padding-right: 15%;
 
     & ul {
         margin: 0;
@@ -28,6 +28,7 @@ const AccountContainer = styled.div`
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
+        width: 70%;
     }
 `
 

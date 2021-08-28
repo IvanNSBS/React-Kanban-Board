@@ -13,8 +13,8 @@ interface BoardData{
 const ListItem = styled.li`
     background-color: red;
     border-radius: 3px;
-    min-width: 160px;
-    width: 23%;
+    width: 21%;
+    min-width: 140px;
     height: 112px;
     margin: 0 2% 2% 0;
     padding: 8px;
@@ -25,6 +25,7 @@ const ListItem = styled.li`
 
     display: flex;
     flex-direction: column;
+    flex-grow: 0;
     justify-content: space-between;
 
     &:hover{
