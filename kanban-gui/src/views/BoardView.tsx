@@ -65,7 +65,7 @@ const FavoriteButton = styled.button`
 
     
     &:hover svg {
-        transition: 0.1s ease-out;
+        transition: 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         transform: scale(1.3);
     }
 `
