@@ -37,8 +37,9 @@ const HomeView: React.FC = function()
     const boardItems = dummyaccount.boards.map((board, idx) => {
         console.log("Board name: " + board.name);
         board.workspace = board.name + "_" + idx;
+        let link = "/";
         return (
-            <BoardView listId={board.name+"_"+idx} board={board}/>
+            <BoardView listId={board.name+"_"+idx} board={board} boardLink={link}/>
         )
     })
 
