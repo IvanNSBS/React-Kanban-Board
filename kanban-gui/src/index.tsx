@@ -4,6 +4,7 @@ import Card from '../../data/cards/card'
 import styled from 'styled-components'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import HomeView from './views/HomeView';
+import BackgroundStyle from './styles/GlobalBody.style'
 
 const homePath = "/";
 const aboutPath = "/about";
@@ -26,6 +27,7 @@ const CardName: React.FC<{text:string}> = (props) => {
 const AppRouter: React.FC = function() {
     return(
         <React.StrictMode>
+            <BackgroundStyle bgCol="#2b2b29"/>
             <BrowserRouter>
                 <Switch>
                     <Route path={homePath} component={HomeView} exact/>

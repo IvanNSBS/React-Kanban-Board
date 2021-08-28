@@ -1,0 +1,17 @@
+import { createGlobalStyle } from 'styled-components';
+
+interface BodyProps{
+    bgCol: string;
+}
+
+const BackgroundStyle = createGlobalStyle<BodyProps>`
+    body {
+        background-color: ${(props) => props.bgCol};
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+`
+
+export default BackgroundStyle;
