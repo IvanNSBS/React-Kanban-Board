@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import Board from '../../../data/board/board';
 import { useHistory } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai'
 
 interface BoardData{
     listId: string;
@@ -27,13 +28,22 @@ const ListItem = styled.li`
     justify-content: space-between;
 
     &:hover{
-    transition: 0.2s ease-out;
+        transition: 0.2s ease-out;
         opacity: 0.5;
+
+        & svg { fill: yellow }
     }
 
     &:active{
         transition: 0.2s ease-out;
         opacity: 0.3;
+    }
+
+    & svg {
+        transition: 0.7s ease-out;
+        width: 100%;
+        height: 100%;
+        fill: transparent
     }
 `
 
@@ -47,8 +57,10 @@ const BottomContainer = styled.div`
 const FavoriteButton = styled.button`
     border: 0px;
     border-radius: 0px;
-    background-color: green;
+    background-color: transparent;
     width: 20px;
+    height: 20px;
+    padding: 0;
 `
 
 const LabelFont = styled.label<{weight: string, size: string}>`
@@ -64,7 +76,9 @@ const BoardView: React.FC<BoardData> = function(props) {
             <LabelFont weight="bold" size="18px">{props.board.name}</LabelFont>
             <BottomContainer>
                 <LabelFont weight="normal" size="15px">{props.board.workspace}</LabelFont>
-                <FavoriteButton></FavoriteButton>
+                <FavoriteButton>
+                    <AiFillStar/>
+                </FavoriteButton>
             </BottomContainer>
         </ListItem>
     );
