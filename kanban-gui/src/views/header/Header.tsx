@@ -1,5 +1,5 @@
 import React from "react";
-import LinkButton from "../../common components/link button/LinkButton";
+import LinkButton from "../../common/components/link button/LinkButton";
 import * as styles from './Header.styles'
 
 const Header: React.FC = function() {
