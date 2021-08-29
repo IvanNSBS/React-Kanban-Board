@@ -16,7 +16,7 @@ const FolderTitleContainer = styled.span<{iconSpacing?: string}>`
 `
 
 const ListContainer = styled.ul`
-    margin: 0;
+    margin: 0 0 30px 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
