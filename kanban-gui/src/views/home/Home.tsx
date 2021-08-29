@@ -6,11 +6,10 @@ import SideBar from './side bar/SideBar';
 import * as styles from './Home.styles'
 
 const dummyaccount = new Account("Ivovski");
-const dummyBoard = new Board("Example Board");
 
 const x = 10;
 for(let i = 0; i < x; i++)
-    dummyaccount.addBoard(dummyBoard);
+    dummyaccount.addBoard(new Board("Example Board_"+i.toString()));
 
 
 const Home: React.FC = function() 
