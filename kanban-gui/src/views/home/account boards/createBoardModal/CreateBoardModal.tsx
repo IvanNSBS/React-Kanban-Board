@@ -21,15 +21,6 @@ const CreateBoardModal: React.FC<{active: boolean}> = function({active})
         return function(){
             window.onscroll = function() {};
         }
-    })
-
-    useEffect(() => {
-        if(isActive)
-            disableScroll();
-
-        return function(){
-            window.onscroll = function() {};
-        }
     }, [isActive])
 
     if(active){
