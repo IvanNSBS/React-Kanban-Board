@@ -9,6 +9,8 @@ interface FlexProperties{
     height?: string;
     padding?: string;
     margin?: string;
+    backgroundColor?: string;
+    borderRadius?: string;
 }
 
 const FlexDiv = styled.div<FlexProperties>`
@@ -20,6 +22,8 @@ const FlexDiv = styled.div<FlexProperties>`
     height: ${(props) => props.height };
     margin: ${(props) => props.margin };
     padding: ${(props) => props.padding };
+    background-color: ${(props) => props.backgroundColor };
+    border-radius: ${(props) => props.borderRadius };
 `  
 
 export default FlexDiv;
