@@ -80,10 +80,6 @@ const Dropdown = styled.select`
     &:hover{
         background-color: #0000006f;
     }
-
-    &:after div {
-        background-color: cadetblue;
-    }
 `
 
 const Create = styled(Button)`
