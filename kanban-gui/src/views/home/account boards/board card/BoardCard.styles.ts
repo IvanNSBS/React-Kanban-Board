@@ -1,12 +1,4 @@
 import styled from 'styled-components';
-import Board from '../../../../../../data/board/board';
-
-
-export interface BoardData{
-    listId: string;
-    board: Board;
-    boardLink: string;
-}
 
 const ListItem = styled.li`
     background-color: red;
