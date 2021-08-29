@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import Palette from "../../common/colorpalette";
 
 const HeaderContainer = styled.div`
     height: 40px;
-    background-color: #305365;
+    background-color: ${Palette.header};
     color: whitesmoke;
 
     display: flex;

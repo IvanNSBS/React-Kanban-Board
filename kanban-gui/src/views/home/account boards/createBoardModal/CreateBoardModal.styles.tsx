@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Palette from "../../../../common/colorpalette";
 
 const ModalBackground = styled.div`
     min-width: 100vw;
@@ -22,16 +23,17 @@ const Button = styled.button`
     border: 0px;
     border-radius: 5px;
 
-    color: whitesmoke;
-    background-color: rgb(50, 92, 112); 
+    color: ${Palette.text};
+    background-color: #34495e; 
     transition: 0.2s ease-out;
     
     &:hover{
-        background-color: rgb(37, 76, 94);
+        filter: brightness(0.85);
     }
 
     &:active{
-        background-color: rgb(30, 66, 83);
+        filter: brightness(0.7);
+
     }
 `
 
@@ -47,7 +49,7 @@ const Input = styled.input`
 
     border: 0px;
     border-radius: 6px;
-    color: whitesmoke;
+    color: ${Palette.text};
     background-color: transparent;
     
     padding-left: 5px;
@@ -75,7 +77,7 @@ const Dropdown = styled.select`
     background-color: transparent;
     width: 50%;
     height: 25px;
-    color: whitesmoke;
+    color: ${Palette.text};
 
     &:hover{
         background-color: #0000006f;

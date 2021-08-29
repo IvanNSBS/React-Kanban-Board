@@ -1,6 +1,7 @@
 import styled, {css} from 'styled-components';
 import FlexDiv from "../../../common/styles/FlexDiv";
 import LinkButton from '../../../common/components/link button/LinkButton';
+import Palette from '../../../common/colorpalette';
 
 const WorkspaceContainer = styled.div`
     width: 300px;
@@ -12,7 +13,7 @@ const WorkspaceContainer = styled.div`
 `
 
 const Font = css`
-    color: whitesmoke;
+    color: ${Palette.text};
     font-size: 16px;
     text-align: left;
     font-weight: bold;
@@ -60,7 +61,7 @@ const FolderTitle = styled(FlexDiv)`
 `
 
 const FolderOption = styled.button`
-    color: white;
+    color: ${Palette.text};
     background-color: transparent;
     border: 0px;
     border-radius: 5px;
@@ -104,7 +105,7 @@ const CreateFolder = styled(FlexDiv)`
     user-select: none;
 
     & label {
-        color: gray;
+        color: ${Palette.disabledText};
     }
 
     & label:hover{
@@ -117,7 +118,7 @@ const CreateFolder = styled(FlexDiv)`
         background-color: transparent;
         width: 30px;
         height: 30px;
-        color: gray;
+        color: ${Palette.disabledText};
         font-size: 1em;
         transition: 0.1s ease-out;
     }

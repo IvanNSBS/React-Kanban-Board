@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import Palette from '../../../../common/colorpalette';
 
 const ListItem = styled.li`
-    background-color: red;
+    background-color: ${Palette.boardCard};
     border-radius: 7px;
     width: 21%;
     min-width: 140px;
@@ -10,7 +11,7 @@ const ListItem = styled.li`
     padding: 8px;
     user-select: none;
     
-    color: whitesmoke;
+    color: ${Palette.text};
     transition: 0.2s ease-out;
 
     display: flex;
@@ -35,7 +36,6 @@ const ListItem = styled.li`
         width: 100%;
         height: 100%;
         fill: transparent
-
     }
 `
 
@@ -50,7 +50,7 @@ const BottomContainer = styled.div`
     display: flex;
     align-items: space-between;
     justify-content: space-between;
-    color: #d1d1d1;
+    color: ${Palette.secondaryText};
 `
 
 const FavoriteButton = styled.button`

@@ -3,6 +3,7 @@ import BoardsFolder from "../../../../../../data/account/boardsFolder";
 
 import * as styles from "./CreateBoardModal.styles";
 import FlexDiv from "../../../../common/styles/FlexDiv";
+import Palette from '../../../../common/colorpalette'
 
 interface CreateBoard {
     isOpen: boolean;
@@ -53,7 +54,7 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
 
                     <FlexDiv justify="space-between" height="95px">
                         <FlexDiv direction="column" alignContent="space-between" 
-                                 width="100%" padding="7px" backgroundColor="blue" borderRadius="8px">
+                                 width="100%" padding="7px" backgroundColor={Palette.boardCard} borderRadius="8px">
 
                                 <FlexDiv justify="space-between">
                                     <styles.Input ref={inputRef} type="text" placeholder="Nome do Quadro"></styles.Input>
