@@ -9,7 +9,7 @@ import BoardsFolder from '../../../../../data/account/boardsFolder';
 
 const AccountBoards: React.FC<{account: Account}> = function(props) {
     const [folder, setFolders] = useState<BoardsFolder[]>(props.account.folders)
-    const [modalOpen, setModalOpen] = useState<boolean>(true);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     const folders = props.account.folders.map((folder, idx) => {
         return (

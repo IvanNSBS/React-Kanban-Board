@@ -1,22 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React , { useState }from "react";
 import Account from "../../../../../data/account/account";
-import * as styles from './SideBar.styles'
+import FlexDiv from "../../../common/styles/FlexDiv";
+import * as styles from './SideBar.styles';
+
+import { BiShow } from 'react-icons/bi';
+import { MdCreateNewFolder } from 'react-icons/md'
 
 const FolderView: React.FC<{name: string}> = function(props) { 
+    const [collapsed, setCollapsed] = useState<boolean>(false);
+
+    const onClick = function() {
+        setCollapsed(!collapsed);
+    }
+
     return(
         <div style={{margin: "5px 0 10px 0"}}>
-            <styles.FlexContainer direction="row" justify="space-between" align="center">
-                <styles.FlexContainer direction="row">
-                    <div style={{backgroundColor: "red", height: "20px", width: "20px", marginRight: "10px"}}></div>
-                    <label>{props.name}</label>
-                </styles.FlexContainer>
-                <button>V</button>
-            </styles.FlexContainer>
-            <styles.FlexContainer direction="column">
-                <button>Ver Quadros</button>
-                <button>Criar Quadro</button>
-            </styles.FlexContainer>
+            <styles.FolderTitle onClick={onClick}>
+                <div style={{backgroundColor: "red", height: "25px", width: "25px", marginRight: "10px"}}></div>
+                <label>{props.name}</label>
+            </styles.FolderTitle>
+
+            <FlexDiv direction="column" backgroundColor="transparent">
+                { collapsed && 
+                    <FlexDiv direction="column">
+                        <styles.FolderOption>
+                            <BiShow/>
+                            <label>Mostrar Quadros</label>
+                        </styles.FolderOption>
+                        <styles.FolderOption>
+                            <MdCreateNewFolder/>
+                            <label>Criar Novo Quadro</label>
+                        </styles.FolderOption>
+                    </FlexDiv>
+                }
+            </FlexDiv>
         </div>
     );
 }
@@ -32,12 +49,12 @@ const SideBar: React.FC<{account: Account}> = function(props) {
 
     return(
         <styles.WorkspaceContainer>
-            <Link to="/">Todos os Quadros</Link>
+            <styles.AllBoards to="/" inner="Todos os Quadros"/>
             <div>
-                <styles.MarginFlexContainer direction="row" justify="space-between" margin="5px 0 5px 0">
+                <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0">
                     <label>Pastas</label>
                     <button> + </button>
-                </styles.MarginFlexContainer>
+                </styles.CreateFolder>
                 {folders}
             </div>
         </styles.WorkspaceContainer>
