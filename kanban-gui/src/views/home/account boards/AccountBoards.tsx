@@ -7,6 +7,7 @@ import Folder from './folder/Folder'
 const AccountBoards: React.FC<{account: Account}> = function(props) {
     const folders = props.account.folders.map((folder, idx) => {
         return (
+            // TODO: Add icon to folder data
             <Folder boards={folder.boards} title={folder.name} icon={<AiOutlineStar/>} />
         )
     })
