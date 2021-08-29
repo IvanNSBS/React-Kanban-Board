@@ -10,7 +10,7 @@ const ModalBackground = styled.div`
     right: 0%;
     top: 0%;
     bottom: 0%;
-    background-color: #1b1e20c9;
+    background-color: #151616e8;
     position: fixed;
     overflow: hidden;
     display: flex;
@@ -18,10 +18,80 @@ const ModalBackground = styled.div`
     align-items: center;
 `
 
-const AbsoluteDiv = styled.div`
-    background-color: magenta;
-    width: 350px;
-    height: 200px;
+const Button = styled.button`
+    border: 0px;
+    border-radius: 5px;
+
+    color: whitesmoke;
+    background-color: rgb(50, 92, 112); 
+    transition: 0.2s ease-out;
+    
+    &:hover{
+        background-color: rgb(37, 76, 94);
+    }
+
+    &:active{
+        background-color: rgb(30, 66, 83);
+    }
 `
 
-export { AbsoluteDiv, ModalBackground }
+const AbsoluteDiv = styled.div`
+    width: 450px;
+`
+
+const Input = styled.input`
+    width: 70%;
+    height: 35px;
+    font-size: 18px;
+    margin-bottom: 10px;
+
+    border: 0px;
+    border-radius: 6px;
+    color: whitesmoke;
+    background-color: transparent;
+    
+    padding-left: 5px;
+
+    &:hover{
+        background-color: #0000006f;
+    }
+
+    &:focus{
+        outline: none;
+        background-color: #000000ab;
+        border: 0px;
+    }
+`
+
+const Upload = styled(Button)`
+    height: 100%;
+    margin: 0;
+    margin-left: 7px;
+`
+
+const Dropdown = styled.select`
+    border: 0px;
+    border-radius: 4px;
+    background-color: transparent;
+    width: 50%;
+    height: 25px;
+    color: whitesmoke;
+
+    &:hover{
+        background-color: #0000006f;
+    }
+
+    &:after div {
+        background-color: cadetblue;
+    }
+`
+
+const Create = styled(Button)`
+    height: 35px;
+    margin-top: 7px;
+`
+
+const Close = styled.button`
+`
+
+export { AbsoluteDiv, ModalBackground, Dropdown, Create, Input, Close, Upload }

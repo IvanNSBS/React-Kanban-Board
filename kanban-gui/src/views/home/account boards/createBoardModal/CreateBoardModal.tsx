@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import { AbsoluteDiv, ModalBackground } from "./CreateBoardModal.styles";
+import React, { useEffect, useRef } from "react";
 import BoardsFolder from "../../../../../../data/account/boardsFolder";
+
+import * as styles from "./CreateBoardModal.styles";
+import FlexDiv from "../../../../common/styles/FlexDiv";
 
 interface CreateBoard {
     isOpen: boolean;
@@ -46,22 +48,29 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
         })
 
         return(
-            <ModalBackground onClick={deactivate}>
-                <AbsoluteDiv onClick={e => e.stopPropagation()}>
-                    <div>
-                        <div>
-                            <input ref={inputRef} type="text" placeholder="Nome do Quadro"></input>
-                            <button onClick={deactivate}>x</button>
-                        </div>
-                        <select ref={selectRef} name={props.folders[0].name}>
-                            {options}
-                        </select>
-                    </div>
-                    <div>
-                        <button onClick={createBoard}>Criar</button>
-                    </div>
-                </AbsoluteDiv>
-            </ModalBackground>
+            <styles.ModalBackground onClick={deactivate}>
+                <styles.AbsoluteDiv onClick={e => e.stopPropagation()}>
+
+                    <FlexDiv justify="space-between" height="95px">
+                        <FlexDiv direction="column" alignContent="space-between" 
+                                 width="100%" padding="7px" backgroundColor="blue" borderRadius="8px">
+
+                                <FlexDiv justify="space-between">
+                                    <styles.Input ref={inputRef} type="text" placeholder="Nome do Quadro"></styles.Input>
+                                    <styles.Close onClick={deactivate}>x</styles.Close>
+                                </FlexDiv>
+
+                            <styles.Dropdown ref={selectRef} name={props.folders[0].name}>
+                                {options}
+                            </styles.Dropdown>
+                        </FlexDiv>
+                        <styles.Upload>Upload Thumbnail</styles.Upload>
+                    </FlexDiv>
+
+                    <styles.Create onClick={createBoard}>Criar Quadro</styles.Create>
+
+                </styles.AbsoluteDiv>
+            </styles.ModalBackground>
         )
     }
 
