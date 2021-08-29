@@ -28,9 +28,9 @@ const BoardView: React.FC<BoardData> = function(props) {
 
 const CreateBoardBtn: React.FC<{listId: string}> = function(props) {
     return(
-        <styles.ListItem key={props.listId}>
+        <styles.CreateBoard key={props.listId}>
             Criar novo quadro
-        </styles.ListItem>
+        </styles.CreateBoard>
     );
 }
 

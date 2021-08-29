@@ -1,6 +1,6 @@
 import React from 'react';
 import Board from '../../../../../../data/board/board';
-import BoardView from '../board card/BoardCard';
+import BoardView, { CreateBoardBtn } from '../board card/BoardCard';
 import * as styles from './Folder.styles'
 
 interface FolderData{
@@ -27,6 +27,7 @@ const Folder: React.FC<FolderData> = function(props){
             </styles.FolderTitleContainer>
             <styles.ListContainer>
                 {boardItems}
+                <CreateBoardBtn listId="create"/>
             </styles.ListContainer>
         </div>
     )

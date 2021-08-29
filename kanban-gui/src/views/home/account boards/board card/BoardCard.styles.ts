@@ -39,6 +39,13 @@ const ListItem = styled.li`
     }
 `
 
+const CreateBoard = styled(ListItem)`
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+`
+
 const BottomContainer = styled.div`
     display: flex;
     align-items: space-between;
@@ -66,4 +73,4 @@ const LabelFont = styled.label<{weight: string, size: string}>`
     font-size: ${(props) => props.size};
 `
 
-export { FavoriteButton, BottomContainer, ListItem, LabelFont }
+export { FavoriteButton, BottomContainer, ListItem, LabelFont, CreateBoard }
