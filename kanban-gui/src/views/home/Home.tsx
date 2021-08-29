@@ -8,6 +8,7 @@ import * as styles from './Home.styles'
 const dummyaccount = new Account("Ivovski");
 dummyaccount.createNewFolder("Geeko's Productions");
 dummyaccount.createNewFolder("Bethesda Softworks");
+dummyaccount.createNewFolder("CD Project Red");
 
 const x = 4;
 for(let i = 0; i < x; i++){
@@ -27,9 +28,7 @@ const Home: React.FC = function()
 {
     return(
         <styles.AccountContainer>
-            <SideBar>
-
-            </SideBar>
+            <SideBar account={dummyaccount}/>
             <AccountBoards account={dummyaccount}/>
         </styles.AccountContainer>
     );

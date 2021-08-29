@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Account from "../../../../../data/account/account";
 import * as styles from './SideBar.styles'
 
 const FolderView: React.FC<{name: string}> = function(props) { 
@@ -21,7 +22,14 @@ const FolderView: React.FC<{name: string}> = function(props) {
 }
 
 
-const SideBar: React.FC = function() {
+const SideBar: React.FC<{account: Account}> = function(props) {
+    const folders = props.account.folders.map((folder, idx) => {
+        return (
+            // TODO: Add icon to folder data
+            <FolderView name={folder.name}/>
+        )
+    })
+
     return(
         <styles.WorkspaceContainer>
             <Link to="/">Todos os Quadros</Link>
@@ -30,8 +38,7 @@ const SideBar: React.FC = function() {
                     <label>Pastas</label>
                     <button> + </button>
                 </styles.MarginFlexContainer>
-                <FolderView name="Geeko's Productions"></FolderView>
-                <FolderView name="Bethesda Softworks"></FolderView>
+                {folders}
             </div>
         </styles.WorkspaceContainer>
     );
