@@ -6,14 +6,16 @@ const ModalBackground = styled.div`
     z-index: 10;
     margin: 0;
     padding: 0;
-    background-color: #2a2c2e;
-    display: flex;
-    position: fixed;
     left: 0%;
     right: 0%;
     top: 0%;
     bottom: 0%;
+    background-color: #1b1e20c9;
+    position: fixed;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const AbsoluteDiv = styled.div`
