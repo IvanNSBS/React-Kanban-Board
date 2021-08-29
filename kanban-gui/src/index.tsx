@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import Card from '../../data/cards/card'
 import styled from 'styled-components'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
-import HomeView from './views/HomeView';
-import BackgroundStyle from './styles/GlobalBody.style'
-import Header from './views/Header'
+import Home from './views/home/Home';
+import BackgroundStyle from './global styles/GlobalBody.style'
+import Header from './views/header/Header'
 
 const homePath = "/";
 const aboutPath = "/about";
@@ -32,7 +32,7 @@ const AppRouter: React.FC = function() {
             <BrowserRouter>
             <Header/>
                 <Switch>
-                    <Route path={homePath} component={HomeView} exact/>
+                    <Route path={homePath} component={Home} exact/>
                     <Route path={aboutPath} render={() => <CardName text="Sining clevers"/>} exact/>
                 </Switch>
             </BrowserRouter>

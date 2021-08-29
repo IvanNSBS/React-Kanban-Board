@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import React from 'react';
-import Board from '../../../data/board/board';
-import { useHistory } from 'react-router-dom';
-import { AiOutlineStar } from 'react-icons/ai'
+import Board from '../../../../data/board/board';
 
-interface BoardData{
+
+export interface BoardData{
     listId: string;
     board: Board;
     boardLink: string;
@@ -76,20 +74,4 @@ const LabelFont = styled.label<{weight: string, size: string}>`
     font-size: ${(props) => props.size};
 `
 
-const BoardView: React.FC<BoardData> = function(props) {
-    const history = useHistory();
-
-    return(
-        <ListItem key={props.listId} onClick={() => history.push(props.boardLink)}>
-            <LabelFont weight="bold" size="18px">{props.board.name}</LabelFont>
-            <BottomContainer>
-                <LabelFont weight="normal" size="15px">{props.board.workspace}</LabelFont>
-                <FavoriteButton>
-                    <AiOutlineStar/>
-                </FavoriteButton>
-            </BottomContainer>
-        </ListItem>
-    );
-}
-
-export default BoardView;
+export { FavoriteButton, BottomContainer, ListItem, LabelFont }
