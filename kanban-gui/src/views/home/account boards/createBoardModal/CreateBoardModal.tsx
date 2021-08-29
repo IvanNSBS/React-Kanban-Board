@@ -5,11 +5,11 @@ import BoardsFolder from "../../../../../../data/account/boardsFolder";
 interface CreateBoard {
     isOpen: boolean;
     folders: BoardsFolder[];
+    setActive(value: boolean): void;
 }
 
 const CreateBoardModal: React.FC<CreateBoard> = function(props) 
 {
-    const [isActive, setActive] = useState(props.isOpen);
     const inputRef = useRef<HTMLInputElement>(null);
     const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -23,7 +23,7 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
     }
 
     const deactivate = function(){
-        setActive(false);
+        props.setActive(false);
     }
 
     const createBoard = function(){
@@ -31,15 +31,15 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
     }
 
     useEffect(() => {
-        if(isActive)
+        if(props.isOpen)
             disableScroll();
 
         return function(){
             window.onscroll = function() {};
         }
-    }, [isActive])
+    }, [props.isOpen])
 
-    if(isActive){
+    if(props.isOpen){
         
         const options = props.folders.map((folder, idx) => {
             return <option value={folder.name}>{folder.name}</option>

@@ -26,9 +26,9 @@ const BoardView: React.FC<BoardData> = function(props) {
     );
 }
 
-const CreateBoardBtn: React.FC<{listId: string}> = function(props) {
+const CreateBoardBtn: React.FC<{listId: string, click?: Function}> = function(props) {
     return(
-        <styles.CreateBoard key={props.listId}>
+        <styles.CreateBoard key={props.listId} onClick={() => { if(props.click !== undefined) props.click()} }>
             Criar novo quadro
         </styles.CreateBoard>
     );

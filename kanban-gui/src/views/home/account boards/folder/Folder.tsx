@@ -7,6 +7,7 @@ interface FolderData{
     boards: Board[];
     title: string;
     icon: JSX.Element;
+    onClickCreate?: Function;
     iconSpacing?:string;
 }
 
@@ -27,7 +28,7 @@ const Folder: React.FC<FolderData> = function(props){
             </styles.FolderTitleContainer>
             <styles.ListContainer>
                 {boardItems}
-                <CreateBoardBtn listId="create"/>
+                <CreateBoardBtn listId="create" click={props.onClickCreate}/>
             </styles.ListContainer>
         </div>
     )
