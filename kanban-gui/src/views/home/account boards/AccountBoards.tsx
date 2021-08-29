@@ -3,6 +3,8 @@ import React from "react";
 import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './AccountBoards.styles'
 import Folder from './folder/Folder'
+import CreateBoardModal from './createBoardModal/CreateBoardModal';
+
 
 const AccountBoards: React.FC<{account: Account}> = function(props) {
     const folders = props.account.folders.map((folder, idx) => {
@@ -16,6 +18,7 @@ const AccountBoards: React.FC<{account: Account}> = function(props) {
         <styles.AccountBoardContainer>
             <Folder boards={props.account.starredBoards} title="Quadros com Estrela" icon={<AiOutlineStar/>}></Folder>
             {folders}
+            <CreateBoardModal active={false}/>
         </styles.AccountBoardContainer>
     )
 }
