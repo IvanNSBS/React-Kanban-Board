@@ -3,6 +3,9 @@ import FlexDiv from "../../../common/styles/FlexDiv";
 import LinkButton from '../../../common/components/link button/LinkButton';
 import Palette from '../../../common/colorpalette';
 
+const hoverPct:number = 0.15;
+const activePct:number = 0.3;
+
 const WorkspaceContainer = styled.div`
     width: 300px;
     margin: 0 40px 0 40px;
@@ -28,7 +31,13 @@ const AllBoards = styled(LinkButton)`
 
     &:hover {
         transition: 0.1s ease-out;
-        background-color: rgba(0,0,0, 0.18);
+        background-color: rgba(0,0,0, ${hoverPct});
+        cursor: pointer;
+    }
+    
+    &:active {
+        transition: 0.1s ease-out;
+        background-color: rgba(0,0,0, ${activePct});
         cursor: pointer;
     }
 `
@@ -55,7 +64,13 @@ const FolderTitle = styled(FlexDiv)`
 
     &:hover {
         transition: 0.1s ease-out;
-        background-color: rgba(0,0,0, 0.18);
+        background-color: rgba(0,0,0, ${hoverPct});
+        cursor: pointer;
+    }
+
+    &:active {
+        transition: 0.1s ease-out;
+        background-color: rgba(0,0,0, ${activePct});
         cursor: pointer;
     }
 `
@@ -76,7 +91,13 @@ const FolderOption = styled.button`
 
     &:hover {
         transition: 0.1s ease-out;
-        background-color: rgba(0,0,0, 0.18);
+        background-color: rgba(0,0,0, ${hoverPct});
+        cursor: pointer;
+    }
+
+    &:active {
+        transition: 0.1s ease-out;
+        background-color: rgba(0,0,0, ${activePct});
         cursor: pointer;
     }
 
@@ -124,7 +145,13 @@ const CreateFolder = styled(FlexDiv)`
     }
 
     & button:hover {
-        background-color: rgba(0,0,0, 0.15);
+        transition: 0.1s ease-out;
+        background-color: rgba(0,0,0, ${hoverPct});
+        cursor: pointer;
+    }
+
+    & button:active {
+        background-color: rgba(0,0,0, ${activePct});
         cursor: pointer;
     }
 `
