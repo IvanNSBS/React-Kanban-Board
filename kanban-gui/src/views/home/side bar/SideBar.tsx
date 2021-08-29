@@ -4,7 +4,7 @@ import FlexDiv from "../../../common/styles/FlexDiv";
 import * as styles from './SideBar.styles';
 
 import { BiShow } from 'react-icons/bi';
-import { MdCreateNewFolder } from 'react-icons/md'
+import { MdFilterFrames } from 'react-icons/md'
 
 const FolderView: React.FC<{name: string}> = function(props) { 
     const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const FolderView: React.FC<{name: string}> = function(props) {
                             <label>Mostrar Quadros</label>
                         </styles.FolderOption>
                         <styles.FolderOption>
-                            <MdCreateNewFolder/>
+                            <MdFilterFrames/>
                             <label>Criar Novo Quadro</label>
                         </styles.FolderOption>
                     </FlexDiv>
