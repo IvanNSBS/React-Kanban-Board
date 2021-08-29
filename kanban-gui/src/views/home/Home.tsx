@@ -1,7 +1,7 @@
 import React from 'react';
 import Account from '../../../../data/account/account';
 import Board from '../../../../data/board/board';
-import AccountBoards from './account boards/AccountBoard';
+import AccountBoards from './account boards/AccountBoards';
 import SideBar from './side bar/SideBar';
 import * as styles from './Home.styles'
 

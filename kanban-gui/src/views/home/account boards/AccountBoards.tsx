@@ -1,7 +1,7 @@
 import Account from '../../../../../data/account/account'
 import React from "react";
 import { AiOutlineStar } from 'react-icons/ai'
-import * as styles from './AccountBoard.styles'
+import * as styles from './AccountBoards.styles'
 import Folder from './folder/Folder'
 
 const AccountBoards: React.FC<{account: Account}> = function(props) {
