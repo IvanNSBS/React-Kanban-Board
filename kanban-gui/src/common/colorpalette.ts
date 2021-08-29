@@ -1,8 +1,11 @@
-const Palette: Object = {
+// link: https://flatuicolors.com/palette/defo 
+const Palette = {
     background: "#222f3e",
-    card: "#0abde3",
-    text: "#bdc3c7",
-    header: "#16a085"
+    boardCard: "#2980b9",
+    text: "#ecf0f1",
+    secondaryText: '#bdc3c7',
+    disabledText: '#7f8c8d',
+    header: "#2980b9"
 }
 
 export default Palette;
