@@ -7,14 +7,19 @@ import * as styles from './Home.styles'
 
 const dummyaccount = new Account("Ivovski");
 dummyaccount.createNewFolder("Geeko's Productions");
+dummyaccount.createNewFolder("Bethesda Softworks");
 
 const x = 4;
 for(let i = 0; i < x; i++){
     dummyaccount.addStarredBoard(new Board("Starred Board_"+i.toString()));
 }
 
-for(let i = 0; i < x*2; i++){
+for(let i = 0; i < x; i++){
     dummyaccount.folders[0].addBoard(new Board("Folder Board_"+i.toString()))
+}
+
+for(let i = 0; i < x; i++){
+    dummyaccount.folders[1].addBoard(new Board("Bethesda Board_"+i.toString()))
 }
 
 
