@@ -1,8 +1,8 @@
 import React from 'react';
 import Account from '../../../../data/account/account';
 import Board from '../../../../data/board/board';
-import BoardView from '../board card/BoardCard';
-import SideBar from '../side bar/SideBar';
+import BoardView from './board card/BoardCard';
+import SideBar from './side bar/SideBar';
 import * as styles from './Home.styles'
 
 const dummyaccount = new Account("Ivovski");

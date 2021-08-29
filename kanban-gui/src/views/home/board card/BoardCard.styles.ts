@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Board from '../../../../data/board/board';
+import Board from '../../../../../data/board/board';
 
 
 export interface BoardData{
