@@ -1,23 +1,14 @@
 import Account from '../../../../../data/account/account'
-import BoardView from '../board card/BoardCard';
 import React from "react";
+import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './AccountBoard.styles'
+import Folder from './folder/Folder'
 
 const AccountBoards: React.FC<{account: Account}> = function(props) {
-
-    const boardItems = props.account.boards.map((board, idx) => {
-        console.log("Board name: " + board.name);
-        board.workspace = board.name + "_" + idx;
-        let link = "/";
-        return (
-            <BoardView listId={board.name+"_"+idx} board={board} boardLink={link}/>
-        )
-    })
-
     return(
-        <styles.ListContainer>
-            {boardItems}
-        </styles.ListContainer>
+        <styles.AccountBoardContainer>
+            <Folder boards={props.account.boards} title="Quadros com Estrela" icon={<AiOutlineStar/>}></Folder>
+        </styles.AccountBoardContainer>
     )
 }
 
