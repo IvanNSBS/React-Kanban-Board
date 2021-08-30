@@ -1,5 +1,5 @@
 import User from '../../../../../data/account/user'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './AccountBoards.styles'
 import Folder from './FolderBoardsDisplay'
@@ -14,17 +14,16 @@ const UserBoards: React.FC<{account: User}> = function(props) {
     const folders = props.account.folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
-            <Folder boards={folder.boards} title={folder.name} icon={<AiOutlineStar/>} />
+            <Folder boards={folder.boards} title={folder.name} 
+                    icon={<AiOutlineStar/>} onClickCreate={() => setModalOpen(true)}/>
         )
     })
 
-    useEffect(() => {
-        console.log(`is open? ${modalOpen}`)
-    }, [modalOpen])
-
     return(
         <styles.AccountBoardContainer>
-            <Folder boards={props.account.starredBoards} title="Quadros com Estrela" icon={<AiOutlineStar/>} onClickCreate={() => setModalOpen(true)}></Folder>
+            <Folder boards={props.account.starredBoards} 
+                    title="Quadros com Estrela" icon={<AiOutlineStar/>}>
+            </Folder>
             {folders}
             <CreateBoardModal setActive={setModalOpen} isOpen={modalOpen} folders={props.account.folders}/>
         </styles.AccountBoardContainer>
