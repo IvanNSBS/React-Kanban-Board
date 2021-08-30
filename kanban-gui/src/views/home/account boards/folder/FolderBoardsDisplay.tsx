@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from '../../../../../../data/board/board';
 import BoardView, { CreateBoardBtn } from '../board card/BoardCard';
-import * as styles from './Folder.styles'
+import * as styles from './FolderBoardsDisplay.styles'
 
 interface FolderData{
     boards: Board[];
@@ -11,7 +11,7 @@ interface FolderData{
     iconSpacing?:string;
 }
 
-const Folder: React.FC<FolderData> = function(props){
+const FolderBoardsDisplay: React.FC<FolderData> = function(props){
     const boardItems = props.boards.map((board, idx) => {
         board.workspace = board.name + "_" + idx;
         let link = "/";
@@ -34,4 +34,4 @@ const Folder: React.FC<FolderData> = function(props){
     )
 }
 
-export default Folder;
+export default FolderBoardsDisplay;
