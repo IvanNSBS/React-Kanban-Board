@@ -14,15 +14,16 @@ const UserBoards: React.FC<{account: User}> = function(props) {
     const folders = props.account.folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
-            <FolderBoardsDisplay boards={folder.boards} title={folder.name} 
-                    icon={<AiOutlineStar/>} onClickCreate={() => setModalOpen(true)}/>
+            <FolderBoardsDisplay boards={folder.boards} icon={<AiOutlineStar/>} onClickCreate={() => setModalOpen(true)}>
+                {folder.name} 
+            </FolderBoardsDisplay>
         )
     })
 
     return(
         <styles.AccountBoardContainer>
-            <FolderBoardsDisplay boards={props.account.starredBoards} 
-                    title="Quadros com Estrela" icon={<AiOutlineStar/>}>
+            <FolderBoardsDisplay boards={props.account.starredBoards} icon={<AiOutlineStar/>}>
+                Quadros com Estrela
             </FolderBoardsDisplay>
             {folders}
             <CreateBoardModal setActive={setModalOpen} isOpen={modalOpen} folders={props.account.folders}/>

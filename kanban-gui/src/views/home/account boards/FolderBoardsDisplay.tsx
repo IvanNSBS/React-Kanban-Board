@@ -5,7 +5,6 @@ import * as styles from './FolderBoardsDisplay.styles'
 
 interface FolderData{
     boards: Board[];
-    title: string;
     icon: JSX.Element;
     onClickCreate?: Function;
 }
@@ -23,7 +22,7 @@ const FolderBoardsDisplay: React.FC<FolderData> = function(props){
         <div>
             <styles.FolderTitleContainer>
                 {props.icon}
-                <p>{props.title}</p>
+                <p>{props.children}</p>
             </styles.FolderTitleContainer>
             <styles.ListContainer>
                 {boardItems}

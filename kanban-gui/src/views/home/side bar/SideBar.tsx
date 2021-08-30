@@ -14,7 +14,7 @@ const SideBar: React.FC<{account: User}> = function(props) {
 
     return(
         <styles.WorkspaceContainer>
-            <styles.AllBoards to="/" inner="Todos os Quadros"/>
+            <styles.AllBoards to="/">Todos os Quadros</styles.AllBoards>
             <div>
                 <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0">
                     <label>Pastas</label>

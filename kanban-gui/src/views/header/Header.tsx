@@ -6,8 +6,8 @@ const Header: React.FC = function() {
     return(
         <styles.HeaderContainer>
             <div>
-                <LinkButton to="/" inner="Home"/>
-                <LinkButton to="/quadros" inner="Quadros"/>
+                <LinkButton to="/">Home</LinkButton>
+                <LinkButton to="/quadros">Quadros</LinkButton>
             </div>
             Kanban Board
             <button>Criar</button>
