@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './BoardCard.styles';
-import Board from '../../../../../../data/board/board';
+import Board from '../../../../../data/board/board';
 
 export interface BoardData{
     listId: string;

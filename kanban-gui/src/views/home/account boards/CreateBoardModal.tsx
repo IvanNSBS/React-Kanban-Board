@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import BoardsFolder from "../../../../../../data/account/boardsFolder";
+import BoardsFolder from "../../../../../data/account/boardsFolder";
 
 import * as styles from "./CreateBoardModal.styles";
-import FlexDiv from "../../../../common/styles/FlexDiv";
-import Palette from '../../../../common/colorpalette'
+import FlexDiv from "../../../common/styles/FlexDiv";
+import Palette from '../../../common/colorpalette'
 
 interface CreateBoard {
     isOpen: boolean;

@@ -1,6 +1,6 @@
 import React from 'react';
-import Board from '../../../../../../data/board/board';
-import BoardView, { CreateBoardBtn } from '../board card/BoardCard';
+import Board from '../../../../../data/board/board';
+import BoardView, { CreateBoardBtn } from './BoardCard';
 import * as styles from './FolderBoardsDisplay.styles'
 
 interface FolderData{

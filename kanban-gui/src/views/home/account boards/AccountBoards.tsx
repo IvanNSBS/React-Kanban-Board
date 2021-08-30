@@ -2,8 +2,8 @@ import Account from '../../../../../data/account/account'
 import React, { useState, useEffect } from "react";
 import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './AccountBoards.styles'
-import Folder from './folder/FolderBoardsDisplay'
-import CreateBoardModal from './createBoardModal/CreateBoardModal';
+import Folder from './FolderBoardsDisplay'
+import CreateBoardModal from './CreateBoardModal';
 import BoardsFolder from '../../../../../data/account/boardsFolder';
 
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Palette from '../../../../common/colorpalette';
+import Palette from '../../../common/colorpalette';
 
 const ListItem = styled.li`
     background-color: ${Palette.boardCard};

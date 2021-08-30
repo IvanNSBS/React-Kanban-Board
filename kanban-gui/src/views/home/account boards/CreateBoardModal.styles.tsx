@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Palette from "../../../../common/colorpalette";
+import Palette from "../../../common/colorpalette";
 
 const ModalBackground = styled.div`
     min-width: 100vw;
