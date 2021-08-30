@@ -1,7 +1,7 @@
 import Board from "../board/board";
 import BoardsFolder from './boardsFolder';
 
-export default class Account {
+export default class User {
     private _username: string;
     private _folders: BoardsFolder[];
     private _starredBoards: Board[]

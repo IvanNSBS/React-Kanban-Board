@@ -1,11 +1,11 @@
 import React from 'react';
-import Account from '../../../../data/account/account';
+import User from '../../../../data/account/user';
 import Board from '../../../../data/board/board';
-import AccountBoards from './account boards/AccountBoards';
+import UserBoards from './account boards/AccountBoards';
 import SideBar from './side bar/SideBar';
 import * as styles from './Home.styles'
 
-const dummyaccount = new Account("Ivovski");
+const dummyaccount = new User("Ivovski");
 dummyaccount.createNewFolder("Geeko's Productions");
 dummyaccount.createNewFolder("Bethesda Softworks");
 dummyaccount.createNewFolder("CD Project Red");
@@ -29,7 +29,7 @@ const Home: React.FC = function()
     return(
         <styles.AccountContainer>
             <SideBar account={dummyaccount}/>
-            <AccountBoards account={dummyaccount}/>
+            <UserBoards account={dummyaccount}/>
         </styles.AccountContainer>
     );
 }

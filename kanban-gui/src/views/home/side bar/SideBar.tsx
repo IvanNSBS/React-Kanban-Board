@@ -1,10 +1,10 @@
 import React from "react";
-import Account from "../../../../../data/account/account";
+import User from "../../../../../data/account/user";
 import FolderSideBar from "./FolderSideBar";
 import * as styles from './SideBar.styles';
 
 
-const SideBar: React.FC<{account: Account}> = function(props) {
+const SideBar: React.FC<{account: User}> = function(props) {
     const folders = props.account.folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
