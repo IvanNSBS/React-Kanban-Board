@@ -13,6 +13,7 @@ const UserBoards: React.FC = function()
     const userController = useContext(UserControllerContext);
     const [folders, setFolders] = useState<BoardsFolder[]>(userController.getFolders());
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [selectedFolderIdx, setSelectedFolderIdx] = useState<number>(-1);
 
     useEffect(() => {
         userController.subscribeToFoldersChanged(setFolders);
@@ -23,9 +24,10 @@ const UserBoards: React.FC = function()
     }, []);
 
     const foldersDisplay = folders.map((folder, idx) => {
+        let index = idx;
         return (
             // TODO: Add icon to folder data
-            <FolderBoardsDisplay boards={folder.boards} icon={<AiOutlineStar/>} onClickCreate={() => setModalOpen(true)}>
+            <FolderBoardsDisplay boards={folder.boards} icon={<AiOutlineStar/>} onClickCreate={() => { setSelectedFolderIdx(index); setModalOpen(true); }}>
                 {folder.name} 
             </FolderBoardsDisplay>
         )
@@ -33,7 +35,8 @@ const UserBoards: React.FC = function()
 
     return(
         <styles.UserBoardsContainer>
-            <CreateBoardModal setActive={setModalOpen} isOpen={modalOpen} folders={userController.getFolders()}/>
+            <CreateBoardModal setActive={setModalOpen} isOpen={modalOpen} index={selectedFolderIdx}
+                              folders={userController.getFolders()} createBoard={ (idx, name) => userController.addBoardToFolder(idx, name)}/>
             { userController.getStarredBoards().length > 0 &&
                 <FolderBoardsDisplay boards={userController.getStarredBoards()} icon={<AiOutlineStar/>}>
                     Quadros com Estrela

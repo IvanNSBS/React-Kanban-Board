@@ -52,7 +52,7 @@ const CreateFolderModal: React.FC<CreateFolder> = function(props)
     if(props.isOpen)
     {
         return(
-            <styles.ModalBackground onClick={() => props.setActive(false)}>
+            <styles.ModalBackground onClick={close}>
                 <styles.AbsoluteDiv onClick={e => e.stopPropagation()}>
 
                     <FlexDiv justify="space-between" height="95px">
