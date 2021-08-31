@@ -4,6 +4,7 @@ import * as styles from "./CreateFolderModal.styles";
 import FlexDiv from "../../../common/styles/FlexDiv";
 import Palette from '../../../common/colorpalette'
 import { CreateBoard } from "../account boards/BoardCard.styles";
+import { Close } from "../account boards/CreateBoardModal.styles";
 
 interface CreateFolder {
     isOpen: boolean;
@@ -14,7 +15,7 @@ interface CreateFolder {
 const CreateFolderModal: React.FC<CreateFolder> = function(props) 
 {
     const [title, setTitle] = useState<string>("");
-    const createBtn = useRef<HTMLButtonElement>(null);
+    const createBtn = useRef<HTMLButtonElement | null>(null);
 
     const disableScroll = function(){
         const x = window.scrollX;
@@ -25,24 +26,28 @@ const CreateFolderModal: React.FC<CreateFolder> = function(props)
         };
     }
 
-    const createBoard = function() {
-        props.onCreate(title);
+    const close = function() {
+        setTitle("");
         props.setActive(false);
     }
 
+    const createBoard = function(e: React.MouseEvent) {
+        e.preventDefault();
+        props.onCreate(title);
+        close();
+    }
+
     useEffect(() => {
-        if(props.isOpen)
+        if(props.isOpen){
             disableScroll();
+            if(createBtn.current !== null)
+                createBtn.current.disabled = title === "";
+        }
 
         return function(){
             window.onscroll = function() {};
         }
-    }, [props.isOpen])
-
-    useEffect(() => {
-        if(createBtn.current !== null)
-            createBtn.current.disabled = title === "";
-    }, [title])
+    }, [props.isOpen, title])
 
     if(props.isOpen)
     {
@@ -58,13 +63,15 @@ const CreateFolderModal: React.FC<CreateFolder> = function(props)
                                     <styles.Input type="text" placeholder="Nome da Pasta"
                                                   onChange={e => setTitle(e.target.value)}>
                                     </styles.Input>
-                                    <styles.Close ref={createBtn} onClick={createBoard}>x</styles.Close>
+                                    <styles.Close onClick={close}>
+                                        x
+                                    </styles.Close>
                                 </FlexDiv>
                         </FlexDiv>
                     </FlexDiv>
-
-                    <styles.Create onClick={createBoard}>Criar Pasta</styles.Create>
-
+                    <form>
+                        <styles.Create ref={createBtn} onClick={createBoard}>Criar Pasta</styles.Create>
+                    </form>
                 </styles.AbsoluteDiv>
             </styles.ModalBackground>
         )
