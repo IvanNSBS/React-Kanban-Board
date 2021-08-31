@@ -32,7 +32,7 @@ const UserBoards: React.FC = function()
     })
 
     return(
-        <styles.AccountBoardContainer>
+        <styles.UserBoardsContainer>
             <CreateBoardModal setActive={setModalOpen} isOpen={modalOpen} folders={userController.getFolders()}/>
             { userController.getStarredBoards().length > 0 &&
                 <FolderBoardsDisplay boards={userController.getStarredBoards()} icon={<AiOutlineStar/>}>
@@ -44,7 +44,7 @@ const UserBoards: React.FC = function()
                 <>Comece criando uma pasta para seus quadros</>
             }
             {foldersDisplay}
-        </styles.AccountBoardContainer>
+        </styles.UserBoardsContainer>
     )
 }
 
