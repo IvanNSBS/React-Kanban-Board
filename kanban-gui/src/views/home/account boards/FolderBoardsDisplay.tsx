@@ -11,7 +11,6 @@ interface FolderData{
 
 const FolderBoardsDisplay: React.FC<FolderData> = function(props){
     const boardItems = props.boards.map((board, idx) => {
-        board.workspace = board.name + "_" + idx;
         let link = "/";
         return (
             <BoardView listId={board.name+"_"+idx} board={board} boardLink={link}/>
