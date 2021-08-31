@@ -16,6 +16,7 @@ export default class User {
     public get starredBoards():Board[] { return this._starredBoards; }
     public get folders():BoardsFolder[] { return this._folders; }
 
-    public addStarredBoard(board: Board) { this._starredBoards.push(board); }
-    public createNewFolder(name: string) { this._folders.push(new BoardsFolder(name)); }
+    public set username(value: string) { this._username = value; }
+    public set folders(value: BoardsFolder[]) { this._folders = value; }
+    public set starredBoards(value: Board[]) { this._starredBoards = value; }
 }

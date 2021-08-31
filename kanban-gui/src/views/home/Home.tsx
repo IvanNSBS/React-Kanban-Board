@@ -4,33 +4,24 @@ import Board from '../../../../data/board/board';
 import UserBoards from './account boards/AccountBoards';
 import SideBar from './side bar/SideBar';
 import * as styles from './Home.styles'
+import UserController from '../../controllers/UserController';
+import { createContext } from 'react';
 
-const dummyaccount = new User("Ivovski");
-dummyaccount.createNewFolder("Geeko's Productions");
-dummyaccount.createNewFolder("Bethesda Softworks");
-dummyaccount.createNewFolder("CD Project Red");
-
-const x = 4;
-for(let i = 0; i < x; i++){
-    dummyaccount.addStarredBoard(new Board("Starred Board_"+i.toString()));
-}
-
-for(let i = 0; i < x; i++){
-    dummyaccount.folders[0].addBoard(new Board("Folder Board_"+i.toString()))
-}
-
-for(let i = 0; i < x; i++){
-    dummyaccount.folders[1].addBoard(new Board("Bethesda Board_"+i.toString()))
-}
-
+const dummyUser = new User("Ivovski");
+const userController = new UserController(dummyUser);
+export const UserControllerContext = createContext<UserController>(userController);
 
 const Home: React.FC = function() 
 {
     return(
-        <styles.AccountContainer>
-            <SideBar account={dummyaccount}/>
-            <UserBoards account={dummyaccount}/>
-        </styles.AccountContainer>
+        <UserControllerContext.Provider value={userController}>
+            
+            <styles.AccountContainer>
+                <SideBar account={dummyUser}/>
+                <UserBoards/>
+            </styles.AccountContainer>
+
+        </UserControllerContext.Provider>
     );
 }
 

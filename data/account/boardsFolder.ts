@@ -13,6 +13,5 @@ export default class BoardsFolder{
     public get boards():Board[] { return this._boards; }
     
     public set name(value: string) { this._name = value;}
-
-    public addBoard(board: Board){ this._boards.push(board); }
+    public set boards(value: Board[]) {this.boards = value;}
 }
