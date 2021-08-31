@@ -15,9 +15,9 @@ const Home: React.FC = function()
 {
     return(
         <UserControllerContext.Provider value={userController}>
-            
+
             <styles.AccountContainer>
-                <SideBar account={dummyUser}/>
+                <SideBar/>
                 <UserBoards/>
             </styles.AccountContainer>
 

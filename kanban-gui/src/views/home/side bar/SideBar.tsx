@@ -1,11 +1,19 @@
-import React from "react";
-import User from "../../../../../data/account/user";
+import React, { useState, useContext } from "react";
+import { UserControllerContext } from "../Home";
 import FolderSideBar from "./FolderSideBar";
 import * as styles from './SideBar.styles';
 
 
-const SideBar: React.FC<{account: User}> = function(props) {
-    const folders = props.account.folders.map((folder, idx) => {
+const SideBar: React.FC = function() 
+{
+    const userController = useContext(UserControllerContext);
+    const [folders, setFolders] = useState(userController.getFolders());
+
+    const createFolder = function(){
+        setFolders(userController.createFolder("Dummy Folder From Sidebar"));
+    }
+
+    const renderedFolders = folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
             <FolderSideBar name={folder.name}/>
@@ -16,11 +24,12 @@ const SideBar: React.FC<{account: User}> = function(props) {
         <styles.WorkspaceContainer>
             <styles.AllBoards to="/">Todos os Quadros</styles.AllBoards>
             <div>
-                <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0">
+                <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0"
+                                     onClick={createFolder}>
                     <label>Pastas</label>
                     <button> + </button>
                 </styles.CreateFolder>
-                {folders}
+                {renderedFolders}
             </div>
         </styles.WorkspaceContainer>
     );

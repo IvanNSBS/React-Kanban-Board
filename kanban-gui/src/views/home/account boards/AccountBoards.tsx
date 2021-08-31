@@ -1,22 +1,28 @@
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './AccountBoards.styles'
 import FolderBoardsDisplay from './FolderBoardsDisplay'
 import CreateBoardModal from './CreateBoardModal';
 
-import User from '../../../../../data/account/user'
+import { UserControllerContext } from '../Home';
 import BoardsFolder from '../../../../../data/account/boardsFolder';
 
-import { UserControllerContext } from '../Home';
-
-const UserBoards: React.FC = function() {
-
+const UserBoards: React.FC = function() 
+{
+    const userController = useContext(UserControllerContext);
+    const [folders, setFolders] = useState<BoardsFolder[]>(userController.getFolders());
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-    const userController = useContext(UserControllerContext);
+    useEffect(() => {
+        userController.subscribeToFoldersChanged(setFolders);
 
-    const folders = userController.getFolders().map((folder, idx) => {
+        return (
+            userController.removeSubscribeFromFoldersChanged(setFolders)
+        );
+    }, []);
+
+    const foldersDisplay = folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
             <FolderBoardsDisplay boards={folder.boards} icon={<AiOutlineStar/>} onClickCreate={() => setModalOpen(true)}>
@@ -37,7 +43,7 @@ const UserBoards: React.FC = function() {
                 folders.length == 0 &&
                 <>Comece criando uma pasta para seus quadros</>
             }
-            {folders}
+            {foldersDisplay}
         </styles.AccountBoardContainer>
     )
 }
