@@ -23,8 +23,8 @@ export default class UserController{
         this._folderEventsSubscribers.filter(f => f !== func);
     }
 
-    public createFolder(name: string): BoardsFolder[] {
-        this._user.folders = this._user.folders.concat( new BoardsFolder(name) );
+    public createFolder(name: string, iconUrl?:string): BoardsFolder[] {
+        this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) );
         this._folderEventsSubscribers.forEach(x => x(this._user.folders));
 
         return this._user.folders;

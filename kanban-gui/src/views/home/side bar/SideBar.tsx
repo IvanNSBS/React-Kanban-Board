@@ -10,13 +10,13 @@ const SideBar: React.FC = function()
     const [folders, setFolders] = useState(userController.getFolders());
 
     const createFolder = function(){
-        setFolders(userController.createFolder("Dummy Folder From Sidebar"));
+        setFolders(userController.createFolder("Dummy Folder From Sidebar", 'https://styles.redditmedia.com/t5_2w3z3/styles/communityIcon_s30x7u9v10a21.png'));
     }
 
     const renderedFolders = folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
-            <FolderSideBar name={folder.name}/>
+            <FolderSideBar name={folder.name} iconUrl={folder.iconLink}/>
         )
     })
 

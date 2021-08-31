@@ -4,17 +4,20 @@ import { BiShow } from 'react-icons/bi';
 import { MdFilterFrames } from 'react-icons/md'
 import FlexDiv from "../../../common/styles/FlexDiv";
 
-const FolderSideBar: React.FC<{name: string}> = function(props) { 
+const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props) { 
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
     const onClick = function() {
         setCollapsed(!collapsed);
     }
 
+    const bgCol:string = props.iconUrl === undefined ? 'red' : 'transparent';
+    const bgImg: string = props.iconUrl === undefined ? 'none' : `url(${props.iconUrl})`;
+
     return(
         <div style={{margin: "5px 0 10px 0"}}>
             <styles.FolderTitle onClick={onClick}>
-                <div style={{backgroundColor: "red", height: "25px", width: "25px", marginRight: "10px"}}></div>
+                <div style={{backgroundColor: bgCol, backgroundImage: bgImg, backgroundSize: 'cover', height: "25px", width: "25px", marginRight: "10px"}}></div>
                 <label>{props.name}</label>
             </styles.FolderTitle>
 

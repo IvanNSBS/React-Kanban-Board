@@ -41,7 +41,7 @@ const UserBoards: React.FC = function()
             }
             {
                 folders.length == 0 &&
-                <>Comece criando uma pasta para seus quadros</>
+                <div style={{textAlign:'center', color: 'white', fontSize: '2em'}}>Comece criando uma pasta para seus quadros</div>
             }
             {foldersDisplay}
         </styles.UserBoardsContainer>
