@@ -9,6 +9,9 @@ import { createContext } from 'react';
 
 const dummyUser = new User("Ivovski");
 const userController = new UserController(dummyUser);
+userController.createFolder("Dummy Folder");
+userController.addBoardToFolder(0, "Dummy Board");
+
 export const UserControllerContext = createContext<UserController>(userController);
 
 const Home: React.FC = function() 
