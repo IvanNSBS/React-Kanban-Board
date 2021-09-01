@@ -10,7 +10,7 @@ export interface BoardData{
     boardLink: string;
 }
 
-const BoardView: React.FC<BoardData> = function(props) {
+const BoardCard: React.FC<BoardData> = function(props) {
     const history = useHistory();
 
     return(
@@ -34,5 +34,5 @@ const CreateBoardBtn: React.FC<{listId: string, click?: Function}> = function(pr
     );
 }
 
-export default BoardView;
+export default BoardCard;
 export { CreateBoardBtn }

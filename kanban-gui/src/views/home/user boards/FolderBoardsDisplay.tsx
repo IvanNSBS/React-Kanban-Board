@@ -1,11 +1,12 @@
 import React from 'react';
 import Board from '../../../../../data/board/board';
-import BoardView, { CreateBoardBtn } from './BoardCard';
+import BoardCard, { CreateBoardBtn } from './BoardCard';
 import * as styles from './FolderBoardsDisplay.styles'
 
 interface FolderData{
     boards: Board[];
     icon: JSX.Element;
+    hideFolderName?: boolean;
     onClickCreate?: Function;
 }
 
@@ -13,7 +14,7 @@ const FolderBoardsDisplay: React.FC<FolderData> = function(props){
     const boardItems = props.boards.map((board, idx) => {
         let link = "/";
         return (
-            <BoardView listId={board.name+"_"+idx} board={board} boardLink={link}/>
+            <BoardCard listId={board.name+"_"+idx} board={board} boardLink={link}/>
         )
     })
 
