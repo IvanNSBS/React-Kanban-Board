@@ -14,7 +14,7 @@ const SideBar: React.FC = function()
     const renderedFolders = folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
-            <FolderSideBar key={idx} name={folder.name} iconUrl={folder.iconLink}/>
+            <FolderSideBar key={idx} name={folder.name} iconUrl={folder.iconUrl}/>
         )
     })
 

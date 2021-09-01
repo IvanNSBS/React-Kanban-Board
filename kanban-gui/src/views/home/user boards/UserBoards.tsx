@@ -21,10 +21,19 @@ const UserBoards: React.FC = function()
     }, []);
 
     const foldersDisplay = folders.map((folder, idx) => {
+        // TODO: This is commong with FolderSideBar. Make it common
+        const firstChar = folder.name.length > 0 ? folder.name.at(0)?.toUpperCase() : "";
+        const folderImg =   <div style={{
+                                 backgroundImage:'linear-gradient(336deg, #ab05a5, #2ad5e9)', 
+                                 height: "25px", width: "25px", 
+                                 display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                {firstChar}
+                            </div>
         return (
+            // TODO: Load icon from actual url
             // TODO: Add icon to folder data
             <FolderBoardsDisplay key={idx} boards={folder.boards} 
-                                 icon={<AiOutlineStar/>} index={idx}>
+                                 icon={folderImg} index={idx}>
                 {folder.name} 
             </FolderBoardsDisplay>
         )
