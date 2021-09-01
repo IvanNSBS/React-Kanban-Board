@@ -1,7 +1,7 @@
 
 import React, { useState, useContext, useEffect } from "react";
 import { AiOutlineStar } from 'react-icons/ai'
-import * as styles from './AccountBoards.styles'
+import * as styles from './UserBoards.styles'
 import FolderBoardsDisplay from './FolderBoardsDisplay'
 import CreateBoardModal from './CreateBoardModal';
 

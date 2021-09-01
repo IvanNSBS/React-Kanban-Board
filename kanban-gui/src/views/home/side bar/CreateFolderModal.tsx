@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import * as styles from "./CreateFolderModal.styles";
 import FlexDiv from "../../../common/styles/FlexDiv";
 import Palette from '../../../common/colorpalette'
-import { CreateBoard } from "../account boards/BoardCard.styles";
-import { Close } from "../account boards/CreateBoardModal.styles";
+import { CreateBoard } from "../user boards/BoardCard.styles";
+import { Close } from "../user boards/CreateBoardModal.styles";
 
 interface CreateFolder {
     isOpen: boolean;
