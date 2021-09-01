@@ -1,76 +1,76 @@
 import styled from "styled-components";
 import Palette from "../../../common/colorpalette";
 
-const ModalBackground = styled.div`
-    min-width: 100vw;
-    min-height: 100vh;
-    z-index: 10;
-    margin: 0;
-    padding: 0;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    background-color: #151616e8;
-    position: fixed;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
-const Button = styled.button`
-    border: 0px;
-    border-radius: 5px;
-
+const Background = styled.div`
     color: ${Palette.text};
-    background-color: #34495e; 
+    background-color: rgba(0,0,0, 0.1); 
     transition: 0.2s ease-out;
-    
-    &:hover{
-        filter: brightness(0.85);
-    }
-
-    &:active{
-        filter: brightness(0.7);
-
-    }
-`
-
-const AbsoluteDiv = styled.div`
-    width: 450px;
+    border-radius: 8px;
+    padding: 5px;
 `
 
 const Input = styled.input`
-    width: 70%;
+    width: 100%;
+    box-sizing: border-box;
     height: 35px;
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 5px;
 
     border: 0px;
     border-radius: 6px;
     color: ${Palette.text};
-    background-color: transparent;
+    background-color: rgba(0,0,0, 0.15);
     
-    padding-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     &:hover{
-        background-color: #0000006f;
+        background-color: rgba(0,0,0, 0.20);
     }
 
     &:focus{
         outline: none;
-        background-color: #000000ab;
+        background-color: rgba(0,0,0, 0.30);
         border: 0px;
     }
 `
 
-const Create = styled(Button)`
+const Create = styled.button`
+    border: 0px;
+    border-radius: 5px;
     height: 35px;
-    margin-top: 7px;
+    width: 60px;
+    font-size: 1.05em;
+
+    color: ${Palette.text};
+    background-color: ${Palette.header}; 
+    transition: 0.2s ease-out;
+
+    &:disabled {
+        filter: brightness(0.3);
+    }
+
+    &:hover:enabled{
+        filter: brightness(0.85);
+        cursor: pointer;
+    }
+
+    &:active:enabled{
+        filter: brightness(0.7);
+    }
 `
 
 const Close = styled.button`
+    height: 35px;
+    width: 35px;
+    color: ${Palette.disabledText};
+    background-color: transparent;
+    border: 0;
+
+    &:hover{
+        color: ${Palette.text};
+        cursor: pointer;
+    }
 `
 
-export { AbsoluteDiv, ModalBackground, Create, Input, Close }
+export { Background, Create, Input, Close }

@@ -1,13 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { UserControllerContext } from "../Home";
 import FolderSideBar from "./FolderSideBar";
+import FolderCreator from './FolderCreator';
 import * as styles from './SideBar.styles';
-import CreateFolderModal from "./CreateFolderModal";
+
+import * as modal from './CreateFolderModal.styles';
 
 
 const SideBar: React.FC = function() 
 {
     const userController = useContext(UserControllerContext);
+
     const [folders, setFolders] = useState(userController.getFolders());
     const [creatingFolder, setCreatingFolder] = useState<boolean>(false);
 
@@ -18,20 +21,36 @@ const SideBar: React.FC = function()
         )
     })
 
+    const tryCreateNewFolder = function(name: string): boolean{
+        const prevLength = folders.length;
+        const newFolders = userController.createFolder(name);
+        const created = newFolders.length > prevLength;
+
+        if(created){
+            setFolders(newFolders);
+            setCreatingFolder(false);
+        }
+
+        return created;
+    }
+
     return(
-        <styles.WorkspaceContainer>
-            <CreateFolderModal isOpen={creatingFolder} setActive={setCreatingFolder}
-                               onCreate={name => setFolders(userController.createFolder(name))}>
-            </CreateFolderModal>
+        <styles.WorkspaceContainer onClick={() => setCreatingFolder(false)}>
+
             <styles.AllBoards to="/">Todos os Quadros</styles.AllBoards>
             <div>
                 <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0"
-                                     onClick={() => setCreatingFolder(true)}>
+                                     onClick={ e => {setCreatingFolder(true); e.stopPropagation(); }}>
                     <label>Pastas</label>
                     <button> + </button>
                 </styles.CreateFolder>
                 {renderedFolders}
             </div>
+
+            {
+                creatingFolder && 
+                <FolderCreator creationFunction={ name => tryCreateNewFolder(name) }></FolderCreator>
+            }
         </styles.WorkspaceContainer>
     );
 }
