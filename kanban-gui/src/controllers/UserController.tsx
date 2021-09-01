@@ -43,6 +43,11 @@ export default class UserController{
         return this._user.folders[folderIdx].boards;
     }
 
+    public addStarredBoard(board: Board): Board[] {
+        this._user.starredBoards = this._user.starredBoards.concat( board );
+        return this._user.starredBoards;
+    }
+
     public getFolders(): BoardsFolder[] {
         return this._user.folders;
     }

@@ -11,6 +11,7 @@ const dummyUser = new User("Ivovski");
 const userController = new UserController(dummyUser);
 userController.createFolder("Dummy Folder");
 userController.addBoardToFolder(0, "Dummy Board");
+userController.addStarredBoard( userController.getFolders()[0].boards[0]);
 
 export const UserControllerContext = createContext<UserController>(userController);
 
