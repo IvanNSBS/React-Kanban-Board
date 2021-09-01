@@ -6,6 +6,15 @@ interface FolderEventFunc {
     (folders: BoardsFolder[]): void;
 }
 
+function folderComparer(a: BoardsFolder, b: BoardsFolder) {
+    if(a.name > b.name)
+        return 1;
+    if(a.name < b.name)
+        return -1;
+
+    return 0;
+}
+
 export default class UserController{
     private _user: User;
     private _folderEventsSubscribers: FolderEventFunc[]; 
@@ -24,9 +33,9 @@ export default class UserController{
     }
 
     public createFolder(name: string, iconUrl?:string): BoardsFolder[] {
-        this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) );
-        this._folderEventsSubscribers.forEach(x => x(this._user.folders));
+        this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) ).sort(folderComparer);
 
+        this._folderEventsSubscribers.forEach(x => x(this._user.folders));
         return this._user.folders;
     }
 
