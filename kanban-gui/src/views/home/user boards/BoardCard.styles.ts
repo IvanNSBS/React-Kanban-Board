@@ -34,6 +34,7 @@ const ListItem = styled.li<{isFavorited: boolean}>`
     &:hover {
         transition: 0.2s ease-out;
         background-color: ${Palette.boardCardHover};
+        cursor: pointer;
 
         & svg{
             fill: ${Palette.text};
@@ -78,6 +79,7 @@ const FavoriteButton = styled.button`
         transition: 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
         transform: scale(1.25);
         fill: yellow;
+        cursor: pointer;
     }
 
     &:active svg {
@@ -94,6 +96,10 @@ const LabelFont = styled.label<{weight: string, size: string}>`
 const TitleContainer = styled.div`
     display: flex;
     justify-content: space-between;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     & svg {
         width: 20px;
