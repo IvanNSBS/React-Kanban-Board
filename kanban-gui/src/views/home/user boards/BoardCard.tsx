@@ -22,7 +22,7 @@ const BoardCard: React.FC<BoardData> = function(props) {
     }
 
     return(
-        <styles.ListItem>
+        <styles.ListItem isFavorited={userController.isBoardStarred(props.board)}>
             <styles.TitleContainer>
                 <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
 
@@ -45,7 +45,7 @@ const BoardCard: React.FC<BoardData> = function(props) {
 
 const CreateBoardBtn: React.FC<{click?: Function}> = function(props) {
     return(
-        <styles.CreateBoard onClick={() => { if(props.click !== undefined) props.click()} }>
+        <styles.CreateBoard isFavorited={false} onClick={() => { if(props.click !== undefined) props.click()} }>
             Criar novo quadro
         </styles.CreateBoard>
     );

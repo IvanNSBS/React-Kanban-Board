@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Palette from '../../../common/colorpalette';
 
-const ListItem = styled.li`
+const ListItem = styled.li<{isFavorited: boolean}>`
     display: flex;
     flex-direction: column;
     flex-grow: 0;
@@ -28,7 +28,7 @@ const ListItem = styled.li`
     background-size: cover; */
 
     & svg {
-        fill: transparent;
+        fill: ${(props) => props.isFavorited ? 'yellow' : 'transparent'};
     }
 
     &:hover {
