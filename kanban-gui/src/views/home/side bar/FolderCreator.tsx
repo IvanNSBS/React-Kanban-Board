@@ -38,12 +38,12 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
         <modal.Background>
             <form>
                 <modal.Input onChange={ e => setNewFolder(e.target.value) } onClick = {e => e.stopPropagation() }
-                             type="text" placeholder={localizer.getTextById(localizer.texts.insert_folder_name)} 
+                             type="text" placeholder={localizer.getTextById(localizer.texts.input_create_folder_placeholder)} 
                              ref={folderNameInput}>
                 </modal.Input>
                 <div>
                     <modal.Create ref={createButton} onClick={onClickCreate}>
-                        {localizer.getTextById(localizer.texts.create)}
+                        {localizer.getTextById(localizer.texts.btn_txt_create)}
                     </modal.Create>
                     <modal.Close>X</modal.Close>
                 </div>

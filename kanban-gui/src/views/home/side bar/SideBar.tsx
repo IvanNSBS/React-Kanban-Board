@@ -36,11 +36,11 @@ const SideBar: React.FC = function()
     return(
         <styles.WorkspaceContainer onClick={() => setCreatingFolder(false)}>
 
-            <styles.AllBoards to="/">{ localizer.getTextById(localizer.texts.all_boards) }</styles.AllBoards>
+            <styles.AllBoards to="/">{ localizer.getTextById(localizer.texts.txt_sidebar_all_boards) }</styles.AllBoards>
             <div>
                 <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0"
                                      onClick={ e => {setCreatingFolder(true); e.stopPropagation(); }}>
-                    <label>{localizer.getTextById(localizer.texts.folders)}</label>
+                    <label>{localizer.getTextById(localizer.texts.txt_folders_plural)}</label>
                     <button> + </button>
                 </styles.CreateFolder>
                 {renderedFolders}

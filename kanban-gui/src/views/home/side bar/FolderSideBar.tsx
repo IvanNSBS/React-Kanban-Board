@@ -38,15 +38,15 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
                     <FlexDiv direction="column">
                         <styles.FolderOption>
                             <BiShow/>
-                            <label>{localizer.getTextById(localizer.texts.display_boards)}</label>
+                            <label>{localizer.getTextById(localizer.texts.txt_sidebar_display_board)}</label>
                         </styles.FolderOption>
                         <styles.FolderOption>
                             <MdFilterFrames/>
-                            <label>{localizer.getTextById(localizer.texts.create_new_board)}</label>
+                            <label>{localizer.getTextById(localizer.texts.txt_create_new_board)}</label>
                         </styles.FolderOption>
                         <styles.FolderOption>
                             <MdSettings/>
-                            <label>{localizer.getTextById(localizer.texts.configurations)}</label>
+                            <label>{localizer.getTextById(localizer.texts.txt_configurations_plural)}</label>
                         </styles.FolderOption>
                     </FlexDiv>
                 }
