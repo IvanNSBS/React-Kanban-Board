@@ -14,9 +14,9 @@ const FolderBoardsDisplay: React.FC<FolderData> = function(props){
     const boardItems = props.boards.map((board, idx) => {
         let link = "/";
         const showFolderName = props.showFolderName === undefined ? false : props.showFolderName;
-
+        const key = `${board.name}_${idx}`
         return (
-            <BoardCard listId={board.name+"_"+idx} board={board} boardLink={link} showFolderName={showFolderName}/>
+            <BoardCard key={key} board={board} boardLink={link} showFolderName={showFolderName}/>
         )
     })
 
@@ -30,7 +30,7 @@ const FolderBoardsDisplay: React.FC<FolderData> = function(props){
                 {boardItems}
                 { 
                     props.onClickCreate !== undefined &&
-                    <CreateBoardBtn listId="create" click={props.onClickCreate}/>
+                    <CreateBoardBtn key="create" click={props.onClickCreate}/>
                 }
             </styles.ListContainer>
         </div>

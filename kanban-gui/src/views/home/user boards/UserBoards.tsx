@@ -27,11 +27,15 @@ const UserBoards: React.FC = function()
         let index = idx;
         return (
             // TODO: Add icon to folder data
-            <FolderBoardsDisplay boards={folder.boards} icon={<AiOutlineStar/>} onClickCreate={() => { setSelectedFolderIdx(index); setModalOpen(true); }}>
+            <FolderBoardsDisplay key={idx} boards={folder.boards} icon={<AiOutlineStar/>} onClickCreate={() => { setSelectedFolderIdx(index); setModalOpen(true); }}>
                 {folder.name} 
             </FolderBoardsDisplay>
         )
     })
+
+    const display = folders.length === 0 ?  <div style={{textAlign:'center', color: 'white', fontSize: '2em'}}>
+                                                Comece criando uma pasta para seus quadros
+                                            </div> : foldersDisplay;
 
     return(
         <styles.UserBoardsContainer>
@@ -43,11 +47,7 @@ const UserBoards: React.FC = function()
                     Quadros com Estrela
                 </FolderBoardsDisplay>
             }
-            {
-                folders.length == 0 &&
-                <div style={{textAlign:'center', color: 'white', fontSize: '2em'}}>Comece criando uma pasta para seus quadros</div>
-            }
-            {foldersDisplay}
+            {display}
         </styles.UserBoardsContainer>
     )
 }
