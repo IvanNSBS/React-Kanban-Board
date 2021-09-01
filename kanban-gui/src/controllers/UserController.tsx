@@ -6,6 +6,10 @@ interface FolderEventFunc {
     (folders: BoardsFolder[]): void;
 }
 
+interface StarredEventFunc {
+    (folders: Board[]): void;
+}
+
 function folderComparer(a: BoardsFolder, b: BoardsFolder) {
     if(a.name > b.name)
         return 1;
@@ -18,10 +22,12 @@ function folderComparer(a: BoardsFolder, b: BoardsFolder) {
 export default class UserController{
     private _user: User;
     private _folderEventsSubscribers: FolderEventFunc[]; 
+    private _starredEventsSubscribers: StarredEventFunc[]; 
 
     constructor(user: User){
         this._user = user;
         this._folderEventsSubscribers = [];
+        this._starredEventsSubscribers = [];
     }   
 
     public subscribeToFoldersChanged(func: FolderEventFunc) {
@@ -29,8 +35,17 @@ export default class UserController{
     }
 
     public removeSubscribeFromFoldersChanged(func: FolderEventFunc) {
-        this._folderEventsSubscribers.filter(f => f !== func);
+        this._folderEventsSubscribers = this._folderEventsSubscribers.filter(f => f !== func);
     }
+
+    public subscribeToStarredChanged(func: StarredEventFunc) {
+        this._starredEventsSubscribers.push(func);
+    }
+
+    public removeSubscribeFromStarredChanged(func: StarredEventFunc) {
+        this._starredEventsSubscribers = this._starredEventsSubscribers.filter(f => f !== func);
+    }
+    // end events
 
     public createFolder(name: string, iconUrl?:string): BoardsFolder[] {
         this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) ).sort(folderComparer);
@@ -52,8 +67,19 @@ export default class UserController{
         return this._user.folders[folderIdx].boards;
     }
 
-    public addStarredBoard(board: Board): Board[] {
-        this._user.starredBoards = this._user.starredBoards.concat( board );
+    public isBoardStarred(board: Board): boolean {
+        return this._user.starredBoards.filter(a => a === board).length > 0;
+    }
+
+    public toggleStarredBoard(board: Board): Board[] {
+        if(!this.isBoardStarred(board)) {
+            this._user.starredBoards = this._user.starredBoards.concat( board );
+        }
+        else{
+            this._user.starredBoards = this._user.starredBoards.filter(a => a !== board);
+        }
+
+        this._starredEventsSubscribers.forEach(x => x(this._user.starredBoards));
         return this._user.starredBoards;
     }
 

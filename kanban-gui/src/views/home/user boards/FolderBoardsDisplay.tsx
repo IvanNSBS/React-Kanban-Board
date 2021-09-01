@@ -15,15 +15,15 @@ interface FolderData{
 
 const FolderBoardsDisplay: React.FC<FolderData> = function(props)
 {
+    const boardsRef = props.boards;
     const canCreateBoard = props.index >= 0;
     const [creatingBoard, setCreatingBoard] = useState<boolean>(false);
     const userController = useContext(UserControllerContext);
 
-    const boardItems = props.boards.map((board, idx) => {
-        let link = "/";
+    const boardItems = boardsRef.map((board, idx) => {
         const showFolderName = props.showFolderName === undefined ? false : props.showFolderName;
         return (
-            <BoardCard key={idx} board={board} boardLink={link} showFolderName={showFolderName}/>
+            <BoardCard key={idx} board={board} showFolderName={showFolderName}/>
         )
     })
 
