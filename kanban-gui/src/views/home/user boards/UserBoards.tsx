@@ -37,8 +37,9 @@ const UserBoards: React.FC = function()
         <styles.UserBoardsContainer>
             <CreateBoardModal setActive={setModalOpen} isOpen={modalOpen} index={selectedFolderIdx}
                               folders={userController.getFolders()} createBoard={ (idx, name) => userController.addBoardToFolder(idx, name)}/>
-            { userController.getStarredBoards().length > 0 &&
-                <FolderBoardsDisplay boards={userController.getStarredBoards()} icon={<AiOutlineStar/>}>
+            { 
+                userController.getStarredBoards().length > 0 &&
+                <FolderBoardsDisplay boards={userController.getStarredBoards()} icon={<AiOutlineStar/>} showFolderName={true}>
                     Quadros com Estrela
                 </FolderBoardsDisplay>
             }

@@ -6,15 +6,17 @@ import * as styles from './FolderBoardsDisplay.styles'
 interface FolderData{
     boards: Board[];
     icon: JSX.Element;
-    hideFolderName?: boolean;
+    showFolderName?: boolean;
     onClickCreate?: Function;
 }
 
 const FolderBoardsDisplay: React.FC<FolderData> = function(props){
     const boardItems = props.boards.map((board, idx) => {
         let link = "/";
+        const showFolderName = props.showFolderName === undefined ? false : props.showFolderName;
+
         return (
-            <BoardCard listId={board.name+"_"+idx} board={board} boardLink={link}/>
+            <BoardCard listId={board.name+"_"+idx} board={board} boardLink={link} showFolderName={showFolderName}/>
         )
     })
 

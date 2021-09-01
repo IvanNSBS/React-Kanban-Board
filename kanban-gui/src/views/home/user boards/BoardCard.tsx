@@ -7,17 +7,20 @@ import Board from '../../../../../data/board/board';
 export interface BoardData{
     listId: string;
     board: Board;
+    showFolderName:boolean;
     boardLink: string;
 }
 
 const BoardCard: React.FC<BoardData> = function(props) {
     const history = useHistory();
 
+    const boardName = props.showFolderName ? props.board.foldername : "";
+
     return(
         <styles.ListItem key={props.listId} onClick={() => history.push(props.boardLink)}>
             <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
             <styles.BottomContainer>
-                <styles.LabelFont weight="normal" size="15px">{props.board.foldername}</styles.LabelFont>
+                <styles.LabelFont weight="normal" size="15px">{boardName}</styles.LabelFont>
                 <styles.FavoriteButton>
                     <AiOutlineStar/>
                 </styles.FavoriteButton>
