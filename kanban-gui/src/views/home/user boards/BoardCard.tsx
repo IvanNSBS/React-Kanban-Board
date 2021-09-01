@@ -5,6 +5,8 @@ import * as styles from './BoardCard.styles';
 import Board from '../../../../../data/board/board';
 import { UserControllerContext } from '../Home';
 import { LocalizerContext } from '../../../contexts/Localizer';
+import { useHistory } from 'react-router-dom';
+import SelectedBoardContext from '../../../contexts/SelectedBoard';
 
 export interface BoardData{
     board: Board;
@@ -14,6 +16,8 @@ export interface BoardData{
 const BoardCard: React.FC<BoardData> = function(props) {
     const boardName = props.showFolderName ? props.board.foldername : "";
     const userController = useContext(UserControllerContext);
+    const selectedBoard = useContext(SelectedBoardContext);
+    const history = useHistory();
 
     const onClickFavorite = function(e: React.MouseEvent) {
         e.stopPropagation();
@@ -22,8 +26,13 @@ const BoardCard: React.FC<BoardData> = function(props) {
         userController.toggleStarredBoard(props.board);
     }
 
+    const onClickBoard = function() {
+        selectedBoard.selectedBoard = props.board;
+        history.push('/board');
+    }
+
     return(
-        <styles.ListItem isFavorited={userController.isBoardStarred(props.board)}>
+        <styles.ListItem isFavorited={userController.isBoardStarred(props.board)} onClick={onClickBoard}>
             <styles.TitleContainer>
                 <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
 
