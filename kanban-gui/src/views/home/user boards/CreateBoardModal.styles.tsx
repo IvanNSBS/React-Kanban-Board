@@ -71,19 +71,6 @@ const Upload = styled(Button)`
     margin-left: 7px;
 `
 
-const Dropdown = styled.select`
-    border: 0px;
-    border-radius: 4px;
-    background-color: transparent;
-    width: 50%;
-    height: 25px;
-    color: ${Palette.text};
-
-    &:hover{
-        background-color: #0000006f;
-    }
-`
-
 const Create = styled(Button)`
     height: 35px;
     margin-top: 7px;
@@ -92,4 +79,4 @@ const Create = styled(Button)`
 const Close = styled.button`
 `
 
-export { AbsoluteDiv, ModalBackground, Dropdown, Create, Input, Close, Upload }
+export { AbsoluteDiv, ModalBackground, Create, Input, Close, Upload }

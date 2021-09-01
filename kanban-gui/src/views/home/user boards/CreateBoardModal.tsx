@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import BoardsFolder from "../../../../../data/account/boardsFolder";
-
 import * as styles from "./CreateBoardModal.styles";
 import FlexDiv from "../../../common/styles/FlexDiv";
 import Palette from '../../../common/colorpalette'
 
 interface CreateBoard {
     isOpen: boolean;
-    folders: BoardsFolder[];
     index: number;
     setActive(value: boolean): void;
     createBoard(index: number, name: string): void;
@@ -16,7 +13,6 @@ interface CreateBoard {
 const CreateBoardModal: React.FC<CreateBoard> = function(props) 
 {
     const [name, setName] = useState<string>("");
-    const selectRef = useRef<HTMLSelectElement>(null);
     const createBtn = useRef<HTMLButtonElement>(null);
 
     const disableScroll = function(){
@@ -26,11 +22,6 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
             e.preventDefault()
             window.scrollTo(x, y);
         };
-    }
-
-    const close = function() {
-        setName("");
-        props.setActive(false);
     }
 
     const createBoard = function(e: React.MouseEvent){
@@ -51,43 +42,30 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
         }
     }, [props.isOpen, name])
 
+    return(
+        <styles.ModalBackground onClick={() => props.setActive(false)}>
+            <styles.AbsoluteDiv onClick={e => e.stopPropagation()}>
 
-    if(props.isOpen){
-        
-        const options = props.folders.map((folder, idx) => {
-            return <option value={folder.name}>{folder.name}</option>
-        })
+                <FlexDiv justify="space-between" height="95px">
+                    <FlexDiv direction="column" alignContent="space-between" 
+                                width="100%" padding="7px" backgroundColor={Palette.boardCard} borderRadius="8px">
 
-        return(
-            <styles.ModalBackground onClick={close}>
-                <styles.AbsoluteDiv onClick={e => e.stopPropagation()}>
+                            <FlexDiv justify="space-between">
+                                <styles.Input type="text" placeholder="Nome do Quadro" onChange={e => setName(e.target.value)}></styles.Input>
+                                <styles.Close onClick={() => props.setActive(false)}>x</styles.Close>
+                            </FlexDiv>
 
-                    <FlexDiv justify="space-between" height="95px">
-                        <FlexDiv direction="column" alignContent="space-between" 
-                                 width="100%" padding="7px" backgroundColor={Palette.boardCard} borderRadius="8px">
-
-                                <FlexDiv justify="space-between">
-                                    <styles.Input type="text" placeholder="Nome do Quadro" onChange={e => setName(e.target.value)}></styles.Input>
-                                    <styles.Close onClick={close}>x</styles.Close>
-                                </FlexDiv>
-
-                            <styles.Dropdown ref={selectRef} name={props.folders[0].name}>
-                                {options}
-                            </styles.Dropdown>
-                        </FlexDiv>
-                        <styles.Upload>Upload Thumbnail</styles.Upload>
                     </FlexDiv>
+                    <styles.Upload>Upload Thumbnail</styles.Upload>
+                </FlexDiv>
 
-                    <form>
-                        <styles.Create onClick={createBoard}>Criar Quadro</styles.Create>
-                    </form>
+                <form>
+                    <styles.Create onClick={createBoard}>Criar Quadro</styles.Create>
+                </form>
 
-                </styles.AbsoluteDiv>
-            </styles.ModalBackground>
-        )
-    }
-
-    return null;
+            </styles.AbsoluteDiv>
+        </styles.ModalBackground>
+    )
 }
 
 export default CreateBoardModal;
