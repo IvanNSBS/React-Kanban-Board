@@ -7,10 +7,12 @@ import FolderBoardsDisplay from './FolderBoardsDisplay'
 import { UserControllerContext } from '../Home';
 import Board from '../../../../../data/board/board';
 import BoardsFolder from '../../../../../data/account/boardsFolder';
+import { LocalizerContext } from "../../../contexts/Localizer";
 
 const UserBoards: React.FC = function() 
 {
     const userController = useContext(UserControllerContext);
+    const localizer = useContext(LocalizerContext);
     const [folders, setFolders] = useState<BoardsFolder[]>(userController.getFolders());
     const [starredBoards, setStarredBoards] = useState<Board[]>(userController.getStarredBoards());
 
@@ -44,7 +46,7 @@ const UserBoards: React.FC = function()
     })
 
     const display = folders.length === 0 ?  <div style={{textAlign:'center', color: 'white', fontSize: '2em'}}>
-                                                Comece criando uma pasta para seus quadros
+                                                {localizer.getTextById(localizer.texts.txt_no_boards_or_folders_created)}
                                             </div> : foldersDisplay;
 
     return(
@@ -53,7 +55,7 @@ const UserBoards: React.FC = function()
                 userController.getStarredBoards().length > 0 &&
                 <FolderBoardsDisplay boards={starredBoards} icon={<AiOutlineStar/>} 
                                      showFolderName={true} index={-1}>
-                    Quadros com Estrela
+                    {localizer.getTextById(localizer.texts.txt_favorite_boards_title)}
                 </FolderBoardsDisplay>
             }
             {display}

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import * as styles from "./CreateBoardModal.styles";
 import FlexDiv from "../../../common/styles/FlexDiv";
 import Palette from '../../../common/colorpalette'
+import { LocalizerContext } from "../../../contexts/Localizer";
 
 interface CreateBoard {
     isOpen: boolean;
@@ -14,6 +15,7 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
 {
     const [name, setName] = useState<string>("");
     const createBtn = useRef<HTMLButtonElement>(null);
+    const localizer = useContext(LocalizerContext);
 
     const disableScroll = function(){
         const x = window.scrollX;
@@ -51,7 +53,9 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
                                 width="100%" padding="7px" backgroundColor={Palette.boardCard} borderRadius="8px">
 
                             <FlexDiv justify="space-between">
-                                <styles.Input type="text" placeholder="Nome do Quadro" onChange={e => setName(e.target.value)}></styles.Input>
+                                <styles.Input type="text" placeholder={localizer.getTextById(localizer.texts.input_board_modal_placeholder)} 
+                                              onChange={e => setName(e.target.value)}>
+                                </styles.Input>
                                 <styles.Close onClick={() => props.setActive(false)}>x</styles.Close>
                             </FlexDiv>
 
@@ -60,7 +64,7 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
                 </FlexDiv>
 
                 <form>
-                    <styles.Create onClick={createBoard}>Criar Quadro</styles.Create>
+                    <styles.Create onClick={createBoard}>{localizer.getTextById(localizer.texts.btn_txt_create)}</styles.Create>
                 </form>
 
             </styles.AbsoluteDiv>

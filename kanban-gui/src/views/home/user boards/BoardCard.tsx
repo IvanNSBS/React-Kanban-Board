@@ -4,6 +4,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as styles from './BoardCard.styles';
 import Board from '../../../../../data/board/board';
 import { UserControllerContext } from '../Home';
+import { LocalizerContext } from '../../../contexts/Localizer';
 
 export interface BoardData{
     board: Board;
@@ -43,10 +44,13 @@ const BoardCard: React.FC<BoardData> = function(props) {
     );
 }
 
-const CreateBoardBtn: React.FC<{click?: Function}> = function(props) {
+const CreateBoardBtn: React.FC<{click?: Function}> = function(props) 
+{
+    const localizer = useContext(LocalizerContext);
+    
     return(
         <styles.CreateBoard isFavorited={false} onClick={() => { if(props.click !== undefined) props.click()} }>
-            Criar novo quadro
+            {localizer.getTextById(localizer.texts.txt_create_new_board)}
         </styles.CreateBoard>
     );
 }
