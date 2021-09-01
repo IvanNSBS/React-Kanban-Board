@@ -1,5 +1,6 @@
 import * as modal from './FolderCreator.styles';
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
+import { LocalizerContext } from '../../../contexts/Localizer';
 
 interface CreationFunction{
     creationFunction(name: string): boolean;
@@ -11,6 +12,7 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
     const [createDisabled, setCreateDisabled] = useState<boolean>(true);
     const createButton = useRef<HTMLButtonElement>(null);
     const folderNameInput = useRef<HTMLInputElement>(null);
+    const localizer = useContext(LocalizerContext);
 
     function onClickCreate(e: React.MouseEvent){
         e.stopPropagation(); 
@@ -36,11 +38,12 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
         <modal.Background>
             <form>
                 <modal.Input onChange={ e => setNewFolder(e.target.value) } onClick = {e => e.stopPropagation() }
-                             type="text" placeholder="Insira um nome para a pasta..." ref={folderNameInput}>
+                             type="text" placeholder={localizer.getTextById(localizer.texts.insert_folder_name)} 
+                             ref={folderNameInput}>
                 </modal.Input>
                 <div>
                     <modal.Create ref={createButton} onClick={onClickCreate}>
-                        Criar
+                        {localizer.getTextById(localizer.texts.create)}
                     </modal.Create>
                     <modal.Close>X</modal.Close>
                 </div>
