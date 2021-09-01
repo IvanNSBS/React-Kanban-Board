@@ -1,4 +1,4 @@
-import * as modal from './CreateFolderModal.styles';
+import * as modal from './FolderCreator.styles';
 import React, {useState, useEffect, useRef} from "react";
 
 interface CreationFunction{

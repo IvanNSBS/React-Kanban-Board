@@ -4,9 +4,6 @@ import FolderSideBar from "./FolderSideBar";
 import FolderCreator from './FolderCreator';
 import * as styles from './SideBar.styles';
 
-import * as modal from './CreateFolderModal.styles';
-
-
 const SideBar: React.FC = function() 
 {
     const userController = useContext(UserControllerContext);
