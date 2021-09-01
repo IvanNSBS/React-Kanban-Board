@@ -2,40 +2,47 @@ import styled from 'styled-components';
 import Palette from '../../../common/colorpalette';
 
 const ListItem = styled.li`
-    background-color: ${Palette.boardCard};
-    border-radius: 7px;
-    width: 21%;
-    min-width: 140px;
-    height: 112px;
-    margin: 0 2% 2% 0;
-    padding: 8px;
-    user-select: none;
-    
-    color: ${Palette.text};
-    transition: 0.2s ease-out;
-
     display: flex;
     flex-direction: column;
     flex-grow: 0;
     justify-content: space-between;
 
-    &:hover{
-        transition: 0.2s ease-out;
-        opacity: 0.5;
+    width: 21%;
+    min-width: 140px;
+    height: 112px;
 
-        & svg { fill: yellow }
-    }
+    color: ${Palette.text};
+    
+    border-radius: 7px;
+    margin: 0 2% 2% 0;
+    padding: 8px;
+    
+    user-select: none;
+    transition: 0.2s ease-out;
 
-    &:active{
-        transition: 0.2s ease-out;
-        opacity: 0.3;
-    }
+    color: ${Palette.text};
+    background-color: ${Palette.boardCard};
+    /* background-image: url('https://nemenomicon.files.wordpress.com/2017/05/dark-souls.jpg');
+    background-repeat: no-repeat;
+    background-position: right right;
+    background-size: cover; */
 
     & svg {
+        fill: transparent;
+    }
+
+    &:hover {
         transition: 0.2s ease-out;
-        width: 100%;
-        height: 100%;
-        fill: transparent
+        background-color: ${Palette.boardCardHover};
+
+        & svg{
+            fill: ${Palette.text};
+        }
+    }
+
+    &:active:not(:focus-within) {
+        transition: 0.2s ease-out;
+        background-color: ${Palette.boardCardActive};
     }
 `
 
@@ -61,10 +68,21 @@ const FavoriteButton = styled.button`
     height: 20px;
     padding: 0;
 
-    
+    & svg {
+        transition: 0.2s ease-out;
+        width: 100%;
+        height: 100%;
+    }
+
     &:hover svg {
-        transition: 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform: scale(1.25);
+        fill: yellow;
+    }
+
+    &:active svg {
         transform: scale(1.3);
+        fill: #adb300;
     }
 `
 
@@ -73,4 +91,14 @@ const LabelFont = styled.label<{weight: string, size: string}>`
     font-size: ${(props) => props.size};
 `
 
-export { FavoriteButton, BottomContainer, ListItem, LabelFont, CreateBoard }
+const TitleContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    & svg {
+        width: 20px;
+        height: 20px;
+    }
+`
+
+export { FavoriteButton, BottomContainer, ListItem, LabelFont, CreateBoard, TitleContainer }
