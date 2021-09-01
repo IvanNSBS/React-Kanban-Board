@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 import * as styles from './FolderSidebar.styles';
 import { BiShow } from 'react-icons/bi';
 import { MdFilterFrames, MdSettings } from 'react-icons/md'
 import FlexDiv from "../../../common/styles/FlexDiv";
+import { LocalizerContext } from "../../../contexts/Localizer";
 
 const img = require('../../../../public/folder_default_icon.jpg').default;
 
-const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props) { 
+const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props) 
+{ 
+    const localizer = useContext(LocalizerContext);
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
     const onClick = function() {
@@ -35,15 +38,15 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
                     <FlexDiv direction="column">
                         <styles.FolderOption>
                             <BiShow/>
-                            <label>Mostrar Quadros</label>
+                            <label>{localizer.getTextById(localizer.texts.display_boards)}</label>
                         </styles.FolderOption>
                         <styles.FolderOption>
                             <MdFilterFrames/>
-                            <label>Criar Novo Quadro</label>
+                            <label>{localizer.getTextById(localizer.texts.create_new_board)}</label>
                         </styles.FolderOption>
                         <styles.FolderOption>
                             <MdSettings/>
-                            <label>Configurações</label>
+                            <label>{localizer.getTextById(localizer.texts.configurations)}</label>
                         </styles.FolderOption>
                     </FlexDiv>
                 }

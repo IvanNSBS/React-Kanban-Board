@@ -6,9 +6,12 @@ const Languages = {
 const Texts = {
     create: 'create',
     create_new_board: 'create_new_board',
-    show_boards: 'show_all_boards',
+    display_boards: 'display_boards',
+    all_boards: 'all_boards',
     configurations: 'configurations',
     folders: 'folders',
+
+
     favorite_boards: 'favorite_boards',
     board_name: 'board_name',
     insert_folder_name: 'insert_folder_name'
@@ -27,6 +30,10 @@ const Localization: Record<string, Record<string, string>> =
     'display_boards': {
         'ptBr': 'Mostrar Quadros',
         'enUs': 'Display Boards'
+    },
+    'all_boards': {
+        'ptBr': 'Todos os Quadros',
+        'enUs': 'All Boards'
     },
     'configurations': {
         'ptBr': 'Configurações',
@@ -50,12 +57,8 @@ const Localization: Record<string, Record<string, string>> =
     }
 };
 
-Localization['create_new_board'] = {'ptBr': 'asd'};
-
-
 function getLocalizedText(languageId: string, textId: string):string {
     return Localization[textId][languageId];
 }
-
 
 export { Languages, Texts, getLocalizedText }

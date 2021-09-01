@@ -3,10 +3,12 @@ import { UserControllerContext } from "../Home";
 import FolderSideBar from "./FolderSideBar";
 import FolderCreator from './FolderCreator';
 import * as styles from './SideBar.styles';
+import { LocalizerContext } from "../../../contexts/Localizer";
 
 const SideBar: React.FC = function() 
 {
     const userController = useContext(UserControllerContext);
+    const localizer = useContext(LocalizerContext);
 
     const [folders, setFolders] = useState(userController.getFolders());
     const [creatingFolder, setCreatingFolder] = useState<boolean>(false);
@@ -34,11 +36,11 @@ const SideBar: React.FC = function()
     return(
         <styles.WorkspaceContainer onClick={() => setCreatingFolder(false)}>
 
-            <styles.AllBoards to="/">Todos os Quadros</styles.AllBoards>
+            <styles.AllBoards to="/">{ localizer.getTextById(localizer.texts.all_boards) }</styles.AllBoards>
             <div>
                 <styles.CreateFolder direction="row" justify="space-between" margin="5px 0 5px 0"
                                      onClick={ e => {setCreatingFolder(true); e.stopPropagation(); }}>
-                    <label>Pastas</label>
+                    <label>{localizer.getTextById(localizer.texts.folders)}</label>
                     <button> + </button>
                 </styles.CreateFolder>
                 {renderedFolders}
