@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import * as styles from './FolderSidebar.styles';
 import { BiShow } from 'react-icons/bi';
-import { MdFilterFrames } from 'react-icons/md'
+import { MdFilterFrames, MdSettings } from 'react-icons/md'
 import FlexDiv from "../../../common/styles/FlexDiv";
 
 const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props) { 
@@ -31,6 +31,10 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
                         <styles.FolderOption>
                             <MdFilterFrames/>
                             <label>Criar Novo Quadro</label>
+                        </styles.FolderOption>
+                        <styles.FolderOption>
+                            <MdSettings/>
+                            <label>Configurações</label>
                         </styles.FolderOption>
                     </FlexDiv>
                 }
