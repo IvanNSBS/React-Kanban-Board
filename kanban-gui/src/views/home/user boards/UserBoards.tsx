@@ -23,7 +23,8 @@ const UserBoards: React.FC = function()
     const foldersDisplay = folders.map((folder, idx) => {
         return (
             // TODO: Add icon to folder data
-            <FolderBoardsDisplay key={idx} boards={folder.boards} icon={<AiOutlineStar/>} index={idx}>
+            <FolderBoardsDisplay key={idx} boards={folder.boards} 
+                                 icon={<AiOutlineStar/>} index={idx}>
                 {folder.name} 
             </FolderBoardsDisplay>
         )
