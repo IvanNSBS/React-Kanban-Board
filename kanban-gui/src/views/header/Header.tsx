@@ -15,10 +15,14 @@ const Header: React.FC = function()
                 <LinkButton to="/quadros">Quadros</LinkButton>
             </div>
             Kanban Board
-            <div>
-                <button onClick={() => localizer.usePtBr()}>Criar</button>
-                <button onClick={() => localizer.useEnUs()}>Criar</button>
-            </div>
+            <styles.LanguagesContainer>
+                <button onClick={() => localizer.usePtBr()}>
+                    <img src={require('../../../public/brazil.png').default}></img>
+                </button>
+                <button onClick={() => localizer.useEnUs()}>
+                    <img src={require('../../../public/united-states.png').default}></img>
+                </button>
+            </styles.LanguagesContainer>
         </styles.HeaderContainer>
     );
 }
