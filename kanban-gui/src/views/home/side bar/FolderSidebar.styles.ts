@@ -13,6 +13,7 @@ const FolderTitle = styled(FlexDiv)`
     align-items: center;
     margin:0 0 5px 0;
     width: 100%;
+    box-sizing: border-box;
     padding: 9px;
     transition: 0.1s ease-out;
     border-radius: 5px;
