@@ -1,4 +1,3 @@
-
 import React, { useState, useContext, useEffect } from "react";
 import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './UserBoards.styles'
@@ -9,6 +8,8 @@ import Board from '../../../../../data/board/board';
 import BoardsFolder from '../../../../../data/account/boardsFolder';
 import { LocalizerContext } from "../../../contexts/Localizer";
 import FolderIcon from "../FolderIcon";
+import { eventsHandlers } from "../../../controllers/EventManager";
+import { FolderEvents } from "../../../controllers/UserController";
 
 const UserBoards: React.FC = function() 
 {
@@ -18,12 +19,19 @@ const UserBoards: React.FC = function()
     const [starredBoards, setStarredBoards] = useState<Board[]>(userController.getStarredBoards());
 
     useEffect(() => {
-        userController.subscribeToFoldersChanged(setFolders);
-        userController.subscribeToStarredChanged(setStarredBoards);
+        const updateFolders = function() {
+            setFolders(userController.getFolders());
+        }
+        const updateStarredBoards = function() {
+            setStarredBoards(userController.getStarredBoards());
+        }
+
+        eventsHandlers.addSubscriber(FolderEvents.foldersChanged, updateFolders);
+        eventsHandlers.addSubscriber(FolderEvents.starredBoardsChanged, updateStarredBoards);
 
         return function unsubscribe() {
-            userController.removeSubscribeFromFoldersChanged(setFolders);
-            userController.removeSubscribeFromStarredChanged(setStarredBoards);
+            eventsHandlers.removeSubscriber(FolderEvents.foldersChanged, updateFolders);
+            eventsHandlers.removeSubscriber(FolderEvents.starredBoardsChanged, updateStarredBoards);
         }
     }, []);
 

@@ -2,13 +2,7 @@ import BoardsFolder from "../../../data/account/boardsFolder";
 import Board from "../../../data/board/board";
 import User from "../../../data/account/user";
 
-interface FolderEventFunc {
-    (folders: BoardsFolder[]): void;
-}
-
-interface StarredEventFunc {
-    (folders: Board[]): void;
-}
+import { eventsHandlers } from './EventManager';
 
 function folderComparer(a: BoardsFolder, b: BoardsFolder) {
     if(a.name > b.name)
@@ -19,33 +13,19 @@ function folderComparer(a: BoardsFolder, b: BoardsFolder) {
     return 0;
 }
 
-export default class UserController{
+export const FolderEvents = {
+    foldersChanged: 'folders_changed',
+    starredBoardsChanged: 'starred_boards_changed'
+}
+
+export default class UserController {
     private _user: User;
-    private _folderEventsSubscribers: FolderEventFunc[]; 
-    private _starredEventsSubscribers: StarredEventFunc[]; 
+
 
     constructor(user: User){
         this._user = user;
-        this._folderEventsSubscribers = [];
-        this._starredEventsSubscribers = [];
     }   
-
-    public subscribeToFoldersChanged(func: FolderEventFunc) {
-        this._folderEventsSubscribers.push(func);
-    }
-
-    public removeSubscribeFromFoldersChanged(func: FolderEventFunc) {
-        this._folderEventsSubscribers = this._folderEventsSubscribers.filter(f => f !== func);
-    }
-
-    public subscribeToStarredChanged(func: StarredEventFunc) {
-        this._starredEventsSubscribers.push(func);
-    }
-
-    public removeSubscribeFromStarredChanged(func: StarredEventFunc) {
-        this._starredEventsSubscribers = this._starredEventsSubscribers.filter(f => f !== func);
-    }
-    // end events
+    
 
     public createFolder(name: string, iconUrl?:string): BoardsFolder[] {
         if(name === "" || this._user.folders.filter(f => f.name === name).length > 0)
@@ -53,7 +33,7 @@ export default class UserController{
         
         this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) ).sort(folderComparer);
 
-        this._folderEventsSubscribers.forEach(x => x(this._user.folders));
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
         return this._user.folders;
     }
 
@@ -65,7 +45,7 @@ export default class UserController{
         this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
 
         this._user.folders = [...this._user.folders];
-        this._folderEventsSubscribers.forEach(x => x(this._user.folders));
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
 
         return this._user.folders[folderIdx].boards;
     }
@@ -82,7 +62,7 @@ export default class UserController{
             this._user.starredBoards = this._user.starredBoards.filter(a => a !== board);
         }
 
-        this._starredEventsSubscribers.forEach(x => x(this._user.starredBoards));
+        eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
         return this._user.starredBoards;
     }
 
