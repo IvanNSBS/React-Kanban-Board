@@ -8,12 +8,14 @@ interface CreateBoard {
     isOpen: boolean;
     index: number;
     setActive(value: boolean): void;
-    createBoard(index: number, name: string): void;
+    createBoard(index: number, name: string, bgImgUrl?:string): void;
 }
 
 const CreateBoardModal: React.FC<CreateBoard> = function(props) 
 {
     const [name, setName] = useState<string>("");
+    const [bgImgUrl, setBgImgUrl] = useState<string | undefined>(undefined);
+    const nameInput = useRef<HTMLInputElement>(null);
     const createBtn = useRef<HTMLButtonElement>(null);
     const localizer = useContext(LocalizerContext);
 
@@ -26,10 +28,20 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
         };
     }
 
-    const createBoard = function(e: React.MouseEvent){
+    const createBoard = function(e: React.MouseEvent)
+    {        
         e.preventDefault();
-        props.createBoard(props.index, name);
+    
+        if(name === "")
+            return;
+    
+        props.createBoard(props.index, name, bgImgUrl);
         props.setActive(false);
+    }
+
+    const openImageSelection = function(e: React.MouseEvent) {
+        e.stopPropagation();
+        e.preventDefault();
     }
 
     useEffect(() => {
@@ -39,6 +51,8 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
                 createBtn.current.disabled = name === "";
         }
 
+        nameInput?.current?.focus();
+
         return function(){
             window.onscroll = function() {};
         }
@@ -47,26 +61,35 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
     return(
         <styles.ModalBackground onClick={() => props.setActive(false)}>
             <styles.AbsoluteDiv onClick={e => e.stopPropagation()}>
-
-                <FlexDiv justify="space-between" height="95px">
-                    <FlexDiv direction="column" alignContent="space-between" 
-                                width="100%" padding="7px" backgroundColor={Palette.boardCard} borderRadius="8px">
-
-                            <FlexDiv justify="space-between">
-                                <styles.Input type="text" placeholder={localizer.getTextById(localizer.texts.input_board_modal_placeholder)} 
-                                              onChange={e => setName(e.target.value)}>
-                                </styles.Input>
-                                <styles.Close onClick={() => props.setActive(false)}>x</styles.Close>
-                            </FlexDiv>
-
-                    </FlexDiv>
-                    <styles.Upload>Upload Thumbnail</styles.Upload>
-                </FlexDiv>
-
                 <form>
-                    <styles.Create onClick={createBoard}>{localizer.getTextById(localizer.texts.btn_txt_create)}</styles.Create>
-                </form>
+                    <FlexDiv justify="space-between" height="95px">
+                        <FlexDiv direction="column" alignContent="space-between" 
+                                    width="100%" padding="7px" backgroundColor={Palette.boardCard} borderRadius="8px">
 
+                                <FlexDiv justify="space-between">
+                                    <styles.Input type="text" placeholder={localizer.getTextById(localizer.texts.input_board_modal_placeholder)} 
+                                                  ref={nameInput}  onChange={e => setName(e.target.value)}>
+                                    </styles.Input>
+                                    <styles.Close type='button' onClick={() => props.setActive(false)}>x</styles.Close>
+                                </FlexDiv>
+
+                                <FlexDiv alignContent='center' alignItems='center'>
+                                    <styles.Input type="text" 
+                                                placeholder={localizer.getTextById(localizer.texts.input_create_folder_icon_placeholder)} 
+                                                onChange={e => setBgImgUrl(e.target.value)}>
+                                    </styles.Input>
+                                    <styles.Create type='button' onClick={openImageSelection}
+                                                   style={{margin: '0 0 0 10px'}}>
+                                        {localizer.getTextById(localizer.texts.btn_select_or_upload_img)}
+                                    </styles.Create>
+                                </FlexDiv>
+
+                        </FlexDiv>
+                    </FlexDiv>
+                    <styles.Create onClick={createBoard} type='submit'>
+                        {localizer.getTextById(localizer.texts.btn_txt_create)}
+                    </styles.Create>
+                </form>
             </styles.AbsoluteDiv>
         </styles.ModalBackground>
     )

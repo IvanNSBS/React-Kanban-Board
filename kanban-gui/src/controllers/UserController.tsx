@@ -57,12 +57,12 @@ export default class UserController{
         return this._user.folders;
     }
 
-    public addBoardToFolder(folderIdx: number, name: string): Board[] | null{
+    public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Board[] | null{
         if(folderIdx < 0 || folderIdx >= this._user.folders.length)
             return null;
             
         const folderName = this._user.folders[folderIdx].name;
-        this._user.folders[folderIdx].boards.push( new Board(name, folderName) );
+        this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
 
         this._user.folders = [...this._user.folders];
         this._folderEventsSubscribers.forEach(x => x(this._user.folders));
