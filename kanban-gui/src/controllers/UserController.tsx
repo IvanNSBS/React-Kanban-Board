@@ -48,6 +48,9 @@ export default class UserController{
     // end events
 
     public createFolder(name: string, iconUrl?:string): BoardsFolder[] {
+        if(name === "" || this._user.folders.filter(f => f.name === name).length > 0)
+            return this._user.folders;
+        
         this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) ).sort(folderComparer);
 
         this._folderEventsSubscribers.forEach(x => x(this._user.folders));
