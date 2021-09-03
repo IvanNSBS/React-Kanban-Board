@@ -54,11 +54,11 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
                         <modal.Input onChange={ e => setNewFolderIconUrl(e.target.value) } onClick = {e => e.stopPropagation() }
                                     type="text" placeholder={localizer.getTextById(localizer.texts.input_create_folder_icon_placeholder)}>
                         </modal.Input>
-                        <modal.Create onClick={openIconSelectModal} style={{marginLeft: '10px', width:'auto'}}>
+                        <modal.Create type='button' onClick={openIconSelectModal} style={{marginLeft: '10px', width:'auto'}}>
                             {localizer.getTextById(localizer.texts.btn_select_or_upload_img)}
                         </modal.Create>
                     </FlexDiv>
-                    <modal.Create ref={createButton} onClick={onClickCreate}>
+                    <modal.Create type='submit' ref={createButton} onClick={onClickCreate}>
                         {localizer.getTextById(localizer.texts.btn_txt_create)}
                     </modal.Create>
                     <modal.Close>X</modal.Close>
