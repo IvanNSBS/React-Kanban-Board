@@ -13,6 +13,8 @@ const Texts = {
     txt_favorite_boards_title: 'txt_favorite_boards_title',
     input_board_modal_placeholder: 'input_board_modal_placeholder',
     input_create_folder_placeholder: 'input_create_folder_placeholder',
+    input_create_folder_icon_placeholder: 'input_create_folder_icon_placeholder',
+    btn_select_or_upload_img: 'btn_select_or_upload_img',
     txt_no_boards_or_folders_created: 'txt_no_boards_or_folders_created'
 }
 
@@ -53,6 +55,14 @@ const Localization: Record<string, Record<string, string>> =
     'input_create_folder_placeholder': {
         'ptBr': 'Inserir um nome para a pasta...',
         'enUs': 'Insert a name for the folder...'
+    },
+    'input_create_folder_icon_placeholder': {
+        'ptBr': 'Url do Ícone(opcional)',
+        'enUs': 'Icon Url(optional)'
+    },
+    'btn_select_or_upload_img':{
+        'ptBr': 'Escolher',
+        'enUs': 'Select'
     },
     'txt_no_boards_or_folders_created': {
         'ptBr': 'Comece criando uma pasta para seus quadros',

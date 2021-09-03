@@ -20,9 +20,9 @@ const SideBar: React.FC = function()
         )
     })
 
-    const tryCreateNewFolder = function(name: string): boolean{
+    const tryCreateNewFolder = function(name: string, iconUrl?:string): boolean{
         const prevLength = folders.length;
-        const newFolders = userController.createFolder(name);
+        const newFolders = userController.createFolder(name, iconUrl);
         const created = newFolders.length > prevLength;
 
         if(created){
@@ -48,7 +48,7 @@ const SideBar: React.FC = function()
 
             {
                 creatingFolder && 
-                <FolderCreator creationFunction={ name => tryCreateNewFolder(name) }></FolderCreator>
+                <FolderCreator creationFunction={ (name, iconUrl) => tryCreateNewFolder(name, iconUrl) }></FolderCreator>
             }
         </styles.WorkspaceContainer>
     );

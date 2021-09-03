@@ -5,8 +5,6 @@ import { MdFilterFrames, MdSettings } from 'react-icons/md'
 import FlexDiv from "../../../common/styles/FlexDiv";
 import { LocalizerContext } from "../../../contexts/Localizer";
 
-const img = require('../../../../public/folder_default_icon.jpg').default;
-
 const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props) 
 { 
     const localizer = useContext(LocalizerContext);
@@ -24,7 +22,9 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
                                     height: "25px", width: "25px", marginRight: "10px", display:'flex', justifyContent: 'center', alignItems: 'center'}}>
                          {firstChar}
                       </div> :
-                      <img src={img} style={{backgroundSize: 'cover', height: "25px", width: "25px", marginRight: "10px"}}></img>
+                      <img src={props.iconUrl} style={{ 
+                          objectFit: 'cover', height: "25px", width: "25px", marginRight: "10px"}}>
+                      </img>
 
     return(
         <div style={{margin: "5px 0 10px 0"}}>
