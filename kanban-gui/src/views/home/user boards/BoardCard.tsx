@@ -32,7 +32,8 @@ const BoardCard: React.FC<BoardData> = function(props) {
     }
 
     return(
-        <styles.ListItem isFavorited={userController.isBoardStarred(props.board)} onClick={onClickBoard}>
+        <styles.ListItem isFavorited={userController.isBoardStarred(props.board)} 
+                         onClick={onClickBoard} style={{backgroundImage: `url('${props.board.backgroundImgUrl}')`, backgroundSize:'cover'}}>
             <styles.TitleContainer>
                 <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
 
