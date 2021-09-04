@@ -1,12 +1,17 @@
-import express from 'express';
-import User from '../../data/account/user'
+import User from '../../data/account/user';
+import express, { Request, Response } from 'express';
+import cors from 'cors'
 
 const app = express();
 const PORT = 8000;
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}))
+
 const user: User = new User('Krakowski');
 
-app.get('/', (req,res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send(`User name: ${user.username}`)
 });
 
