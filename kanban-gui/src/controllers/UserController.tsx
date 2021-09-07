@@ -51,21 +51,20 @@ export default class UserController {
         return this._user.folders;
     }
 
-    public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Board[] | null{
+    public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Board[] | null 
+    {
         if(folderIdx < 0 || folderIdx >= this._user.folders.length)
             return null;
         
         const folderName = this._user.folders[folderIdx].name;
-        axios.post(UrlManager.boards, {folderIdx, folderName, name, bgImgUrl}).then(res => {
-            if(res.status !== 200){
-                alert(`status: ${res.status} | error: ${res.data}`);
-                return;
-            }
-
+        axios.post(UrlManager.boards, {folderIdx, folderName, name, bgImgUrl}).then(res => 
+        {
             const folderName = this._user.folders[folderIdx].name;
             this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
             this._user.folders = [...this._user.folders];
             eventsHandlers.invoke(FolderEvents.foldersChanged);
+        }).catch(e => {
+            alert(e);
         })
 
         return this._user.folders[folderIdx].boards;

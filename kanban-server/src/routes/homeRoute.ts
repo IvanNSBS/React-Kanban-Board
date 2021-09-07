@@ -50,14 +50,16 @@ export default class HomeRouteController {
         })
 
         this._route.post('/boards', function(req: express.Request, res: express.Response) {
-            console.log(`body: ${JSON.stringify(req.body)}`);
             const folderIdx: number = req.body.folderIdx;
             const folderName: string = req.body.folderName;
             const name: string = req.body.name;
             const bgImgUrl: string | undefined = req.body.bgImgUrl;
 
-            if(folderIdx < 0 || folderIdx >= that._user.folders.length || name === "" || folderName === "")
-                res.status(400).send('Invalid parameters for boards');
+            if( folderIdx < 0 || folderIdx >= that._user.folders.length || 
+                name === "" || name === undefined || folderName === "" || folderName === undefined)
+            {
+                res.status(406).send('Invalid parameters for boards');
+            }
             else{
                 that._user.folders[folderIdx].boards.push(new Board(name, folderName, bgImgUrl));
                 res.status(200).send(`Board created for folder ${folderName} Created`);
