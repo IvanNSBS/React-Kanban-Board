@@ -41,12 +41,11 @@ export default class UserController {
             return this._user.folders;
         
         const newFolder = new BoardsFolder(name, iconUrl);
-        axios.put(UrlManager.folders, newFolder).then(res => {
+        axios.post(UrlManager.folders, newFolder).then(res => {
             if(res.status === 200){
                 this._user.folders = this._user.folders.concat( newFolder ).sort(folderComparer);
                 eventsHandlers.invoke(FolderEvents.foldersChanged);
             }
-            alert(`status: ${res.status} | data: ${res.data}`)
         })
 
         return this._user.folders;

@@ -1,7 +1,6 @@
 import User from '../../../data/account/user';
 import express, { Router } from 'express';
 import BoardsFolder from '../../../data/account/boardsFolder';
-import { userInfo } from 'os';
 
 export default class HomeRouteController {
     private _user: User;
@@ -30,7 +29,7 @@ export default class HomeRouteController {
             res.send( JSON.stringify(that._user.starredBoards) );
         })
 
-        this._route.put('/folders', function(req: express.Request, res: express.Response) {
+        this._route.post('/folders', function(req: express.Request, res: express.Response) {
             const folder = <BoardsFolder>req.body;
             if(folder.name === undefined || folder.name === ""){
                 res.status(406).send('Invalid Folder');
