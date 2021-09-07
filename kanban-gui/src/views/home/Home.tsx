@@ -7,11 +7,7 @@ import * as styles from './Home.styles'
 import UserController from '../../controllers/UserController';
 import { createContext } from 'react';
 
-const dummyUser = new User("Ivovski");
-const userController = new UserController(dummyUser);
-userController.createFolder("Dummy Folder");
-userController.addBoardToFolder(0, "Dummy Board");
-userController.toggleStarredBoard( userController.getFolders()[0].boards[0] );
+const userController = new UserController();
 
 export const UserControllerContext = createContext<UserController>(userController);
 

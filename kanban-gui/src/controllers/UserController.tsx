@@ -24,12 +24,12 @@ export default class UserController {
     private _user: User;
 
 
-    constructor(user: User){
-        this._user = user;
+    constructor(){
+        this._user = new User("Not Found");
 
         axios.get(UrlManager.home).then(res => {
             const user = JSON.parse(JSON.stringify(res.data)) as User;
-            this._user = res.data;
+            this._user = user;
             eventsHandlers.invoke(FolderEvents.foldersChanged);
             eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
         }).catch(e => alert(e));
@@ -40,9 +40,15 @@ export default class UserController {
         if(name === "" || this._user.folders.filter(f => f.name === name).length > 0)
             return this._user.folders;
         
-        this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) ).sort(folderComparer);
+        const newFolder = new BoardsFolder(name, iconUrl);
+        axios.put(UrlManager.folders, newFolder).then(res => {
+            if(res.status === 200){
+                this._user.folders = this._user.folders.concat( newFolder ).sort(folderComparer);
+                eventsHandlers.invoke(FolderEvents.foldersChanged);
+            }
+            alert(`status: ${res.status} | data: ${res.data}`)
+        })
 
-        eventsHandlers.invoke(FolderEvents.foldersChanged);
         return this._user.folders;
     }
 
