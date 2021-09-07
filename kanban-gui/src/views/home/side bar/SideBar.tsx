@@ -1,9 +1,11 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserControllerContext } from "../Home";
 import FolderSideBar from "./FolderSideBar";
 import FolderCreator from './FolderCreator';
 import * as styles from './SideBar.styles';
 import { LocalizerContext } from "../../../contexts/Localizer";
+import { eventsHandlers } from "../../../controllers/EventManager";
+import { FolderEvents } from "../../../controllers/UserController";
 
 const SideBar: React.FC = function() 
 {
@@ -32,6 +34,18 @@ const SideBar: React.FC = function()
 
         return created;
     }
+
+    useEffect(() => {
+        const updateFolders = function() {
+            setFolders(userController.getFolders());
+        }
+
+        eventsHandlers.addSubscriber(FolderEvents.foldersChanged, updateFolders);
+
+        return function unsubscribe() {
+            eventsHandlers.removeSubscriber(FolderEvents.foldersChanged, updateFolders);
+        }
+    }, [])
 
     return(
         <styles.WorkspaceContainer onClick={() => setCreatingFolder(false)}>
