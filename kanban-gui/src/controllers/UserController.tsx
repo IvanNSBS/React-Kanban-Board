@@ -43,7 +43,7 @@ export default class UserController {
         const newFolder = new BoardsFolder(name, iconUrl);
         axios.post(UrlManager.folders, newFolder).then(res => {
             if(res.status === 200){
-                this._user.folders = this._user.folders.concat( newFolder ).sort(folderComparer);
+                this._user.folders = this._user.folders.concat( newFolder );
                 eventsHandlers.invoke(FolderEvents.foldersChanged);
             }
         })
@@ -54,29 +54,39 @@ export default class UserController {
     public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Board[] | null{
         if(folderIdx < 0 || folderIdx >= this._user.folders.length)
             return null;
-            
+        
         const folderName = this._user.folders[folderIdx].name;
-        this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
+        axios.post(UrlManager.boards, {folderIdx, folderName, name, bgImgUrl}).then(res => {
+            if(res.status !== 200){
+                alert(`status: ${res.status} | error: ${res.data}`);
+                return;
+            }
 
-        this._user.folders = [...this._user.folders];
-        eventsHandlers.invoke(FolderEvents.foldersChanged);
+            const folderName = this._user.folders[folderIdx].name;
+            this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
+            this._user.folders = [...this._user.folders];
+            eventsHandlers.invoke(FolderEvents.foldersChanged);
+        })
 
         return this._user.folders[folderIdx].boards;
     }
 
     public isBoardStarred(board: Board): boolean {
-        return this._user.starredBoards.filter(a => a === board).length > 0;
+        return this._user.starredBoards.filter(a => a.name === board.name).length > 0;
     }
 
     public toggleStarredBoard(board: Board): Board[] {
+        // TODO: This validation shouldn't be done here.
         if(!this.isBoardStarred(board)) {
             this._user.starredBoards = this._user.starredBoards.concat( board );
         }
         else{
-            this._user.starredBoards = this._user.starredBoards.filter(a => a !== board);
+            this._user.starredBoards = this._user.starredBoards.filter(a => a.name !== board.name);
         }
 
-        eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
+        axios.post(UrlManager.starredBoards, this._user.starredBoards).then(() => {
+            eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
+        })
         return this._user.starredBoards;
     }
 

@@ -1,6 +1,7 @@
 import User from '../../../data/account/user';
 import express, { Router } from 'express';
 import BoardsFolder from '../../../data/account/boardsFolder';
+import Board from '../../../data/board/board';
 
 export default class HomeRouteController {
     private _user: User;
@@ -37,6 +38,30 @@ export default class HomeRouteController {
 
             that._user.folders = that._user.folders.concat(folder);
             res.status(200).send(`Folder with name ${folder.name} created`)
+        })
+
+        this._route.post('/favorites', function(req: express.Request, res: express.Response) {
+            const favorites = <Board[]>req.body;
+            if(favorites === undefined)
+                res.status(406).send('Invalid Folder');
+
+            that._user.starredBoards = favorites;
+            res.status(200).send(`Updated Starred Boards`)
+        })
+
+        this._route.post('/boards', function(req: express.Request, res: express.Response) {
+            console.log(`body: ${JSON.stringify(req.body)}`);
+            const folderIdx: number = req.body.folderIdx;
+            const folderName: string = req.body.folderName;
+            const name: string = req.body.name;
+            const bgImgUrl: string | undefined = req.body.bgImgUrl;
+
+            if(folderIdx < 0 || folderIdx >= that._user.folders.length || name === "" || folderName === "")
+                res.status(400).send('Invalid parameters for boards');
+            else{
+                that._user.folders[folderIdx].boards.push(new Board(name, folderName, bgImgUrl));
+                res.status(200).send(`Board created for folder ${folderName} Created`);
+            }
         })
     }
 }
