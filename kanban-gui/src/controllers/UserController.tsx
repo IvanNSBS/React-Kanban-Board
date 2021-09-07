@@ -1,10 +1,10 @@
 import BoardsFolder from "../../../data/account/boardsFolder";
 import Board from "../../../data/board/board";
 import User from "../../../data/account/user";
-
+import UrlManager from "./UrlManager";
+import { eventsHandlers } from './EventManager';
 import axios from 'axios';
 
-import { eventsHandlers } from './EventManager';
 
 function folderComparer(a: BoardsFolder, b: BoardsFolder) {
     if(a.name > b.name)
@@ -27,12 +27,12 @@ export default class UserController {
     constructor(user: User){
         this._user = user;
 
-        axios.get('http://localhost:8000/').then(res => {
+        axios.get(UrlManager.home).then(res => {
             const user = JSON.parse(JSON.stringify(res.data)) as User;
             this._user = res.data;
             eventsHandlers.invoke(FolderEvents.foldersChanged);
             eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
-        });
+        }).catch(e => alert(e));
     }   
     
 
