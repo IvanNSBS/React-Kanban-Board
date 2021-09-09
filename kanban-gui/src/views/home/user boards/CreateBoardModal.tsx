@@ -3,12 +3,13 @@ import * as styles from "./CreateBoardModal.styles";
 import FlexDiv from "../../../common/styles/FlexDiv";
 import Palette from '../../../common/colorpalette'
 import { LocalizerContext } from "../../../contexts/Localizer";
+import user_actions_status from "../../../../../data/request_statuses/user_statuses";
 
 interface CreateBoard {
     isOpen: boolean;
     index: number;
     setActive(value: boolean): void;
-    createBoard(index: number, name: string, bgImgUrl?:string): void;
+    createBoard(index: number, name: string, bgImgUrl?:string): Promise<number>;
 }
 
 const CreateBoardModal: React.FC<CreateBoard> = function(props) 
@@ -35,8 +36,17 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
         if(name === "")
             return;
     
-        props.createBoard(props.index, name, bgImgUrl);
-        props.setActive(false);
+        props.createBoard(props.index, name, bgImgUrl).then(status => {
+            if(status === user_actions_status.success) {
+                props.setActive(false);
+            }
+            else if(status === user_actions_status.already_exists){
+                alert("Board already exists")
+            }
+        })
+        .catch(e => {
+            alert(e);
+        });
     }
 
     const openImageSelection = function(e: React.MouseEvent) {

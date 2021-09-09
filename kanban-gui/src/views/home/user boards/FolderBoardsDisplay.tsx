@@ -43,7 +43,7 @@ const FolderBoardsDisplay: React.FC<FolderData> = function(props)
             {
                 creatingBoard && 
                 <CreateBoardModal setActive={setCreatingBoard} isOpen={creatingBoard} index={props.index}
-                                  createBoard={ (idx, name, bgImgUrl) => userController.addBoardToFolder(idx, name, bgImgUrl)}/>
+                                  createBoard={ async (idx, name, bgImgUrl) => userController.addBoardToFolder(idx, name, bgImgUrl)}/>
             }
         </div>
     )

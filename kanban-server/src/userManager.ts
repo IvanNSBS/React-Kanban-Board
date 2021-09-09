@@ -19,16 +19,30 @@ class UserManager {
 
     public get user() { return this._user; }
     
-    public createFolder(name: string, iconUrl?:string) : number {
+    public createFolder(name: string, iconUrl?:string) : number 
+    {
         if(name === "" || name === undefined)
             return user_actions_status.bad_request;
 
-        if(this.user.folders.filter(f => f.name === name).length > 0){
-            console.log("Name already exists")
+        if(this.user.folders.filter(f => f.name === name).length > 0)
+            return user_actions_status.already_exists;
+        
+        this.user.folders.push( new BoardsFolder(name, iconUrl) )
+        return user_actions_status.success;
+    }
+
+    public createBoardOnFolder(folderIdx: number, name: string, iconUrl?:string) 
+    {
+        if(folderIdx < 0 || folderIdx >= this.user.folders.length || name === "" || name === undefined)
+            return user_actions_status.bad_request;
+
+        if(this.user.folders[folderIdx].boards.filter(b => b.name === name).length > 0){
             return user_actions_status.already_exists;
         }
         
-        this.user.folders.push( new BoardsFolder(name, iconUrl) )
+        const folderName = this.user.folders[folderIdx].name;
+        this.user.folders[folderIdx].boards.push( new Board(name, folderName, iconUrl) )
+
         return user_actions_status.success;
     }
 }

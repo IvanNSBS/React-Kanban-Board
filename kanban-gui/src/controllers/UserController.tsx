@@ -5,6 +5,7 @@ import UrlManager from "./UrlManager";
 import { eventsHandlers } from './EventManager';
 import axios, { AxiosError } from 'axios';
 import user_action_statuses from '../../../data/request_statuses/user_statuses';
+import user_actions_status from "../../../data/request_statuses/user_statuses";
 
 
 function folderComparer(a: BoardsFolder, b: BoardsFolder) {
@@ -46,7 +47,7 @@ export default class UserController {
         })
         .catch((err: AxiosError) => {
             if(err.request.status === 409){
-                alert("Folder already exists");
+                // alert("Folder already exists");
                 return user_action_statuses.already_exists;
             }
             else if(err.request.status === 406){
@@ -60,23 +61,28 @@ export default class UserController {
         return user_action_statuses.success;
     }
 
-    public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Board[] | null 
+    public async addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Promise<number> 
     {
-        if(folderIdx < 0 || folderIdx >= this._user.folders.length)
-            return null;
-        
-        const folderName = this._user.folders[folderIdx].name;
-        axios.post(UrlManager.boards, {folderIdx, folderName, name, bgImgUrl}).then(res => 
-        {
+        await axios.post(UrlManager.boards, {folderIdx, name, bgImgUrl})
+        .then(res => {
             const folderName = this._user.folders[folderIdx].name;
             this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
             this._user.folders = [...this._user.folders];
             eventsHandlers.invoke(FolderEvents.foldersChanged);
-        }).catch(e => {
-            alert(e);
+            
+            return user_actions_status.success;
+        }).catch((err: AxiosError) => {
+            if(err.request.status === 409){
+                alert("Folder already exists");
+                return user_action_statuses.already_exists;
+            }
+            else if(err.request.status === 406){
+                alert("Bad Request: Invalid Params")
+                return user_action_statuses.bad_request;
+            }
         })
 
-        return this._user.folders[folderIdx].boards;
+        return user_actions_status.success;
     }
 
     public isBoardStarred(board: Board): boolean {

@@ -20,16 +20,16 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
         e.stopPropagation(); 
         e.preventDefault();
         const url: string | undefined = newFolderIconUrl === "" ? undefined : newFolderIconUrl;
-        const created: Promise<boolean> = props.creationFunction(newFolder, url); 
 
-        created.then(val => {
+        props.creationFunction(newFolder, url).then(created => {
             if(!created) {
                 // TODO: Show error message
+                alert("Not Created")
             }
         })
         .catch(e => {
             alert(e);
-        })
+        }); 
     }
 
     function openIconSelectModal(e: React.MouseEvent) {

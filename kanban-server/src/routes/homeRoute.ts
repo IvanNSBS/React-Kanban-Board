@@ -47,19 +47,16 @@ homeRoute.post('/favorites', function(req: express.Request, res: express.Respons
 
 homeRoute.post('/boards', function(req: express.Request, res: express.Response) {
     const folderIdx: number = req.body.folderIdx;
-    const folderName: string = req.body.folderName;
     const name: string = req.body.name;
     const bgImgUrl: string | undefined = req.body.bgImgUrl;
 
-    if( folderIdx < 0 || folderIdx >= userManager.user.folders.length || 
-        name === "" || name === undefined || folderName === "" || folderName === undefined)
-    {
+    const status = userManager.createBoardOnFolder(folderIdx, name, bgImgUrl);
+    if(status === user_actions_status.bad_request)
         res.status(406).send('Invalid parameters for boards');
-    }
-    else{
-        userManager.user.folders[folderIdx].boards.push(new Board(name, folderName, bgImgUrl));
-        res.status(200).send(`Board created for folder ${folderName} Created`);
-    }
+    else if(status === user_actions_status.already_exists)
+        res.status(409).send('Board already exists');
+    else
+        res.status(200).send(`Board with name ${name} created`);
 })
 
 export default homeRoute;
