@@ -1,32 +1,39 @@
 import express, { Router } from 'express';
-import BoardsFolder from '../../../data/account/boardsFolder';
 import Board from '../../../data/board/board';
 import userManager from '../userManager';
+import user_actions_status from '../../../data/request_statuses/user_statuses';
 
-const homeRoute = express.Router();
+const homeRoute = Router();
 
 homeRoute.get('/', function (req: express.Request, res: express.Response) {
     res.send(JSON.stringify(userManager.user))
 });
 
 homeRoute.get('/folders', function (req: express.Request, res: express.Response) {
-    console.log(JSON.stringify(userManager.user.folders));
-    res.send( JSON.stringify(userManager.user.folders) );
+    if(userManager.user.folders.length == 0)
+        res.status(204).send('No folders created')
+    else
+        res.status(200).send( JSON.stringify(userManager.user.folders) );
 })
 
 homeRoute.get('/favorites', function (req: express.Request, res: express.Response) {
-    console.log(JSON.stringify(userManager.user.starredBoards));
-    res.send( JSON.stringify(userManager.user.starredBoards) );
+    if(userManager.user.starredBoards.length == 0)
+        res.status(204).send('No favorite boards')
+    else
+        res.status(200).send( JSON.stringify(userManager.user.starredBoards) );
 })
 
 homeRoute.post('/folders', function(req: express.Request, res: express.Response) {
-    const folder = <BoardsFolder>req.body;
-    if(folder.name === undefined || folder.name === ""){
-        res.status(406).send('Invalid Folder');
-    }
+    const folderName = req.body.name;
+    const iconUrl = req.body.iconUrl;
 
-    userManager.user.folders = userManager.user.folders.concat(folder);
-    res.status(200).send(`Folder with name ${folder.name} created`)
+    const status = userManager.createFolder(folderName, iconUrl);
+    if(status === user_actions_status.bad_request)
+        res.status(406).send('Invalid Folder');
+    else if(status === user_actions_status.already_exists)
+        res.status(409).send('Folder already exists')
+    else
+        res.status(200).send(`Folder with name ${folderName} created`)
 })
 
 homeRoute.post('/favorites', function(req: express.Request, res: express.Response) {

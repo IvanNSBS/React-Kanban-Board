@@ -1,8 +1,7 @@
 import User from '../../data/account/user';
 import BoardsFolder from '../../data/account/boardsFolder';
 import Board from '../../data/board/board';
-
-const user: User = new User('Server User');
+import user_actions_status from '../../data/request_statuses/user_statuses'
 
 class UserManager {
     private _user: User;
@@ -19,6 +18,19 @@ class UserManager {
     }
 
     public get user() { return this._user; }
+    
+    public createFolder(name: string, iconUrl?:string) : number {
+        if(name === "" || name === undefined)
+            return user_actions_status.bad_request;
+
+        if(this.user.folders.filter(f => f.name === name).length > 0){
+            console.log("Name already exists")
+            return user_actions_status.already_exists;
+        }
+        
+        this.user.folders.push( new BoardsFolder(name, iconUrl) )
+        return user_actions_status.success;
+    }
 }
 
 

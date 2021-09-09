@@ -4,7 +4,7 @@ import { LocalizerContext } from '../../../contexts/Localizer';
 import FlexDiv from '../../../common/styles/FlexDiv';
 
 interface CreationFunction{
-    creationFunction(name: string, iconUrl?:string): boolean;
+    creationFunction(name: string, iconUrl?:string): Promise<boolean>;
 }
 
 const FolderCreator: React.FC<CreationFunction> = function(props)
@@ -20,11 +20,16 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
         e.stopPropagation(); 
         e.preventDefault();
         const url: string | undefined = newFolderIconUrl === "" ? undefined : newFolderIconUrl;
-        const created: boolean = props.creationFunction(newFolder, url); 
+        const created: Promise<boolean> = props.creationFunction(newFolder, url); 
 
-        if(!created) {
-            // TODO: Show error message
-        }
+        created.then(val => {
+            if(!created) {
+                // TODO: Show error message
+            }
+        })
+        .catch(e => {
+            alert(e);
+        })
     }
 
     function openIconSelectModal(e: React.MouseEvent) {

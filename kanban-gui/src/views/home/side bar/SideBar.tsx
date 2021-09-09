@@ -6,6 +6,7 @@ import * as styles from './SideBar.styles';
 import { LocalizerContext } from "../../../contexts/Localizer";
 import { eventsHandlers } from "../../../controllers/EventManager";
 import { FolderEvents } from "../../../controllers/UserController";
+import user_actions_status from "../../../../../data/request_statuses/user_statuses";
 
 const SideBar: React.FC = function() 
 {
@@ -22,17 +23,15 @@ const SideBar: React.FC = function()
         )
     })
 
-    const tryCreateNewFolder = function(name: string, iconUrl?:string): boolean{
-        const prevLength = folders.length;
-        const newFolders = userController.createFolder(name, iconUrl);
-        const created = newFolders.length > prevLength;
+    const tryCreateNewFolder = async function(name: string, iconUrl?:string): Promise<boolean> {
+        const createStatus = await userController.createFolder(name, iconUrl);
 
-        if(created){
-            setFolders(newFolders);
+        if(createStatus === user_actions_status.success) {
+            setFolders(userController.getFolders());
             setCreatingFolder(false);
         }
 
-        return created;
+        return createStatus === user_actions_status.success;
     }
 
     useEffect(() => {

@@ -3,7 +3,8 @@ import Board from "../../../data/board/board";
 import User from "../../../data/account/user";
 import UrlManager from "./UrlManager";
 import { eventsHandlers } from './EventManager';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import user_action_statuses from '../../../data/request_statuses/user_statuses';
 
 
 function folderComparer(a: BoardsFolder, b: BoardsFolder) {
@@ -23,9 +24,8 @@ export const FolderEvents = {
 export default class UserController {
     private _user: User;
 
-
     constructor(){
-        this._user = new User("Not Found");
+        this._user = new User("");
 
         axios.get(UrlManager.home).then(res => {
             const user = JSON.parse(JSON.stringify(res.data)) as User;
@@ -36,19 +36,28 @@ export default class UserController {
     }   
     
 
-    public createFolder(name: string, iconUrl?:string): BoardsFolder[] {
-        if(name === "" || this._user.folders.filter(f => f.name === name).length > 0)
-            return this._user.folders;
-        
-        const newFolder = new BoardsFolder(name, iconUrl);
-        axios.post(UrlManager.folders, newFolder).then(res => {
-            if(res.status === 200){
-                this._user.folders = this._user.folders.concat( newFolder );
-                eventsHandlers.invoke(FolderEvents.foldersChanged);
+    public async createFolder(name: string, iconUrl?:string): Promise<number> 
+    {
+        await axios.post(UrlManager.folders, {name, iconUrl}).then(res => {
+            this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) );
+            eventsHandlers.invoke(FolderEvents.foldersChanged);
+
+            return user_action_statuses.success;
+        })
+        .catch((err: AxiosError) => {
+            if(err.request.status === 409){
+                alert("Folder already exists");
+                return user_action_statuses.already_exists;
             }
+            else if(err.request.status === 406){
+                alert("Bad Request: Invalid Params")
+                return user_action_statuses.bad_request;
+            }
+
+            return user_action_statuses.bad_request;
         })
 
-        return this._user.folders;
+        return user_action_statuses.success;
     }
 
     public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Board[] | null 
