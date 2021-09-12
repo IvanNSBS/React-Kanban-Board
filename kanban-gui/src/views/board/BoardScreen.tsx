@@ -35,11 +35,13 @@ const BoardScreen: React.FC = function()
                 board !== null &&
                 <BoardHeader board={board}/>
             }
-            <div style={{width: '100%', height: '100%', padding: '8px 4px'}}>
-                <CardList name="To Do"></CardList>
-                <CardList name="Doing"></CardList>
-                <CardList name="Done"></CardList>
-                <CardList name="Backlog"></CardList>
+            <div style={{width: '100%', height: '100%'}}>
+                <div style={{height: '100%', padding: '8px 4px'}}>
+                    <CardList name="To Do"></CardList>
+                    <CardList name="Doing"></CardList>
+                    <CardList name="Done"></CardList>
+                    <CardList name="Backlog"></CardList>
+                </div>
             </div>
         </styles.BoardBackground>
     )
