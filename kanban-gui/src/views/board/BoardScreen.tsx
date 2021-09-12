@@ -4,6 +4,7 @@ import * as styles from './BoardScreen.styles';
 import SelectedBoardContext from "../../contexts/SelectedBoard";
 import { eventsHandlers } from "../../controllers/EventManager";
 import { BoardEvents } from "../../controllers/SelectedBoardController";
+import CardList from "./CardList";
 
 const BoardScreen: React.FC = function() 
 {
@@ -18,15 +19,18 @@ const BoardScreen: React.FC = function()
             setBgImgUrl(board?.backgroundImgUrl);
         }
         eventsHandlers.addSubscriber(BoardEvents.board_selected, updateSelected);
+        setBgImgUrl(selectedBoardController.selectedBoard?.backgroundImgUrl);
+        
         return(
             eventsHandlers.removeSubscriber(BoardEvents.board_selected, updateSelected)
         )
 
     }, [])
 
+
     return(
         <styles.BoardBackground bgImgUrl={bgImgUrl}>
-            <>{JSON.stringify(selectedBoardController.selectedBoard)}</>
+            <CardList name="To Do"></CardList>
         </styles.BoardBackground>
     )
 } 

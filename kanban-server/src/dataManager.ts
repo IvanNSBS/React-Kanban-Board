@@ -10,7 +10,7 @@ class DataManager {
         this._user = new User('');
         const serverFolder = new BoardsFolder('Server Folder', undefined);
         const board = new Board('Server Folder Board', serverFolder.name, 
-        'https://s2.glbimg.com/rZddFXm-uylDO-055Zo0yJLzNAw=/0x0:2761x1840/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2020/5/o/Fup5dESmmxeeVEdtuMTA/jongsun-lee-f-pszo-jee8-unsplash.jpg')
+        'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/16a027a140eec15f3d668010445fc62e/photo-1534631528984-63174ca557d0.jpg')
 
         this._user.folders.push(serverFolder);
         serverFolder.boards.push(board);
