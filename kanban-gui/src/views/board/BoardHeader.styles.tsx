@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Palette from "../../common/colorpalette";
 
-const opacity = 0.3;
-const opacityHover = 0.5;
+const opacity = 0.25;
+const opacityHover = 0.4;
 
 const HeaderWrapper = styled.div`
     height: 40px;
@@ -53,12 +53,17 @@ const FolderDataWrapper = styled.div`
     align-items: center;
     justify-content: center;
 
-    background-color: #ffffff3d;
     max-width: 400px;
     border-radius: 4px;
     color: ${Palette.text};
     padding: 4px 8px;
     column-gap: 10px;
+
+    background-color: rgba(255, 255, 255, ${opacity});
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, ${opacityHover});
+    }
 `
 
 const FolderName = styled.input`
