@@ -9,7 +9,7 @@ interface CreateBoard {
     isOpen: boolean;
     index: number;
     setActive(value: boolean): void;
-    createBoard(index: number, name: string, bgImgUrl?:string): Promise<number>;
+    createBoard(index: number, name: string, bgImgUrl?:string): number;
 }
 
 const CreateBoardModal: React.FC<CreateBoard> = function(props) 
@@ -36,17 +36,13 @@ const CreateBoardModal: React.FC<CreateBoard> = function(props)
         if(name === "")
             return;
     
-        props.createBoard(props.index, name, bgImgUrl).then(status => {
-            if(status === user_actions_status.success) {
-                props.setActive(false);
-            }
-            else if(status === user_actions_status.already_exists){
-                alert("Board already exists")
-            }
-        })
-        .catch(e => {
-            alert(e);
-        });
+        const createStatus = props.createBoard(props.index, name, bgImgUrl);
+        if(createStatus === user_actions_status.success) {
+            props.setActive(false);
+        }
+        else if(createStatus === user_actions_status.already_exists){
+            alert("Board already exists")
+        }
     }
 
     const openImageSelection = function(e: React.MouseEvent) {

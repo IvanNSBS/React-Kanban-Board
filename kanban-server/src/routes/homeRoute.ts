@@ -1,39 +1,33 @@
 import express, { Router } from 'express';
 import Board from '../../../data/board/board';
-import userManager from '../userManager';
-import user_actions_status from '../../../data/request_statuses/user_statuses';
+import dataManager from '../dataManager';
 
 const homeRoute = Router();
 
 homeRoute.get('/', function (req: express.Request, res: express.Response) {
-    res.send(JSON.stringify(userManager.user))
+    res.send(JSON.stringify(dataManager.user))
 });
 
 homeRoute.get('/folders', function (req: express.Request, res: express.Response) {
-    if(userManager.user.folders.length == 0)
+    if(dataManager.user.folders.length == 0)
         res.status(204).send('No folders created')
     else
-        res.status(200).send( JSON.stringify(userManager.user.folders) );
+        res.status(200).send( JSON.stringify(dataManager.user.folders) );
 })
 
 homeRoute.get('/favorites', function (req: express.Request, res: express.Response) {
-    if(userManager.user.starredBoards.length == 0)
+    if(dataManager.user.starredBoards.length == 0)
         res.status(204).send('No favorite boards')
     else
-        res.status(200).send( JSON.stringify(userManager.user.starredBoards) );
+        res.status(200).send( JSON.stringify(dataManager.user.starredBoards) );
 })
 
 homeRoute.post('/folders', function(req: express.Request, res: express.Response) {
     const folderName = req.body.name;
     const iconUrl = req.body.iconUrl;
 
-    const status = userManager.createFolder(folderName, iconUrl);
-    if(status === user_actions_status.bad_request)
-        res.status(406).send('Invalid Folder');
-    else if(status === user_actions_status.already_exists)
-        res.status(409).send('Folder already exists')
-    else
-        res.status(200).send(`Folder with name ${folderName} created`)
+    const status = dataManager.createFolder(folderName, iconUrl);
+    res.status(200).send(`Folder with name ${folderName} created`);
 })
 
 homeRoute.post('/favorites', function(req: express.Request, res: express.Response) {
@@ -41,7 +35,7 @@ homeRoute.post('/favorites', function(req: express.Request, res: express.Respons
     if(favorites === undefined)
         res.status(406).send('Invalid Folder');
 
-    userManager.user.starredBoards = favorites;
+    dataManager.user.starredBoards = favorites;
     res.status(200).send(`Updated Starred Boards`)
 })
 
@@ -50,13 +44,8 @@ homeRoute.post('/boards', function(req: express.Request, res: express.Response) 
     const name: string = req.body.name;
     const bgImgUrl: string | undefined = req.body.bgImgUrl;
 
-    const status = userManager.createBoardOnFolder(folderIdx, name, bgImgUrl);
-    if(status === user_actions_status.bad_request)
-        res.status(406).send('Invalid parameters for boards');
-    else if(status === user_actions_status.already_exists)
-        res.status(409).send('Board already exists');
-    else
-        res.status(200).send(`Board with name ${name} created`);
+    const status = dataManager.createBoardOnFolder(folderIdx, name, bgImgUrl);
+    res.status(200).send(`Board with name ${name} created`);
 })
 
 export default homeRoute;

@@ -7,7 +7,6 @@ import axios, { AxiosError } from 'axios';
 import user_action_statuses from '../../../data/request_statuses/user_statuses';
 import user_actions_status from "../../../data/request_statuses/user_statuses";
 
-
 function folderComparer(a: BoardsFolder, b: BoardsFolder) {
     if(a.name > b.name)
         return 1;
@@ -37,49 +36,33 @@ export default class UserController {
     }   
     
 
-    public async createFolder(name: string, iconUrl?:string): Promise<number> 
+    public createFolder(name: string, iconUrl?:string): number 
     {
-        await axios.post(UrlManager.folders, {name, iconUrl}).then(res => {
-            this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) );
-            eventsHandlers.invoke(FolderEvents.foldersChanged);
-
-            return user_action_statuses.success;
-        })
-        .catch((err: AxiosError) => {
-            if(err.request.status === 409){
-                // alert("Folder already exists");
-                return user_action_statuses.already_exists;
-            }
-            else if(err.request.status === 406){
-                alert("Bad Request: Invalid Params")
-                return user_action_statuses.bad_request;
-            }
-
+        if(name.length === 0)
             return user_action_statuses.bad_request;
+
+        this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) );
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
+
+        axios.post(UrlManager.folders, {name, iconUrl}).catch(function(e: AxiosError) {
+            alert(`Couldn't send data to server.\nStatus: ${e.request.status}\nError: ${e}`);
         })
 
         return user_action_statuses.success;
     }
 
-    public async addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): Promise<number> 
+    public addBoardToFolder(folderIdx: number, name: string, bgImgUrl?:string): number
     {
-        await axios.post(UrlManager.boards, {folderIdx, name, bgImgUrl})
-        .then(res => {
-            const folderName = this._user.folders[folderIdx].name;
-            this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
-            this._user.folders = [...this._user.folders];
-            eventsHandlers.invoke(FolderEvents.foldersChanged);
-            
-            return user_actions_status.success;
-        }).catch((err: AxiosError) => {
-            if(err.request.status === 409){
-                alert("Folder already exists");
-                return user_action_statuses.already_exists;
-            }
-            else if(err.request.status === 406){
-                alert("Bad Request: Invalid Params")
-                return user_action_statuses.bad_request;
-            }
+        if(folderIdx < 0 || folderIdx >= this._user.folders.length)
+            return user_action_statuses.bad_request;
+
+        const folderName = this._user.folders[folderIdx].name;
+        this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
+        this._user.folders = [...this._user.folders];
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
+
+        axios.post(UrlManager.boards, {folderIdx, name, bgImgUrl}).catch(function(e: AxiosError){
+            alert(`Couldn't send data to server.\nStatus: ${e.request.status}\nError: ${e}`);
         })
 
         return user_actions_status.success;

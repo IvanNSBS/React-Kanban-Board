@@ -23,15 +23,15 @@ const SideBar: React.FC = function()
         )
     })
 
-    const tryCreateNewFolder = async function(name: string, iconUrl?:string): Promise<boolean> {
-        const createStatus = await userController.createFolder(name, iconUrl);
+    const tryCreateNewFolder = function(name: string, iconUrl?:string): number {
+        const createStatus = userController.createFolder(name, iconUrl);
 
         if(createStatus === user_actions_status.success) {
             setFolders(userController.getFolders());
             setCreatingFolder(false);
         }
 
-        return createStatus === user_actions_status.success;
+        return createStatus;
     }
 
     useEffect(() => {

@@ -2,9 +2,10 @@ import * as modal from './FolderCreator.styles';
 import React, {useState, useEffect, useRef, useContext} from "react";
 import { LocalizerContext } from '../../../contexts/Localizer';
 import FlexDiv from '../../../common/styles/FlexDiv';
+import user_actions_status from '../../../../../data/request_statuses/user_statuses';
 
 interface CreationFunction{
-    creationFunction(name: string, iconUrl?:string): Promise<boolean>;
+    creationFunction(name: string, iconUrl?:string): number;
 }
 
 const FolderCreator: React.FC<CreationFunction> = function(props)
@@ -20,16 +21,11 @@ const FolderCreator: React.FC<CreationFunction> = function(props)
         e.stopPropagation(); 
         e.preventDefault();
         const url: string | undefined = newFolderIconUrl === "" ? undefined : newFolderIconUrl;
+        const createStatus: number = props.creationFunction(newFolder, url);
 
-        props.creationFunction(newFolder, url).then(created => {
-            if(!created) {
-                // TODO: Show error message
-                alert("Not Created")
-            }
-        })
-        .catch(e => {
-            alert(e);
-        }); 
+        if(createStatus === user_actions_status.already_exists){
+            alert("Folder already exists");
+        }
     }
 
     function openIconSelectModal(e: React.MouseEvent) {
