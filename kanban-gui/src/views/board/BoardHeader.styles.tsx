@@ -80,6 +80,11 @@ const FolderName = styled.input`
         cursor: pointer;
         background-color: rgba(255, 255, 255, ${opacityHover});
     }
+
+    &:focus {
+        background-color: ${Palette.text};
+        color: ${Palette.background};
+    }
 `
 
 
