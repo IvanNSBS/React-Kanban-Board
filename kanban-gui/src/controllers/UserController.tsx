@@ -41,6 +41,9 @@ export default class UserController {
         if(name.length === 0)
             return user_action_statuses.bad_request;
 
+        if(this._user.folders.filter(f => f.name === name).length > 0)
+            return user_action_statuses.already_exists;
+
         this._user.folders = this._user.folders.concat( new BoardsFolder(name, iconUrl) );
         eventsHandlers.invoke(FolderEvents.foldersChanged);
 
@@ -55,6 +58,9 @@ export default class UserController {
     {
         if(folderIdx < 0 || folderIdx >= this._user.folders.length)
             return user_action_statuses.bad_request;
+        
+        if(this._user.folders[folderIdx].boards.filter(b => b.name === name).length > 0)
+            return user_action_statuses.already_exists;
 
         const folderName = this._user.folders[folderIdx].name;
         this._user.folders[folderIdx].boards.push( new Board(name, folderName, bgImgUrl) );
