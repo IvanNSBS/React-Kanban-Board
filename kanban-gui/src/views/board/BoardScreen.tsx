@@ -5,10 +5,11 @@ import SelectedBoardContext from "../../contexts/SelectedBoard";
 import { eventsHandlers } from "../../controllers/EventManager";
 import { BoardEvents } from "../../controllers/SelectedBoardController";
 import CardList from "./CardList";
+import BoardHeader from "./BoardHeader";
 
 const BoardScreen: React.FC = function() 
 {
-    const [board, setBoard] = useState<Board | null>();
+    const [board, setBoard] = useState<Board | null>(null);
     const selectedBoardController = useContext(SelectedBoardContext);
     const [bgImgUrl, setBgImgUrl] = useState<string | undefined>(undefined);
 
@@ -29,8 +30,17 @@ const BoardScreen: React.FC = function()
 
 
     return(
-        <styles.BoardBackground bgImgUrl={bgImgUrl}>
-            <CardList name="To Do"></CardList>
+        <styles.BoardBackground bgImgUrl={bgImgUrl} style={{overflowY: 'hidden'}}>
+            {
+                board !== null &&
+                <BoardHeader board={board}/>
+            }
+            <div style={{width: '100%', height: '100%'}}>
+                {/* <CardList name="To Do"></CardList>
+                <CardList name="Doing"></CardList>
+                <CardList name="Done"></CardList>
+                <CardList name="Backlog"></CardList> */}
+            </div>
         </styles.BoardBackground>
     )
 } 
