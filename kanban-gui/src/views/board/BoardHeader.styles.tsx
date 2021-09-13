@@ -7,7 +7,7 @@ const activeHover = 0.45;
 
 const HeaderWrapper = styled.div`
     height: 40px;
-    margin: 3px 10px;
+    margin: 8px 10px 3px 10px;
 
     display: flex;
     flex-direction: row;
