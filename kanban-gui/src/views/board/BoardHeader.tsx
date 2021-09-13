@@ -2,6 +2,7 @@ import React from "react";
 import FolderIcon from "../home/FolderIcon";
 import { MdSettings } from 'react-icons/md'
 import { AiOutlineStar } from 'react-icons/ai';
+import { FaProjectDiagram, FaTags } from 'react-icons/fa';
 import { FolderDataWrapper, HeaderButton, HeaderWrapper, OptionsContainer, FolderName } from "./BoardHeader.styles";
 import Board from "../../../../data/board/board";
 
@@ -23,6 +24,14 @@ const BoardHeader: React.FC<HeaderData> = function(props){
                 <FolderDataWrapper>
                     <FolderIcon name="Test"/>
                     {props.board.foldername}
+                </FolderDataWrapper>
+                <FolderDataWrapper>
+                    <FaTags/>
+                    Epics Tags
+                </FolderDataWrapper>
+                <FolderDataWrapper>
+                    <FaProjectDiagram/>
+                    UML Diagram
                 </FolderDataWrapper>
             </OptionsContainer>
 
