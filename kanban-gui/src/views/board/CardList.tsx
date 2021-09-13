@@ -11,6 +11,7 @@ const CardList: React.FC<CardListData> = function(props){
     return(
         <styles.ListWrapper>
             <styles.ListContent>
+                
                 <styles.ListHeader>
                     <input value={props.name}></input>
                     <button><BsThreeDots/></button>

@@ -26,32 +26,30 @@ const ListContent = styled.div`
 const ListHeader = styled.div`
     min-height: 26px;
     height: 32px;
-    padding: 5px 8px;
+    padding: 8px 8px 3px 8px;
 
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: space-between;
-    column-gap: 10px;
+    column-gap: 4px;
 
     & input {
         color: ${Palette.background};
         font-weight: bold;
         background-color: transparent;
         border: 0;
-        margin: 10px 0px 0px 0px;
         padding: 4px 8px;
         width: 100%;
         border-radius: 4px;
         font-size: 14px;
 
-        height: 28px;
-        min-height: 20px;
-        max-height: 256px;
         overflow: hidden;
         overflow-wrap: break-word;
         box-shadow: none;
         font-weight: 600;
+
+        cursor: pointer;
 
         &:focus {
             border: 1px solid ${Palette.background};
