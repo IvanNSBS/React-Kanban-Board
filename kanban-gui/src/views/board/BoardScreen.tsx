@@ -35,8 +35,8 @@ const BoardScreen: React.FC = function()
                 board !== null &&
                 <BoardHeader board={board}/>
             }
-            <div style={{width: '100%', height: '100%', marginBottom: '20px'}}>
-                <div style={{height: '100%', maxHeight: '100%', padding: '8px 4px'}}>
+            <div style={{width: '100%', height: '100%', paddingBottom: '20px', overflow: 'hidden'}}>
+                <div className="Mark"style={{height: '100%', padding: '8px 4px'}}>
                     <CardList name="To Do"></CardList>
                     <CardList name="Doing"></CardList>
                     <CardList name="Done"></CardList>
