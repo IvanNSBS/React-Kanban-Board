@@ -46,7 +46,7 @@ const OptionsContainer = styled.div`
     column-gap: 8px;
 `
 
-const FolderDataWrapper = styled.div`
+const HeaderTitleWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -88,4 +88,4 @@ const FolderName = styled.input`
 `
 
 
-export { HeaderWrapper, FolderDataWrapper, OptionsContainer, HeaderButton, FolderName }
+export { HeaderWrapper, HeaderTitleWrapper, OptionsContainer, HeaderButton, FolderName }

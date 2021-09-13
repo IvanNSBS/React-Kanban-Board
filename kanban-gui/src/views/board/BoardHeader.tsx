@@ -3,7 +3,7 @@ import FolderIcon from "../home/FolderIcon";
 import { MdSettings } from 'react-icons/md'
 import { AiOutlineStar } from 'react-icons/ai';
 import { FaProjectDiagram, FaTags } from 'react-icons/fa';
-import { FolderDataWrapper, HeaderButton, HeaderWrapper, OptionsContainer, FolderName } from "./BoardHeader.styles";
+import { HeaderTitleWrapper, HeaderButton, HeaderWrapper, OptionsContainer, FolderName } from "./BoardHeader.styles";
 import Board from "../../../../data/board/board";
 
 interface HeaderData {
@@ -21,18 +21,18 @@ const BoardHeader: React.FC<HeaderData> = function(props){
                     <AiOutlineStar/> 
                 </HeaderButton>
 
-                <FolderDataWrapper>
+                <HeaderTitleWrapper>
                     <FolderIcon name="Test"/>
                     {props.board.foldername}
-                </FolderDataWrapper>
-                <FolderDataWrapper>
+                </HeaderTitleWrapper>
+                <HeaderTitleWrapper>
                     <FaTags/>
                     Epics Tags
-                </FolderDataWrapper>
-                <FolderDataWrapper>
+                </HeaderTitleWrapper>
+                <HeaderTitleWrapper>
                     <FaProjectDiagram/>
                     UML Diagram
-                </FolderDataWrapper>
+                </HeaderTitleWrapper>
             </OptionsContainer>
 
             <HeaderButton>
