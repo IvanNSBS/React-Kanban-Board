@@ -6,6 +6,7 @@ import { eventsHandlers } from "../../controllers/EventManager";
 import { BoardEvents } from "../../controllers/SelectedBoardController";
 import CardList from "./CardList";
 import BoardHeader from "./BoardHeader";
+import CreateList from "./CreateList";
 
 const BoardScreen: React.FC = function() 
 {
@@ -41,14 +42,7 @@ const BoardScreen: React.FC = function()
                     <CardList name="Doing"></CardList>
                     <CardList name="Done"></CardList>
                     <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CardList name="Backlog"></CardList>
+                    <CreateList/>
                 </div>
             </div>
         </styles.BoardBackground>
