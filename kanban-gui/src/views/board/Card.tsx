@@ -1,10 +1,24 @@
 import React from "react";
-import { ListCard } from "./Card.styles";
+import { CardText, ContentWrapper, LabelWrapper, ListCard } from "./Card.styles";
+
+const Label: React.FC = function() {
+    return(
+        <LabelWrapper>
+            <span>Label</span>
+        </LabelWrapper>
+    )
+}
 
 const Card: React.FC = function() {
     return(
         <ListCard>
-            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+            {/* <div>Edit</div> */}
+            <ContentWrapper>
+                <Label/>
+                <CardText>
+                    Header não aparece quando abre pelo Home
+                </CardText>
+            </ContentWrapper>
         </ListCard>
     )
 }

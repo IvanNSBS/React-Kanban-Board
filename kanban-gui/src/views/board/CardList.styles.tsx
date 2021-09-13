@@ -24,7 +24,7 @@ const ListContent = styled.div`
 
 const ListHeader = styled.div`
     min-height: 26px;
-    height: auto;
+    height: 32px;
     padding: 5px 8px;
 
     display: flex;
@@ -38,11 +38,24 @@ const ListHeader = styled.div`
         font-weight: bold;
         background-color: transparent;
         border: 0;
-        margin: 0;
-        padding: 6px;
+        margin: 10px 0px 0px 0px;
+        padding: 4px 8px;
         width: 100%;
         border-radius: 4px;
-        font-size: 16px;
+        font-size: 14px;
+
+        height: 28px;
+        min-height: 20px;
+        max-height: 256px;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        box-shadow: none;
+        font-weight: 600;
+
+        &:focus {
+            border: 1px solid ${Palette.background};
+            background-color: white;
+        }
     }
 
     & button {

@@ -16,7 +16,17 @@ const CardList: React.FC<CardListData> = function(props){
                     <button><BsThreeDots/></button>
                 </styles.ListHeader>
 
-                <div style={{margin:'4px 6px', padding:'4px'}}>
+                <div style={{margin:'4px 6px', padding:'4px', overflowY: 'auto'}}>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
+                    <Card></Card>
                     <Card></Card>
                 </div>
 
