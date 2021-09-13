@@ -2,7 +2,8 @@ import styled from "styled-components";
 import Palette from "../../common/colorpalette";
 
 const opacity = 0.25;
-const opacityHover = 0.4;
+const opacityHover = 0.35;
+const activeHover = 0.45;
 
 const HeaderWrapper = styled.div`
     height: 40px;
@@ -59,10 +60,18 @@ const HeaderTitleWrapper = styled.div`
     padding: 4px 8px;
     column-gap: 10px;
 
+    user-select: none;
+
     background-color: rgba(255, 255, 255, ${opacity});
+
     &:hover {
         cursor: pointer;
         background-color: rgba(255, 255, 255, ${opacityHover});
+    }
+
+    &:active {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, ${activeHover});
     }
 `
 
