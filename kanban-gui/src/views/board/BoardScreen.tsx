@@ -36,10 +36,18 @@ const BoardScreen: React.FC = function()
                 <BoardHeader board={board}/>
             }
             <div style={{width: '100%', height: '100%', paddingBottom: '20px', overflow: 'hidden'}}>
-                <div className="Mark"style={{height: '100%', padding: '8px 4px'}}>
+                <div className="Mark"style={{width: '100%', height: '100%', padding: '8px 4px', display:'inline-flex', overflowX:'auto'}}>
                     <CardList name="To Do"></CardList>
                     <CardList name="Doing"></CardList>
                     <CardList name="Done"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
+                    <CardList name="Backlog"></CardList>
                     <CardList name="Backlog"></CardList>
                 </div>
             </div>

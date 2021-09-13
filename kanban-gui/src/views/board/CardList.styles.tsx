@@ -10,6 +10,7 @@ const ListWrapper = styled.div`
     margin: 0 5px;
     flex-direction: column;
     width: 272px;
+    min-width: 272px;
 `
 
 const ListContent = styled.div`
