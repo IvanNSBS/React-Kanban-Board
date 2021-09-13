@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import LinkButton from "../../common/components/link button/LinkButton";
+import { BiHomeAlt } from 'react-icons/bi'
+import FlexDiv from "../../common/styles/FlexDiv";
 import { LocalizerContext } from "../../contexts/Localizer";
-import { Languages } from "../../common/localization";
 import * as styles from './Header.styles'
 
 const Header: React.FC = function() 
@@ -10,10 +10,11 @@ const Header: React.FC = function()
 
     return(
         <styles.HeaderContainer>
-            <div>
-                <LinkButton to="/">Home</LinkButton>
-                <LinkButton to="/quadros">Quadros</LinkButton>
-            </div>
+            <FlexDiv direction='row'>
+                <styles.HeaderButton to="/">
+                    <BiHomeAlt/>
+                </styles.HeaderButton>
+            </FlexDiv>
             Kanban Board
             <styles.LanguagesContainer>
                 <button onClick={() => localizer.usePtBr()}>
