@@ -13,9 +13,6 @@ const BackgroundStyle = createGlobalStyle<BodyProps>`
         height: 100vh;
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
-        display: flex;
-        flex-direction: column;
     }
 `
 
