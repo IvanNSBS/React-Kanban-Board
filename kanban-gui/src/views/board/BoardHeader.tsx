@@ -27,7 +27,7 @@ const BoardHeader: React.FC<HeaderData> = function(props){
                 </HeaderTitleWrapper>
                 <HeaderTitleWrapper>
                     <FaTags/>
-                    Epics Tags
+                    Tags and Epics
                 </HeaderTitleWrapper>
                 <HeaderTitleWrapper>
                     <FaProjectDiagram/>

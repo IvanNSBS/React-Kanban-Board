@@ -6,7 +6,10 @@ const opacityHover = 0.35;
 const activeHover = 0.45;
 
 const HeaderWrapper = styled.div`
-    height: 40px;
+    min-height: 40px;
+    @media (max-width: 600px) {
+        min-height: 100px;
+    }
     margin: 8px 10px 3px 10px;
 
     display: flex;
@@ -44,7 +47,9 @@ const HeaderButton = styled.button`
 const OptionsContainer = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     column-gap: 8px;
+    row-gap: 8px;
 `
 
 const HeaderTitleWrapper = styled.div`
