@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as styles from './CardList.styles';
 import { BsThreeDots } from 'react-icons/bs'
 import Card from './Card';
+import { LocalizerContext } from "../../contexts/Localizer";
 
 interface CardListData {
     name: string;
 }
 
-const CardList: React.FC<CardListData> = function(props){
+const CardList: React.FC<CardListData> = function(props) {
+
+    const localizer = useContext(LocalizerContext);
+
     return(
         <styles.ListWrapper>
             <styles.ListContent>
@@ -32,7 +36,7 @@ const CardList: React.FC<CardListData> = function(props){
                 </div>
 
                 <styles.CreateCard>
-                    <b>+</b> Adicionar um cartão
+                    <b>+</b> {localizer.getTextById(localizer.texts.btn_add_new_card)}
                 </styles.CreateCard>
             </styles.ListContent>
         </styles.ListWrapper>

@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import FolderIcon from "../home/FolderIcon";
 import { MdSettings } from 'react-icons/md'
 import { AiOutlineStar } from 'react-icons/ai';
 import { FaProjectDiagram, FaTags } from 'react-icons/fa';
 import { HeaderTitleWrapper, HeaderButton, HeaderWrapper, OptionsContainer, FolderName } from "./BoardHeader.styles";
 import Board from "../../../../data/board/board";
+import { LocalizerContext } from "../../contexts/Localizer";
 
 interface HeaderData {
     board: Board;
 }
 
-const BoardHeader: React.FC<HeaderData> = function(props){
+const BoardHeader: React.FC<HeaderData> = function(props) 
+{
+
+    const localizer = useContext(LocalizerContext)
+
     return(
         <HeaderWrapper>
 
@@ -27,11 +32,11 @@ const BoardHeader: React.FC<HeaderData> = function(props){
                 </HeaderTitleWrapper>
                 <HeaderTitleWrapper>
                     <FaTags/>
-                    Tags and Epics
+                    {localizer.getTextById(localizer.texts.txt_tags_epics)}
                 </HeaderTitleWrapper>
                 <HeaderTitleWrapper>
                     <FaProjectDiagram/>
-                    UML Diagram
+                    {localizer.getTextById(localizer.texts.txt_uml_diagram)}
                 </HeaderTitleWrapper>
             </OptionsContainer>
 

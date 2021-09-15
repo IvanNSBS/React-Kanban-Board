@@ -15,7 +15,13 @@ const Texts = {
     input_create_folder_placeholder: 'input_create_folder_placeholder',
     input_create_folder_icon_placeholder: 'input_create_folder_icon_placeholder',
     btn_select_or_upload_img: 'btn_select_or_upload_img',
-    txt_no_boards_or_folders_created: 'txt_no_boards_or_folders_created'
+    txt_no_boards_or_folders_created: 'txt_no_boards_or_folders_created',
+    txt_tags_epics: 'txt_tags_epics',
+    txt_uml_diagram: 'txt_uml_diagram',
+    btn_add_new_card: 'btn_add_new_card',
+    input_add_new_list: 'txt_add_new_list',
+    btn_add_list: 'btn_add_list',
+    txt_insert_title: 'insert_title'
 }
 
 const Localization: Record<string, Record<string, string>> = 
@@ -67,6 +73,30 @@ const Localization: Record<string, Record<string, string>> =
     'txt_no_boards_or_folders_created': {
         'ptBr': 'Comece criando uma pasta para seus quadros',
         'enUs': 'Start by creating a folder for your boards'
+    },
+    'txt_tags_epics': {
+        'ptBr': 'Tags e Epics',
+        'enUs': 'Tags and Epics'
+    },
+    'txt_uml_diagram': {
+        'ptBr': 'Diagrama UML',
+        'enUs': 'UML Diagram'
+    },
+    'btn_add_new_card': {
+        'ptBr': 'Adicionar um cartão',
+        'enUs': 'Add a card'
+    },
+    'txt_add_new_list': {
+        'ptBr': 'Adicionar outra lista',
+        'enUs': 'Add another list'
+    },
+    'btn_add_list': {
+        'ptBr': 'Adicionar Lista',
+        'enUs': 'Add list'
+    },
+    'insert_title': {
+        'ptBr': 'Insira o título da lista...',
+        'enUs': 'Insert the title list...'
     }
 };
 
