@@ -14,7 +14,7 @@ const ListWrapper = styled.div`
 `
 
 const ListContent = styled.div`
-    background-color: #ebecf0;
+    background-color: ${Palette.cardListBg};
     border-radius: 3px;
     box-sizing: border-box;
     display: flex;

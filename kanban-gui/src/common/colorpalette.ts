@@ -7,7 +7,12 @@ const Palette = {
     text: "#ecf0f1",
     secondaryText: '#bdc3c7',
     disabledText: '#7f8c8d',
-    header: "#2980b9"
+    header: "#2980b9",
+    cardListBg: "#ebecf0",
+    cardTextCol: "#172b4d",
+    cardBg: "#fff",
+    cardHoverBg: "#f4f5f7",
+    cardClickBg: "f4f5f7"
 }
 
 export default Palette;

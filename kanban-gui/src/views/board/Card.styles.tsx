@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Palette from "../../common/colorpalette";
 
 const ListCard = styled.div`
-    background-color: #fff;
+    background-color: ${Palette.cardBg};
     border-radius: 3px;
     box-shadow: 0 1px 0 #091e4240;
     cursor: pointer;
@@ -15,7 +15,11 @@ const ListCard = styled.div`
     font-family: Arial, Helvetica, sans-serif;
 
     &:hover{
-        background-color: #f4f5f7;
+        background-color: ${Palette.cardHoverBg}
+    }
+
+    &:active {
+        background-color: ${Palette.cardClickBg}
     }
 `
 
@@ -51,7 +55,7 @@ const LabelWrapper = styled.div`
 const CardText = styled.span`
     word-wrap: break-word;
     clear: both;
-    color: #172b4d;
+    color: ${Palette.cardTextCol};
     display: block;
     margin: 0 0 4px;
     overflow: hidden;
