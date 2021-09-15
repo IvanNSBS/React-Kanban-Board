@@ -12,16 +12,15 @@ const BoardScreen: React.FC = function()
 {
     const [board, setBoard] = useState<Board | null>(null);
     const selectedBoardController = useContext(SelectedBoardContext);
-    const [bgImgUrl, setBgImgUrl] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         const updateSelected = function(){
             const board = selectedBoardController.selectedBoard;
             setBoard(board);
-            setBgImgUrl(board?.backgroundImgUrl);
         }
+        
         eventsHandlers.addSubscriber(BoardEvents.board_selected, updateSelected);
-        setBgImgUrl(selectedBoardController.selectedBoard?.backgroundImgUrl);
+        setBoard(selectedBoardController.selectedBoard);
         
         return(
             eventsHandlers.removeSubscriber(BoardEvents.board_selected, updateSelected)
@@ -31,7 +30,7 @@ const BoardScreen: React.FC = function()
 
 
     return(
-        <styles.BoardBackground bgImgUrl={bgImgUrl} style={{overflowY: 'hidden'}}>
+        <styles.BoardBackground bgImgUrl={board?.backgroundImgUrl} style={{overflowY: 'hidden'}}>
             {
                 board !== null &&
                 <BoardHeader board={board}/>
