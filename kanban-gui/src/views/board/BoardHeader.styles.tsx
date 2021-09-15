@@ -23,7 +23,9 @@ const HeaderButton = styled.button`
     border: 0;
     padding: 0;
     border-radius: 4px;
+    min-width: 35px;
     width: 35px;
+    height: 35px;
     background-color: rgba(255, 255, 255, ${opacity});
 
     display: flex;
