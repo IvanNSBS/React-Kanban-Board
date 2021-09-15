@@ -25,5 +25,8 @@ export default class SelectedBoardController
     }   
 
     public get selectedBoard() { return this._selectedBoard; }
-    public set selectedBoard(value: Board | null) { this._selectedBoard = value; }
+    public set selectedBoard(value: Board | null) { 
+        this._selectedBoard = value; 
+        eventsHandlers.invoke(BoardEvents.board_selected);
+    }
 }
