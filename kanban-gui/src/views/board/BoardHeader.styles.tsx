@@ -7,16 +7,21 @@ const activeHover = 0.45;
 
 const HeaderWrapper = styled.div`
     min-height: 40px;
-    @media (max-width: 600px) {
-        min-height: 100px;
-    }
     margin: 8px 10px 3px 10px;
-
+    
     display: flex;
     flex-direction: row;
     align-items: center;
-    align-content: center;
+    align-content: start;
     justify-content: space-between;
+
+    @media (max-width: 900px) {
+        align-items: flex-start;
+    }
+
+    @media (max-width: 650px) {
+        min-height: 100px;
+    }
 `
 
 const HeaderButton = styled.button`
