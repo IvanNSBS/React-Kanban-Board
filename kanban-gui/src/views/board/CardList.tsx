@@ -21,19 +21,12 @@ const CardList: React.FC<CardListData> = function(props) {
                     <button><BsThreeDots/></button>
                 </styles.ListHeader>
 
-                <div style={{margin:'4px 6px', padding:'4px', overflowY: 'auto'}}>
+                <styles.CardsContainer>
                     <Card></Card>
                     <Card></Card>
                     <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                </div>
+                    <Card isLast={true}></Card>
+                </styles.CardsContainer>
 
                 <styles.CreateCard>
                     <b>+</b> {localizer.getTextById(localizer.texts.btn_add_new_card)}

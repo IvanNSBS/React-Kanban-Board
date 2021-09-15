@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Palette from "../../common/colorpalette";
 
 const ListWrapper = styled.div`
-    background-color: #00ffff13;
     height: 100%;
     display: inline-block;
     box-sizing: border-box;
@@ -80,6 +79,12 @@ const ListHeader = styled.div`
     }
 `
 
+const CardsContainer = styled.div`
+    margin: 4px 6px;
+    padding: 4px;
+    overflow-y: auto;
+`
+
 const CreateCard = styled.button`
     height: 30px;
 
@@ -89,7 +94,7 @@ const CreateCard = styled.button`
     border-radius: 4px;
     background-color: transparent;
 
-    margin: 6px 6px;
+    margin: 0px 6px 6px 6px;
     padding: 0px 12px;
     text-align: left;
     font-size: 14px;
@@ -101,4 +106,4 @@ const CreateCard = styled.button`
     }
 `
 
-export { ListWrapper, ListContent, ListHeader, CreateCard }
+export { ListWrapper, ListContent, ListHeader, CreateCard, CardsContainer }

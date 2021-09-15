@@ -30,20 +30,20 @@ const BoardScreen: React.FC = function()
 
 
     return(
-        <styles.BoardBackground bgImgUrl={board?.backgroundImgUrl} style={{overflowY: 'hidden'}}>
+        <styles.BoardBackground bgImgUrl={board?.backgroundImgUrl}>
             {
                 board !== null &&
                 <BoardHeader board={board}/>
             }
-            <div style={{width: '100%', height: '100%', paddingBottom: '20px', overflow: 'hidden'}}>
-                <div className="Mark"style={{width: '100%', height: '100%', padding: '8px 4px', display:'inline-flex', overflowX:'auto'}}>
+            <styles.BoardsAreaWrapper>
+                <styles.CardsContainer>
                     <CardList name="To Do"></CardList>
                     <CardList name="Doing"></CardList>
                     <CardList name="Done"></CardList>
                     <CardList name="Backlog"></CardList>
                     <CreateList/>
-                </div>
-            </div>
+                </styles.CardsContainer>
+            </styles.BoardsAreaWrapper>
         </styles.BoardBackground>
     )
 } 

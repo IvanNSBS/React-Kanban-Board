@@ -9,9 +9,10 @@ const Label: React.FC = function() {
     )
 }
 
-const Card: React.FC = function() {
+const Card: React.FC<{isLast?: boolean}> = function(props) 
+{
     return(
-        <ListCard>
+        <ListCard isLast={props.isLast}>
             {/* <div>Edit</div> */}
             <ContentWrapper>
                 <Label/>

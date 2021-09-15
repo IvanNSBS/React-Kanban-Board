@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import Palette from "../../common/colorpalette";
 
-const ListCard = styled.div`
+const ListCard = styled.div<{isLast?: boolean}>`
     background-color: ${Palette.cardBg};
     border-radius: 3px;
     box-shadow: 0 1px 0 #091e4240;
     cursor: pointer;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: ${props => props.isLast ? '0px' : '8px' };;
     max-width: 300px;
     min-height: 20px;
     position: relative;
