@@ -33,6 +33,7 @@ const LabelWrapper = styled.div`
     overflow: auto;
     cursor: pointer;
     white-space: normal;
+    user-select: none;
 
     & span {
         height: 16px;
@@ -65,6 +66,7 @@ const CardText = styled.span`
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
+    user-select: none;
 `
 
 export { ListCard, ContentWrapper, LabelWrapper, CardText }

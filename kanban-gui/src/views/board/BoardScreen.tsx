@@ -33,7 +33,7 @@ const BoardScreen: React.FC = function()
     return(
         <styles.BoardBackground 
             bgImgUrl={board?.backgroundImgUrl} 
-            onClick={() => setIsCreatingFolder(!isCreatingFolder)}
+            onClick={() => setIsCreatingFolder(false)}
         >
             {
                 board !== null &&
