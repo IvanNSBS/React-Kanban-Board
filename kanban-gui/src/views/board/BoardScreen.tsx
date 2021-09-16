@@ -10,6 +10,7 @@ import CreateList from "./CreateList";
 
 const BoardScreen: React.FC = function() 
 {
+    const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const [board, setBoard] = useState<Board | null>(null);
     const selectedBoardController = useContext(SelectedBoardContext);
 
@@ -30,7 +31,10 @@ const BoardScreen: React.FC = function()
 
 
     return(
-        <styles.BoardBackground bgImgUrl={board?.backgroundImgUrl}>
+        <styles.BoardBackground 
+            bgImgUrl={board?.backgroundImgUrl} 
+            onClick={() => setIsCreatingFolder(!isCreatingFolder)}
+        >
             {
                 board !== null &&
                 <BoardHeader board={board}/>
@@ -41,7 +45,7 @@ const BoardScreen: React.FC = function()
                     <CardList name="Doing"></CardList>
                     <CardList name="Done"></CardList>
                     <CardList name="Backlog"></CardList>
-                    <CreateList/>
+                    <CreateList isActive={isCreatingFolder} setIsActive={val => setIsCreatingFolder(val)}/>
                 </styles.CardsContainer>
             </styles.BoardsAreaWrapper>
         </styles.BoardBackground>
