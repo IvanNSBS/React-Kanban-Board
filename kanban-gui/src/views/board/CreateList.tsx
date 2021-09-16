@@ -30,7 +30,7 @@ const CreateList: React.FC<ActivateCreate> = function(props)
         props.setIsActive(false);
     }
 
-    const InactiveRender =  <InactiveText onClick = { () => props.setIsActive(true) }>
+    const InactiveRender =  <InactiveText onClick = { e => { props.setIsActive(true); e.stopPropagation(); } }>
                                 <GoPlus/>
                                 {inactiveText}
                             </InactiveText>
