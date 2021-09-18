@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from './views/home/Home';
@@ -10,9 +10,29 @@ import { LocalizerContext, localizer} from './contexts/Localizer'
 import SelectedBoardContext from './contexts/SelectedBoard';
 import SelectedBoardController from './controllers/SelectedBoardController';
 import Board from '../../data/board/board';
+import LoadingScreen from './LoadingScreen';
+import User from '../../data/account/user';
 
 const homePath = "/";
 const boardViewPath = "/board/:folderName/:boardName";
+
+const AppLoader: React.FC = function() {
+    const [user, setUser] = useState<User | undefined>(undefined);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    function onLoadComplete(user: User | undefined) {
+        setUser(user);
+        setIsLoading(false);
+    }
+
+    if(isLoading){
+        return <LoadingScreen onLoadComplete = { onLoadComplete }/>
+    }
+    else if(user === undefined)
+        return <span>Couldn't fetch user data</span>
+        
+    return <AppRouter></AppRouter>
+}
 
 const AppRouter: React.FC = function() 
 {
@@ -36,6 +56,6 @@ const AppRouter: React.FC = function()
 }
 
 ReactDOM.render(
-    <AppRouter />,
+    <AppLoader />,
     document.getElementById('app-root'),
 )
