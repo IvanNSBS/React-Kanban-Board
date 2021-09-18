@@ -3,7 +3,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import * as styles from './BoardCard.styles';
 import Board from '../../../../../data/board/board';
-import { UserControllerContext } from '../Home';
+import { UserControllerContext } from '../../../contexts/UserController';
 import { LocalizerContext } from '../../../contexts/Localizer';
 import { useHistory } from 'react-router-dom';
 import SelectedBoardContext from '../../../contexts/SelectedBoard';

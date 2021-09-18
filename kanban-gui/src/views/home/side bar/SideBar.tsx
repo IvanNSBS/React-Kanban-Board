@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { UserControllerContext } from "../Home";
+import { UserControllerContext } from "../../../contexts/UserController";
 import FolderSideBar from "./FolderSideBar";
 import FolderCreator from './FolderCreator';
 import * as styles from './SideBar.styles';

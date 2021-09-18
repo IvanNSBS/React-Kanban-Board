@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router";
 import { eventsHandlers } from "../../controllers/EventManager";
-import { UserControllerContext } from "../home/Home";
+import { UserControllerContext } from "../../contexts/UserController";
 
 import SelectedBoardController from "../../controllers/SelectedBoardController";
 import Board from "../../../../data/board/board";

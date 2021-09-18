@@ -24,15 +24,8 @@ export const FolderEvents = {
 export default class UserController {
     private _user: User;
 
-    constructor(){
-        this._user = new User("");
-
-        axios.get(UrlManager.home).then(res => {
-            const user = JSON.parse(JSON.stringify(res.data)) as User;
-            this._user = user;
-            eventsHandlers.invoke(FolderEvents.foldersChanged);
-            eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
-        }).catch(e => alert(e));
+    constructor(user: User){
+        this._user = user;
     }   
     
 

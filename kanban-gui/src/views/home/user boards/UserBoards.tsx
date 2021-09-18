@@ -3,7 +3,7 @@ import { AiOutlineStar } from 'react-icons/ai'
 import * as styles from './UserBoards.styles'
 import FolderBoardsDisplay from './FolderBoardsDisplay'
 
-import { UserControllerContext } from '../Home';
+import { UserControllerContext } from "../../../contexts/UserController";
 import Board from '../../../../../data/board/board';
 import BoardsFolder from '../../../../../data/account/boardsFolder';
 import { LocalizerContext } from "../../../contexts/Localizer";

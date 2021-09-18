@@ -3,7 +3,7 @@ import BoardCard, { CreateBoardBtn } from './BoardCard';
 import CreateBoardModal from './CreateBoardModal';
 import * as styles from './FolderBoardsDisplay.styles'
 
-import { UserControllerContext } from '../Home';
+import { UserControllerContext } from '../../../contexts/UserController';
 import Board from '../../../../../data/board/board';
 
 interface FolderData{
