@@ -12,7 +12,8 @@ const Palette = {
     cardTextCol: "#172b4d",
     cardBg: "#fff",
     cardHoverBg: "#f4f5f7",
-    cardClickBg: "f4f5f7"
+    cardClickBg: "#f4f5f7",
+    deleteBtn: '#853125'
 }
 
 export default Palette;
