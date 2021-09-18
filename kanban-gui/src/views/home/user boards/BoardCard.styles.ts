@@ -61,24 +61,25 @@ const BottomContainer = styled.div`
     color: ${Palette.secondaryText};
 `
 
-const FavoriteButton = styled.button`
+const BoardCardBtn = styled.button<{fillColor: string, dfColor?:string}>`
     border: 0px;
     border-radius: 0px;
     background-color: transparent;
     width: 20px;
     height: 20px;
     padding: 0;
-
+    
     & svg {
         transition: 0.2s ease-out;
         width: 100%;
         height: 100%;
+        fill: ${props => props.dfColor};
     }
 
     &:hover svg {
         transition: 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
         transform: scale(1.25);
-        fill: yellow;
+        fill: ${(props) => props.fillColor};
         cursor: pointer;
     }
 
@@ -107,4 +108,4 @@ const TitleContainer = styled.div`
     }
 `
 
-export { FavoriteButton, BottomContainer, ListItem, LabelFont, CreateBoard, TitleContainer }
+export { BoardCardBtn, BottomContainer, ListItem, LabelFont, CreateBoard, TitleContainer }

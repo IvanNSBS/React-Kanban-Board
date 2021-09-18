@@ -7,6 +7,8 @@ import { UserControllerContext } from '../../../contexts/UserController';
 import { LocalizerContext } from '../../../contexts/Localizer';
 import { useHistory } from 'react-router-dom';
 import SelectedBoardContext from '../../../contexts/SelectedBoard';
+import Palette from '../../../common/colorpalette';
+import { withTheme } from 'styled-components';
 
 export interface BoardData{
     board: Board;
@@ -43,17 +45,17 @@ const BoardCard: React.FC<BoardData> = function(props) {
             <styles.TitleContainer>
                 <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
 
-                <styles.FavoriteButton onClick={onClickDelete}>
+                <styles.BoardCardBtn onClick={onClickDelete} fillColor={Palette.text} dfColor={'white'}>
                     <BsTrash/>
-                </styles.FavoriteButton>
+                </styles.BoardCardBtn>
 
             </styles.TitleContainer>
             <styles.BottomContainer>
                 <styles.LabelFont weight="normal" size="15px">{boardName}</styles.LabelFont>
 
-                <styles.FavoriteButton onClick={onClickFavorite }>
+                <styles.BoardCardBtn onClick={onClickFavorite} fillColor={'yellow'}>
                     <AiOutlineStar/>
-                </styles.FavoriteButton>
+                </styles.BoardCardBtn>
 
             </styles.BottomContainer>
         </styles.ListItem>
