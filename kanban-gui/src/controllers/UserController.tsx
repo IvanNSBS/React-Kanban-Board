@@ -121,7 +121,8 @@ export default class UserController {
         })
     }
 
-    public deleteFolder(folderName: string){
+    public deleteFolder(folderName: string) 
+    {
         const folder = this.getFolders().find(f => f.name === folderName);
         if(folder === undefined)
             return;
@@ -137,7 +138,7 @@ export default class UserController {
             eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
         }
 
-        axios.delete(UrlManager.boards+`/${folderName}`).catch((e: AxiosError) => {
+        axios.delete(UrlManager.folders+`/${folderName}`).catch((e: AxiosError) => {
             alert(e.response?.data);
         });
     }
