@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Palette from "../../common/colorpalette";
 import { VscLoading } from 'react-icons/vsc'
 
+const size = '2em';
+
 const Screen = styled.div`
     width: 100%;
     height: 100%;
@@ -9,19 +11,24 @@ const Screen = styled.div`
     
     display: flex;
     align-items: center;
+    align-content: center;
     justify-content: center;
 `
 
 const TextWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    column-gap: 15px;
+    display: inline-flex;
+    flex-direction: row;
+    column-gap: 20px;
+
+    width: 100%;
+    align-content: flex-start;
+    justify-content: center;
 `
 
 const Icon = styled(VscLoading)`
-    width: 1em;
-    height: 1em;
-
+    width : ${size};
+    height: ${size};
+    fill: ${Palette.text};
 
     animation: loading 4s linear infinite;
     @keyframes loading {
@@ -30,8 +37,10 @@ const Icon = styled(VscLoading)`
 `
 
 const Text = styled.span`
+    user-select: none;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
+    font-size: ${size};
+    color: ${Palette.text};
 `
 
 export { Screen, TextWrapper, Icon, Text }
