@@ -30,8 +30,9 @@ export default class SelectedBoardController
         eventsHandlers.invoke(BoardEvents.board_selected);
     }
 
-    public setFolderName(newName: string) {
-
+    public setBoardName(newName: string) {
+        if(this.selectedBoard !== null)
+            this.selectedBoard.name = newName;
     }
 
     public addList(title: string) 

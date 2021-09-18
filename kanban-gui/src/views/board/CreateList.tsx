@@ -79,7 +79,7 @@ const CreateList: React.FC<ActivateCreate> = function(props)
                             </ActiveContentWrapper>
 
     return(
-        <form>
+        <form style={{paddingLeft: '6px'}}>
             <ContentWrapper>
                 { props.isActive ? ActiveRender : InactiveRender }
             </ContentWrapper>

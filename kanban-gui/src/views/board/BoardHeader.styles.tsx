@@ -87,7 +87,7 @@ const HeaderTitleWrapper = styled.div`
     }
 `
 
-const FolderName = styled.input`
+const BoardName = styled.input`
     border-radius: 4px;
     background-color: rgba(255, 255, 255, ${opacity});
     margin: 0;
@@ -108,5 +108,4 @@ const FolderName = styled.input`
     }
 `
 
-
-export { HeaderWrapper, HeaderTitleWrapper, OptionsContainer, HeaderButton, FolderName }
+export { HeaderWrapper, HeaderTitleWrapper, OptionsContainer, HeaderButton, BoardName }
