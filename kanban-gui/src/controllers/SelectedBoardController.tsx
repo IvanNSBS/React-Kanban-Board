@@ -1,8 +1,7 @@
 import Board from "../../../data/board/board";
-import User from "../../../data/account/user";
 import { eventsHandlers } from "./EventManager";
 import UrlManager from "./UrlManager";
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import CardsList from "../../../data/board/cardList";
 import Card from "../../../data/cards/card";
 
@@ -14,26 +13,14 @@ export default class SelectedBoardController
 {
     private _selectedBoard: Board;
 
-    constructor(board: Board){
+    constructor(board: Board) {
         this._selectedBoard = board;
-        
-        // axios.get(UrlManager.home).then(res => {
-        //     const user = JSON.parse(JSON.stringify(res.data)) as User;
-        //     this._selectedBoard = user.folders[0].boards[0];
-
-        //     eventsHandlers.invoke(BoardEvents.board_selected);
-        // }).catch(e => alert(e));
     }   
 
     public get selectedBoard() { return this._selectedBoard; }
     public set selectedBoard(value: Board) { 
         this._selectedBoard = value; 
         eventsHandlers.invoke(BoardEvents.board_selected);
-    }
-
-    public setBoardName(newName: string) {
-        if(this.selectedBoard !== null)
-            this.selectedBoard.name = newName;
     }
 
     public addList(title: string) 
@@ -43,19 +30,21 @@ export default class SelectedBoardController
 
         const newCardList = new CardsList(title);
         this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.concat( newCardList );
+
+        const params = {
+            folderName: this.selectedBoard.foldername,
+            boardName: this.selectedBoard.name,
+            listName: title
+        }
+        axios.post(UrlManager.postBoardList, params).then(res => {
+        })
+        .catch(e => {
+            alert(e);
+        })
     }
 
-    public changeListTitle(listIdx: number, newTitle: string){
-        if(this.selectedBoard === null)
-            return;
-
-        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
-            return;
-        
-        this.selectedBoard.cardsCollection[listIdx].name = newTitle;
-    }
-
-    public addCardToList(cardListidx: number, cardTitle: string) {
+    public addCardToList(cardListidx: number, cardTitle: string) 
+    {
         if(this.selectedBoard === null){
             console.log('selected board is null')
             return;
@@ -68,6 +57,53 @@ export default class SelectedBoardController
 
         const newCard = new Card(cardTitle);
         this.selectedBoard.cardsCollection[cardListidx].cards = this.selectedBoard.cardsCollection[cardListidx].cards.concat(newCard);
+
+        console.log("Card Title: " + newCard.title)
+
+        const params = {
+            folderName: this.selectedBoard.foldername,
+            boardName: this.selectedBoard.name,
+            listIndex: cardListidx,
+            cardTitle: cardTitle
+        }
+        axios.post(UrlManager.postBoardCard, params).then(res => {
+        })
+        .catch(e => {
+            alert(e);
+        })
+    }
+
+    public changeListTitle(listIdx: number, newTitle: string) 
+    {
+        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
+            return;
+        
+        if(this.selectedBoard.cardsCollection[listIdx].name === newTitle)
+            return;
+
+        this.selectedBoard.cardsCollection[listIdx].name = newTitle;
+        const params = { 
+            folderName: this.selectedBoard.foldername,
+            boardName: this.selectedBoard.name,
+            listIdx: listIdx,
+            newName: newTitle
+        }
+        axios.put(UrlManager.putBoardCardTitle, params).catch((e:AxiosError) => alert(e.response?.data));
+    }
+
+    public setBoardName(newName: string) 
+    {
+        if(this.selectedBoard.name === newName)
+            return;
+
+        const params = {
+            folderName: this.selectedBoard.foldername,
+            prevName: this.selectedBoard.name,
+            newName: newName
+        }
+        
+        this.selectedBoard.name = newName;
+        axios.put(UrlManager.putBoardTitle, params).catch((e:AxiosError) => alert(e.response?.data));
     }
 
     public moveCard(currentListIdx: number, newListIdx: number, newPosIdx: number) {

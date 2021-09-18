@@ -5,7 +5,12 @@ const UrlManager = {
     home: baseUrl,
     folders: baseUrl+'folders',
     boards: baseUrl+'boards',
-    starredBoards: baseUrl+'favorites'
+    starredBoards: baseUrl+'favorites',
+
+    postBoardList: baseUrl+'board/list',
+    postBoardCard: baseUrl+'board/list/card',
+    putBoardTitle: baseUrl+'board/name',
+    putBoardCardTitle: baseUrl+'board/list/name'
 }
 
 export default UrlManager;
