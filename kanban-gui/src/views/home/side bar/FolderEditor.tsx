@@ -21,19 +21,25 @@ const FolderEditor: React.FC<Editor> = function(props)
     return(
         <st.FromWrapper>
             <st.InputsWrapper>
-                <st.StringInputs placeholder={namePh} value={name} onChange={e => setName(e.target.value)}/>
-                <st.StringInputs placeholder={urlPh} value={iconUrl} onChange={e => setIconUrl(e.target.value)}/>
+                <st.StringInputs placeholder={namePh} 
+                                 value={name} 
+                                 onChange={e => setName(e.target.value)}>
+                </st.StringInputs>
+                <st.StringInputs placeholder={urlPh} 
+                                 value={iconUrl} 
+                                 onChange={e => setIconUrl(e.target.value)}>
+                </st.StringInputs>
             </st.InputsWrapper>
 
             <st.ButtonsWrapper>
-                <div>
+                <st.ButtonsWrapper>
                     <st.EditBtn type='button'>
                         {localizer.getTextById(localizer.texts.btn_txt_edit)}
                     </st.EditBtn>
                     <st.CancelBtn type='button'>
                         <MdClose/>
                     </st.CancelBtn>
-                </div>
+                </st.ButtonsWrapper>
 
                 <st.DeleteBtn type='button'>
                     {localizer.getTextById(localizer.texts.btn_txt_delete)}

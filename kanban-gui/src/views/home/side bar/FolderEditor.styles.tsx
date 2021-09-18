@@ -29,6 +29,8 @@ const ButtonsWrapper = styled.div`
     display: flex;
     flex-direction: row;
 
+    align-items: center;
+    align-content: center;
     justify-content: space-between;
 `
 
@@ -38,6 +40,13 @@ const EditBtn = styled(creator.Create)`
 const CancelBtn = styled(creator.Close)`
     margin: 0;
     padding: 0;
+
+    & svg {
+        margin: 0;
+        padding: 0;
+        width: 25px;
+        height: 25px;
+    }
 `
 
 const DeleteBtn = styled(creator.Create)`
