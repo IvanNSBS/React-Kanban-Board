@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import axios, { AxiosError } from 'axios';
-import UrlManager from "./controllers/UrlManager";
-import User from "../../data/account/user";
+import { VscLoading } from 'react-icons/vsc';
+import * as st from "./LoadingScreen.styles";
+import UrlManager from "../../controllers/UrlManager";
+import User from "../../../../data/account/user";
+
 
 interface Load {
     onLoadComplete(user: User | undefined): void;
@@ -23,11 +26,16 @@ const LoadingScreen: React.FC<Load> = function({onLoadComplete})
             });
         }
 
-        fetchUser();
+        // fetchUser();
     }, [])
 
     return(
-        <span>Loading...</span>
+        <st.Screen>
+            <st.TextWrapper>
+                <st.Icon></st.Icon>
+                <st.Text>Loading...</st.Text>
+            </st.TextWrapper>
+        </st.Screen>
     );
 }
 
