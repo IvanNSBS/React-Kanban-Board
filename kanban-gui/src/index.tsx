@@ -11,7 +11,7 @@ import SelectedBoardContext from './contexts/SelectedBoard';
 import SelectedBoardController from './controllers/SelectedBoardController';
 
 const homePath = "/";
-const boardViewPath = "/board";
+const boardViewPath = "/board/:folderName/:boardName";
 
 const AppRouter: React.FC = function() 
 {
@@ -25,7 +25,7 @@ const AppRouter: React.FC = function()
                     <SelectedBoardContext.Provider value={ new SelectedBoardController(null) }>
                         <Switch>
                             <Route path={homePath} component={Home} exact/>
-                            <Route path={boardViewPath} component={BoardScreen} exact/>
+                            <Route path={boardViewPath} component={BoardScreen}/>
                         </Switch>
                     </SelectedBoardContext.Provider>
                 </BrowserRouter>

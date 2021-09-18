@@ -17,12 +17,12 @@ export default class SelectedBoardController
     constructor(board: Board | null){
         this._selectedBoard = board;
         
-        axios.get(UrlManager.home).then(res => {
-            const user = JSON.parse(JSON.stringify(res.data)) as User;
-            this._selectedBoard = user.folders[0].boards[0];
+        // axios.get(UrlManager.home).then(res => {
+        //     const user = JSON.parse(JSON.stringify(res.data)) as User;
+        //     this._selectedBoard = user.folders[0].boards[0];
 
-            eventsHandlers.invoke(BoardEvents.board_selected);
-        }).catch(e => alert(e));
+        //     eventsHandlers.invoke(BoardEvents.board_selected);
+        // }).catch(e => alert(e));
     }   
 
     public get selectedBoard() { return this._selectedBoard; }
