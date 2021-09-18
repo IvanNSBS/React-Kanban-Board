@@ -1,11 +1,11 @@
 import Card from "../cards/card";
 
 export default class CardsList {
-    private _name: string = "";
-    private _cards: Card[] = []; 
+    public name: string = "";
+    public cards: Card[] = []; 
 
-    constructor(){
-        this._name = "";
-        this._cards = [];
+    constructor(name: string){
+        this.name = name;
+        this.cards = [];
     }
 }

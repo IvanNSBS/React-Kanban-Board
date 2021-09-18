@@ -3,6 +3,7 @@ import User from "../../../data/account/user";
 import { eventsHandlers } from "./EventManager";
 import UrlManager from "./UrlManager";
 import axios from 'axios';
+import CardsList from "../../../data/board/cardList";
 
 export const BoardEvents = {
     board_selected: 'board_selected'
@@ -14,7 +15,6 @@ export default class SelectedBoardController
 
     constructor(board: Board | null){
         this._selectedBoard = board;
-
         
         axios.get(UrlManager.home).then(res => {
             const user = JSON.parse(JSON.stringify(res.data)) as User;
@@ -31,14 +31,23 @@ export default class SelectedBoardController
     }
 
     public setFolderName(newName: string) {
-        
+
     }
 
-    public addList(title: string) {
+    public addList(title: string) 
+    {
+        if(this.selectedBoard === null || title === "")
+            return;
 
+        const newCardList = new CardsList(title);
+        this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.concat( newCardList );
     }
 
     public addCardToList(listIdx: number, cardTitle: string){
+        
+    }
+
+    public moveCard(currentListIdx: number, newListIdx: number, newPosIdx: number) {
 
     }
 }

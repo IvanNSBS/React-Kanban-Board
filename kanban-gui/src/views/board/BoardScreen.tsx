@@ -10,8 +10,8 @@ import CreateList from "./CreateList";
 
 const BoardScreen: React.FC = function() 
 {
-    const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const [board, setBoard] = useState<Board | null>(null);
+    const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const selectedBoardController = useContext(SelectedBoardContext);
     
     function onClickBackground(){
@@ -35,6 +35,10 @@ const BoardScreen: React.FC = function()
     }, [])
 
 
+    const cardsLists = selectedBoardController.selectedBoard?.cardsCollection.map((card, idx) => {
+        return(<CardList name={card.name}/>)
+    })
+
     return(
         <styles.BoardBackground 
             bgImgUrl={board?.backgroundImgUrl} 
@@ -46,11 +50,12 @@ const BoardScreen: React.FC = function()
             }
             <styles.BoardsAreaWrapper>
                 <styles.CardsContainer>
-                    <CardList name="To Do"></CardList>
-                    <CardList name="Doing"></CardList>
-                    <CardList name="Done"></CardList>
-                    <CardList name="Backlog"></CardList>
-                    <CreateList isActive={isCreatingFolder} setIsActive={val => setIsCreatingFolder(val)}/>
+                    {cardsLists}
+                    <CreateList 
+                                isActive={isCreatingFolder} 
+                                setIsActive={val => setIsCreatingFolder(val)}
+                                createList={val => selectedBoardController.addList(val)}>
+                    </CreateList>
                 </styles.CardsContainer>
             </styles.BoardsAreaWrapper>
         </styles.BoardBackground>

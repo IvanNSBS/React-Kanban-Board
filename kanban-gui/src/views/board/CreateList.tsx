@@ -7,6 +7,7 @@ import { VscChromeClose } from 'react-icons/vsc';
 interface ActivateCreate {
     isActive: boolean;
     setIsActive(val: boolean): void;
+    createList(name: string): void;
 }
 
 const CreateList: React.FC<ActivateCreate> = function(props) 
@@ -26,6 +27,12 @@ const CreateList: React.FC<ActivateCreate> = function(props)
     function onClickAdd(e: React.MouseEvent) {
         e.preventDefault();
         e.stopPropagation();
+
+        if(name === "")
+            return;
+            
+        props.createList(name);
+        props.setIsActive(false);
     }
 
     function onClickCancel(e: React.MouseEvent) {
