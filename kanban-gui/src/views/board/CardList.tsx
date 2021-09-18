@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as styles from './CardList.styles';
-import { BsThreeDots } from 'react-icons/bs'
-import Card from './Card';
 import { LocalizerContext } from "../../contexts/Localizer";
-import CreationCard from "./CreationCard";
 import { eventsHandlers } from "../../controllers/EventManager";
-
+import Card from './Card';
+import CreationCard from "./CreationCard";
+import CardListTitle from "./CardListTitle";
 
 interface CardListData {
     name: string;
@@ -30,10 +29,7 @@ const CardList: React.FC<CardListData> = function(props)
         <styles.ListWrapper>
             <styles.ListContent>
                 
-                <styles.ListHeader>
-                    <input value={props.name}></input>
-                    <button><BsThreeDots/></button>
-                </styles.ListHeader>
+                <CardListTitle name={props.name}/>
 
                 <styles.CardsContainer>
                     <Card></Card>
