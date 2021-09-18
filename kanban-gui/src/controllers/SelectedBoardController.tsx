@@ -4,6 +4,7 @@ import { eventsHandlers } from "./EventManager";
 import UrlManager from "./UrlManager";
 import axios from 'axios';
 import CardsList from "../../../data/board/cardList";
+import Card from "../../../data/cards/card";
 
 export const BoardEvents = {
     board_selected: 'board_selected'
@@ -54,8 +55,19 @@ export default class SelectedBoardController
         this.selectedBoard.cardsCollection[listIdx].name = newTitle;
     }
 
-    public addCardToList(listIdx: number, cardTitle: string){
-        
+    public addCardToList(cardListidx: number, cardTitle: string) {
+        if(this.selectedBoard === null){
+            console.log('selected board is null')
+            return;
+        }
+
+        if(cardListidx < 0 || cardListidx >= this.selectedBoard.cardsCollection.length){
+            console.log('invalid index')
+            return;
+        }
+
+        const newCard = new Card(cardTitle);
+        this.selectedBoard.cardsCollection[cardListidx].cards = this.selectedBoard.cardsCollection[cardListidx].cards.concat(newCard);
     }
 
     public moveCard(currentListIdx: number, newListIdx: number, newPosIdx: number) {

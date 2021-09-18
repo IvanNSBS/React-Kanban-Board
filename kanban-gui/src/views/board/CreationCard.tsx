@@ -3,16 +3,29 @@ import { LocalizerContext } from "../../contexts/Localizer";
 import { ListCard, CardCreator } from "./Card.styles";
 import { VscChromeClose } from 'react-icons/vsc';
 import * as st from "./CreateList.styles";
+import SelectedBoardContext from "../../contexts/SelectedBoard";
 
-const CreationCard: React.FC = function(props)
+interface CreationInterface {
+    index: number;
+    onFinishCreate(): void;
+}
+
+const CreationCard: React.FC<CreationInterface> = function(props)
 {
     const [title, setTitle] = useState<string>("");
     const textArea = useRef<HTMLTextAreaElement>(null);
     const localizer = useContext(LocalizerContext);
+    const boardController = useContext(SelectedBoardContext);
     
     function onClickAdd(e: React.MouseEvent) {
         e.preventDefault();
         e.stopPropagation();
+
+        if(title === "")
+            return;
+
+        boardController.addCardToList(props.index, title);
+        props.onFinishCreate();
     }
 
     useEffect(() => {
@@ -26,7 +39,8 @@ const CreationCard: React.FC = function(props)
     return(
         <form>
             <ListCard>
-                <CardCreator 
+                <CardCreator
+                    value={title}
                     placeholder={localizer.getTextById(localizer.texts.input_ph_insert_card_title)} 
                     onClick={e => e.stopPropagation()}
                     onChange={e => setTitle(e.target.value)}

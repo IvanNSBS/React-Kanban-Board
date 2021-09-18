@@ -28,6 +28,12 @@ const CardList: React.FC<CardListData> = function(props)
         )
     }, [])
 
+    const listSize = selectedBoardController.selectedBoard?.cardsCollection[props.index].cards.length;
+    const allCards = selectedBoardController.selectedBoard
+                     ?.cardsCollection[props.index].cards.map((card, idx) => {
+        return <Card key={idx} isLast={idx===listSize} title={card.title}></Card>
+    })
+
     return(
         <styles.ListWrapper>
             <styles.ListContent>
@@ -37,13 +43,10 @@ const CardList: React.FC<CardListData> = function(props)
                 </CardListTitle>
 
                 <styles.CardsContainer>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card isLast={!isCreating}></Card>
+                    {allCards}
                     {
                         isCreating && 
-                        <CreationCard/>
+                        <CreationCard index={props.index} onFinishCreate={() => setIsCreating(false)}/>
                     }
                 </styles.CardsContainer>
                 {

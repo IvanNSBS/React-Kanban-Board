@@ -9,7 +9,7 @@ const Label: React.FC = function() {
     )
 }
 
-const Card: React.FC<{isLast?: boolean}> = function(props) 
+const Card: React.FC<{isLast?: boolean, title: string}> = function(props) 
 {
     return(
         <ListCard isLast={props.isLast}>
@@ -17,7 +17,7 @@ const Card: React.FC<{isLast?: boolean}> = function(props)
             <ContentWrapper>
                 <Label/>
                 <CardText>
-                    Header não aparece quando abre pelo Home
+                    {props.title}
                 </CardText>
             </ContentWrapper>
         </ListCard>
