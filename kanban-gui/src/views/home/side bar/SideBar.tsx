@@ -34,18 +34,6 @@ const SideBar: React.FC = function()
         return createStatus;
     }
 
-    useEffect(() => {
-        const updateFolders = function() {
-            setFolders(userController.getFolders());
-        }
-
-        eventsHandlers.addSubscriber(FolderEvents.foldersChanged, updateFolders);
-
-        return function unsubscribe() {
-            eventsHandlers.removeSubscriber(FolderEvents.foldersChanged, updateFolders);
-        }
-    }, [])
-
     return(
         <styles.WorkspaceContainer onClick={() => setCreatingFolder(false)}>
 
