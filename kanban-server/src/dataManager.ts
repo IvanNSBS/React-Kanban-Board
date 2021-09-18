@@ -2,6 +2,7 @@ import User from '../../data/account/user';
 import BoardsFolder from '../../data/account/boardsFolder';
 import Board from '../../data/board/board';
 import user_actions_status from '../../data/request_statuses/user_statuses'
+import CardsList from '../../data/board/cardList';
 
 class DataManager {
     private _user: User;
@@ -29,6 +30,20 @@ class DataManager {
     {
         const folderName = this.user.folders[folderIdx].name;
         this.user.folders[folderIdx].boards.push( new Board(name, folderName, iconUrl) )
+        return user_actions_status.success;
+    }
+
+    public createListOnBoard(folderIdx: number, boardIdx: number, name: string) {
+        if(folderIdx < 0 || folderIdx >= this.user.folders.length)
+            return user_actions_status.bad_request;
+        
+        const boards = this.user.folders[folderIdx].boards;
+        if(boardIdx < 0 || boardIdx >= boards.length)
+            return user_actions_status.bad_request;
+            
+        const newList = new CardsList(name);
+        this.user.folders[folderIdx].boards[boardIdx].cardsCollection.push(newList);
+
         return user_actions_status.success;
     }
 }
