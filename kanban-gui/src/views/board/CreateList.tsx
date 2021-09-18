@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { LocalizerContext } from "../../contexts/Localizer";
 import { AddListBtn, CancelButton, ContentWrapper, InactiveText, ListNameInput, ActiveContentWrapper, ButtonsContainer } from "./CreateList.styles";
 import { GoPlus } from 'react-icons/go';
@@ -11,11 +11,18 @@ interface ActivateCreate {
 
 const CreateList: React.FC<ActivateCreate> = function(props) 
 {
+    const textArea = useRef<HTMLTextAreaElement>(null);
     const [name, setName] = useState<string>("");
     const localizer = useContext(LocalizerContext);
 
     const inactiveText = localizer.getTextById(localizer.texts.input_add_new_list);
     const activeText = localizer.getTextById(localizer.texts.input_ph_insert_list_title);
+
+    function onOpenForm(e: React.MouseEvent) {
+        e.stopPropagation();
+        props.setIsActive(true);
+        textArea.current?.focus();
+    }
 
     function onClickAdd(e: React.MouseEvent) {
         e.preventDefault();
@@ -30,7 +37,17 @@ const CreateList: React.FC<ActivateCreate> = function(props)
         props.setIsActive(false);
     }
 
-    const InactiveRender =  <InactiveText onClick = { e => { props.setIsActive(true); e.stopPropagation(); } }>
+    useEffect(() => {
+        textArea.current?.focus();
+        if(textArea.current !== null){
+            textArea.current.style.height = 'auto';
+            textArea.current.style.height = textArea.current.scrollHeight + 'px';
+        }
+    }, [name])
+
+    const InactiveRender =  <InactiveText 
+                                ref={textArea}
+                                onClick = { onOpenForm }>
                                 <GoPlus/>
                                 {inactiveText}
                             </InactiveText>
@@ -39,6 +56,7 @@ const CreateList: React.FC<ActivateCreate> = function(props)
                                 <ListNameInput 
                                     value   = {name}
                                     placeholder = { activeText }
+                                    ref = {textArea}
                                     onClick = { e => e.stopPropagation() } 
                                     onChange = { e => setName(e.target.value) }>
                                 </ListNameInput>

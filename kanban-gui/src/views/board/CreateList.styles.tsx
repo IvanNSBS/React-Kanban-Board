@@ -66,11 +66,17 @@ const ActiveContentWrapper = styled.div`
     row-gap: 4px;
 `
 
-const ListNameInput = styled.input`
+const ListNameInput = styled.textarea`
     border: 2px solid ${Palette.boardCard};
     border-radius: 4px;
     height: 30px;
     padding: 1px 8px;
+
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
 
     &::placeholder {
         color: gray;

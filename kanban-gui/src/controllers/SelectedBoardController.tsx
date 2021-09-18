@@ -29,4 +29,16 @@ export default class SelectedBoardController
         this._selectedBoard = value; 
         eventsHandlers.invoke(BoardEvents.board_selected);
     }
+
+    public setFolderName(newName: string) {
+        
+    }
+
+    public addList(title: string) {
+
+    }
+
+    public addCardToList(listIdx: number, cardTitle: string){
+
+    }
 }
