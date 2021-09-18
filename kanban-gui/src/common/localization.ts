@@ -10,7 +10,7 @@ const Texts = {
     txt_create_new_board: 'txt_create_new_board',
     txt_sidebar_display_board: 'txt_sidebar_display_board',
     txt_sidebar_all_boards: 'txt_sidebar_all_boards',
-    txt_configurations_plural: 'txt_configurations_plural',
+    txt_edit: 'txt_edit',
     txt_folders_plural: 'txt_folders_plural',
     txt_favorite_boards_title: 'txt_favorite_boards_title',
     input_board_modal_placeholder: 'input_board_modal_placeholder',
@@ -55,9 +55,9 @@ const Localization: Record<string, Record<string, string>> =
         'ptBr': 'Todos os Quadros',
         'enUs': 'All Boards'
     },
-    'txt_configurations_plural': {
-        'ptBr': 'Configurações',
-        'enUs': 'Configurations'
+    'txt_edit': {
+        'ptBr': 'Editar',
+        'enUs': 'Edit'
     },
     'txt_folders_plural': {
         'ptBr': 'Pastas',

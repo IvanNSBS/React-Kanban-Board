@@ -4,7 +4,7 @@ import FolderIcon from "../FolderIcon";
 import FolderEditor from "./FolderEditor";
 import * as styles from './FolderSidebar.styles';
 import { BiShow } from 'react-icons/bi';
-import { MdFilterFrames, MdSettings } from 'react-icons/md'
+import { MdFilterFrames, MdEdit } from 'react-icons/md'
 import { LocalizerContext } from "../../../contexts/Localizer";
 import { UserControllerContext } from "../../../contexts/UserController";
 
@@ -56,8 +56,8 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
                                 <label>{localizer.getTextById(localizer.texts.txt_create_new_board)}</label>
                             </styles.FolderOption>
                             <styles.FolderOption onClick={() => setIsEditing(true)}>
-                                <MdSettings/>
-                                <label>{localizer.getTextById(localizer.texts.txt_configurations_plural)}</label>
+                                <MdEdit/>
+                                <label>{localizer.getTextById(localizer.texts.txt_edit)}</label>
                             </styles.FolderOption>
                         </FlexDiv>
                     }
