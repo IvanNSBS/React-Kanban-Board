@@ -46,7 +46,6 @@ const ListHeader = styled.div`
         overflow: hidden;
         overflow-wrap: break-word;
         box-shadow: none;
-        font-weight: 600;
 
         cursor: pointer;
 
@@ -81,7 +80,9 @@ const ListHeader = styled.div`
 
 const CardsContainer = styled.div`
     margin: 4px 6px;
+    margin-top: 0;
     padding: 4px;
+    padding-top: 0;
     overflow-y: auto;
 `
 
