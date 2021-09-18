@@ -21,7 +21,9 @@ const Texts = {
     btn_add_new_card: 'btn_add_new_card',
     btn_add_list: 'btn_add_list',
     input_add_new_list: 'input_add_new_list',
-    input_ph_insert_list_title: 'input_ph_insert_list_title'
+    input_ph_insert_list_title: 'input_ph_insert_list_title',
+    btn_add_card: 'btn_add_card',
+    input_ph_insert_card_title: 'input_ph_insert_card_title'
 }
 
 const Localization: Record<string, Record<string, string>> = 
@@ -97,6 +99,14 @@ const Localization: Record<string, Record<string, string>> =
     'input_ph_insert_list_title': {
         'ptBr': 'Insira o título da lista...',
         'enUs': 'Insert the list title...'
+    },
+    'btn_add_card': { 
+        'ptBr': 'Adicionar Cartão',
+        'enUs': 'Add Card'
+    },
+    'input_ph_insert_card_title': {
+        'ptBr': 'Insira um título para o cartão...',
+        'enUs': 'Insert a title for the cartd...'
     }
 };
 

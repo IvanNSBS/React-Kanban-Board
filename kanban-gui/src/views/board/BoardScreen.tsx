@@ -13,6 +13,11 @@ const BoardScreen: React.FC = function()
     const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const [board, setBoard] = useState<Board | null>(null);
     const selectedBoardController = useContext(SelectedBoardContext);
+    
+    function onClickBackground(){
+        setIsCreatingFolder(false);
+        eventsHandlers.invoke("bg_click_board_screen");
+    }
 
     useEffect(() => {
         const updateSelected = function(){
@@ -33,7 +38,7 @@ const BoardScreen: React.FC = function()
     return(
         <styles.BoardBackground 
             bgImgUrl={board?.backgroundImgUrl} 
-            onClick={() => setIsCreatingFolder(false)}
+            onClick={onClickBackground}
         >
             {
                 board !== null &&

@@ -1,13 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Palette from "../../common/colorpalette";
 
-const ListCard = styled.div<{isLast?: boolean}>`
+const Card = css`
     background-color: ${Palette.cardBg};
     border-radius: 3px;
     box-shadow: 0 1px 0 #091e4240;
     cursor: pointer;
     display: block;
-    margin-bottom: ${props => props.isLast ? '0px' : '8px' };;
     max-width: 300px;
     min-height: 20px;
     position: relative;
@@ -22,6 +21,31 @@ const ListCard = styled.div<{isLast?: boolean}>`
         background-color: ${Palette.cardClickBg}
     }
 `
+
+const ListCard = styled.div<{isLast?: boolean}>`
+    ${Card};
+    display: flex;
+    flex-direction: column;
+    margin-bottom: ${props => props.isLast ? '0px' : '8px' };
+`
+
+const CardCreator = styled.textarea`
+    resize: none;
+    outline: none;
+    user-select: none;
+    overflow: hidden;
+    
+    border: 0px;
+    margin: 2px;
+    padding: 8px;
+    min-height: 40px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+`
+
 
 const ContentWrapper = styled.div`
     padding: 6px 8px 2px;
@@ -69,4 +93,4 @@ const CardText = styled.span`
     user-select: none;
 `
 
-export { ListCard, ContentWrapper, LabelWrapper, CardText }
+export { ListCard, CardCreator, ContentWrapper, LabelWrapper, CardText }
