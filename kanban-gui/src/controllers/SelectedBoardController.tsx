@@ -43,6 +43,16 @@ export default class SelectedBoardController
         this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.concat( newCardList );
     }
 
+    public changeListTitle(listIdx: number, newTitle: string){
+        if(this.selectedBoard === null)
+            return;
+
+        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
+            return;
+        
+        this.selectedBoard.cardsCollection[listIdx].name = newTitle;
+    }
+
     public addCardToList(listIdx: number, cardTitle: string){
         
     }

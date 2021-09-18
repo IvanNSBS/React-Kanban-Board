@@ -33,28 +33,6 @@ const ListHeader = styled.div`
     justify-content: space-between;
     column-gap: 4px;
 
-    & input {
-        color: ${Palette.background};
-        font-weight: bold;
-        background-color: transparent;
-        border: 0;
-        padding: 4px 8px;
-        width: 100%;
-        border-radius: 4px;
-        font-size: 14px;
-
-        overflow: hidden;
-        overflow-wrap: break-word;
-        box-shadow: none;
-
-        cursor: pointer;
-
-        &:focus {
-            border: 1px solid ${Palette.background};
-            background-color: white;
-        }
-    }
-
     & button {
         border: 0;
         margin: 0;
@@ -75,6 +53,28 @@ const ListHeader = styled.div`
             opacity: 1;
             background-color: #00000018;
         }
+    }
+`
+
+const CardTitleInput = styled.input`
+    color: ${Palette.background};
+    font-weight: bold;
+    background-color: transparent;
+    border: 0;
+    padding: 4px 8px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 14px;
+
+    overflow: hidden;
+    overflow-wrap: break-word;
+    box-shadow: none;
+
+    cursor: pointer;
+
+    &:focus {
+        border: 1px solid ${Palette.background};
+        background-color: white;
     }
 `
 
@@ -107,4 +107,4 @@ const CreateCard = styled.button`
     }
 `
 
-export { ListWrapper, ListContent, ListHeader, CreateCard, CardsContainer }
+export { ListWrapper, ListContent, ListHeader, CreateCard, CardsContainer, CardTitleInput }

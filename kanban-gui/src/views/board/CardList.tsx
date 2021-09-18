@@ -5,13 +5,16 @@ import { eventsHandlers } from "../../controllers/EventManager";
 import Card from './Card';
 import CreationCard from "./CreationCard";
 import CardListTitle from "./CardListTitle";
+import SelectedBoardContext from "../../contexts/SelectedBoard";
 
 interface CardListData {
+    index: number;
     name: string;
 }
 
 const CardList: React.FC<CardListData> = function(props) 
 {
+    const selectedBoardController = useContext(SelectedBoardContext);
     const localizer = useContext(LocalizerContext);
     const [isCreating, setIsCreating] = useState<boolean>(false);
 
@@ -29,7 +32,9 @@ const CardList: React.FC<CardListData> = function(props)
         <styles.ListWrapper>
             <styles.ListContent>
                 
-                <CardListTitle name={props.name}/>
+                <CardListTitle name={props.name} 
+                               changeName={val => selectedBoardController.changeListTitle(props.index, val)}>
+                </CardListTitle>
 
                 <styles.CardsContainer>
                     <Card></Card>
