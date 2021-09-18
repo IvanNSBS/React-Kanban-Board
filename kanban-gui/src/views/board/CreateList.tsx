@@ -21,7 +21,6 @@ const CreateList: React.FC<ActivateCreate> = function(props)
     function onOpenForm(e: React.MouseEvent) {
         e.stopPropagation();
         props.setIsActive(true);
-        textArea.current?.focus();
     }
 
     function onClickAdd(e: React.MouseEvent) {
@@ -38,7 +37,6 @@ const CreateList: React.FC<ActivateCreate> = function(props)
     }
 
     useEffect(() => {
-        textArea.current?.focus();
         if(textArea.current !== null)
         {
             if(name !== "")
@@ -48,6 +46,11 @@ const CreateList: React.FC<ActivateCreate> = function(props)
             }
         }
     }, [name])
+
+    useEffect(() => {
+        if(props.isActive)
+            textArea.current?.focus();
+    }, [props.isActive])
 
     const InactiveRender =  <InactiveText 
                                 ref={textArea}
