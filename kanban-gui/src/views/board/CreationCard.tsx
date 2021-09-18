@@ -11,6 +11,7 @@ const CreationCard: React.FC = function(props)
     const localizer = useContext(LocalizerContext);
     
     useEffect(() => {
+        textArea.current?.focus();
         if(textArea.current !== null){
             textArea.current.style.height = 'auto';
             textArea.current.style.height = textArea.current.scrollHeight + 'px';
