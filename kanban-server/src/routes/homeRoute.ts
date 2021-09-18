@@ -48,4 +48,21 @@ homeRoute.post('/boards', function(req: express.Request, res: express.Response) 
     res.status(200).send(`Board with name ${name} created`);
 })
 
+homeRoute.put('/boards', function(req: express.Request, res: express.Response) {
+    const prevFolderName = req.body.prevFolderName;
+    const newFolderName = req.body.newFolderName;
+    const newFolderIconUrl = req.body.newFolderIconUrl;
+
+    const folder = dataManager.user.folders.find(f => f.name === prevFolderName);
+    if(folder === undefined) {
+        console.log("Folder doesn't exist...")
+        res.status(406).send("Folder Doesn't exist")
+        return;
+    }
+
+    folder.name = newFolderName;
+    folder.iconUrl = newFolderIconUrl;
+    res.status(200).send(`Changed Folder name from <${prevFolderName}> to <${newFolderName}>.\nChanged Icon Url to <${newFolderIconUrl}>`);
+})
+
 export default homeRoute;

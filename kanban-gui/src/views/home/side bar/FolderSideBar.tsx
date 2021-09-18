@@ -1,16 +1,17 @@
 import React, { useState, useContext } from "react";
+import FlexDiv from "../../../common/styles/FlexDiv";
+import FolderIcon from "../FolderIcon";
+import FolderEditor from "./FolderEditor";
 import * as styles from './FolderSidebar.styles';
 import { BiShow } from 'react-icons/bi';
 import { MdFilterFrames, MdSettings } from 'react-icons/md'
-import FlexDiv from "../../../common/styles/FlexDiv";
 import { LocalizerContext } from "../../../contexts/Localizer";
-import FolderIcon from "../FolderIcon";
-import FolderCreator from "./FolderCreator";
-import FolderEditor from "./FolderEditor";
+import { UserControllerContext } from "../../../contexts/UserController";
 
 const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props) 
 { 
     const localizer = useContext(LocalizerContext);
+    const userController = useContext(UserControllerContext);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -18,8 +19,14 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
         setCollapsed(!collapsed);
     }
 
-    const finishEdit = function(newName: string, newIconUrl?:string) {
-        
+    const finishEdit = function(newName: string, newIconUrl?:string) 
+    {
+        userController.updateFolderName(props.name, newName, newIconUrl);
+        setIsEditing(false);
+    }
+
+    const cancelEdit = function() {
+        setIsEditing(false);
     }
 
     if(!isEditing)
@@ -54,7 +61,13 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
             </div>
         );
     
-    return <FolderEditor name={props.name} iconUrl={props.iconUrl} onFinish={finishEdit}></FolderEditor> 
+    return (
+        <FolderEditor name={props.name} 
+                      iconUrl={props.iconUrl} 
+                      finish={finishEdit}
+                      cancel={cancelEdit}>
+        </FolderEditor> 
+    );
 }
 
 export default FolderSideBar;

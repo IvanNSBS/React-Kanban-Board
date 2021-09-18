@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { LocalizerContext } from "../../../contexts/Localizer";
 import { MdClose } from "react-icons/md";
 import * as st from "./FolderEditor.styles";
@@ -6,11 +6,13 @@ import * as st from "./FolderEditor.styles";
 interface Editor {
     name: string;
     iconUrl?: string;
-    onFinish(newName: string, newIconUrl?: string): void;
+    finish(newName: string, newIconUrl?: string): void;
+    cancel(): void;
 }
 
 const FolderEditor: React.FC<Editor> = function(props) 
 {
+    const nameInput = useRef<HTMLInputElement>(null);
     const [name, setName] = useState<string>(props.name);
     const [iconUrl, setIconUrl] = useState<string | undefined>(props.iconUrl);
     const localizer = useContext(LocalizerContext);
@@ -18,10 +20,21 @@ const FolderEditor: React.FC<Editor> = function(props)
     const namePh = localizer.getTextById(localizer.texts.input_create_folder_placeholder);
     const urlPh = localizer.getTextById(localizer.texts.input_create_folder_icon_placeholder);
 
+    useEffect(() => {
+        nameInput.current?.focus();
+    }, [])
+
+    function submit(e: React.FormEvent<HTMLFormElement>) 
+    {
+        e.preventDefault();
+        props.finish(name, iconUrl);
+    }
+
     return(
-        <st.FromWrapper>
+        <st.FromWrapper onSubmit={ submit }>
             <st.InputsWrapper>
-                <st.StringInputs placeholder={namePh} 
+                <st.StringInputs ref={nameInput}
+                                 placeholder={namePh} 
                                  value={name} 
                                  onChange={e => setName(e.target.value)}>
                 </st.StringInputs>
@@ -33,10 +46,10 @@ const FolderEditor: React.FC<Editor> = function(props)
 
             <st.ButtonsWrapper>
                 <st.ButtonsWrapper>
-                    <st.EditBtn type='button'>
+                    <st.EditBtn type='submit' onClick = { () => props.finish(name, iconUrl) }>
                         {localizer.getTextById(localizer.texts.btn_txt_edit)}
                     </st.EditBtn>
-                    <st.CancelBtn type='button'>
+                    <st.CancelBtn type='button' onClick={props.cancel}>
                         <MdClose/>
                     </st.CancelBtn>
                 </st.ButtonsWrapper>

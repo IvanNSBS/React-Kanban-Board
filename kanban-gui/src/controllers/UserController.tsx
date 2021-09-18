@@ -93,4 +93,39 @@ export default class UserController {
     public getStarredBoards(): Board[] {
         return this._user.starredBoards;
     }
+
+    public updateFolderName(prevName: string, newName: string, newIconUrl?: string)
+    {
+        const folderIdx = this.getFolders().findIndex(f => f.name === prevName);
+        if(folderIdx === -1)
+            return;
+        
+        const newFolder = JSON.parse(JSON.stringify(this.getFolders()[folderIdx])) as BoardsFolder;
+        newFolder.name = newName;
+        newFolder.iconUrl = newIconUrl;
+
+        this._user.folders = Object.assign([...this._user.folders], {
+            [folderIdx]: newFolder
+        });
+
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
+
+        const params = {
+            prevFolderName: prevName,
+            newFolderName: newName,
+            newFolderIconUrl: newIconUrl,
+        }
+
+        axios.put(UrlManager.boards, params).catch((e: AxiosError) => {
+            alert(e.request.data);
+        })
+    }
+
+    public deleteFolder(folderName: string){
+        const folderIdx = this.getFolders().findIndex(f => f.name === folderName);
+        if(folderIdx === -1)
+            return;
+
+        // axios.delete(UrlManager.boards+`/${folderIdx}`);
+    }
 }
