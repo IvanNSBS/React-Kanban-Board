@@ -32,7 +32,6 @@ const LoadingScreen: React.FC<Load> = function({onLoadComplete})
         if(text.current !== null) {
             text.current.style.width = 'auto';
             const width = text.current.offsetWidth;
-            console.log("Setting width...   " + width)
             text.current.style.width = width+'px';
         }
 
