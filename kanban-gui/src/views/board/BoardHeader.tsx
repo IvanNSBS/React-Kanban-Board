@@ -7,6 +7,7 @@ import { HeaderTitleWrapper, HeaderButton, HeaderWrapper, OptionsContainer, Boar
 import Board from "../../../../data/board/board";
 import { LocalizerContext } from "../../contexts/Localizer";
 import SelectedBoardContext from "../../contexts/SelectedBoard";
+import { UserControllerContext } from "../../contexts/UserController";
 
 interface HeaderData {
     board: Board;
@@ -20,6 +21,8 @@ const BoardHeader: React.FC<HeaderData> = function(props)
 
     const localizer = useContext(LocalizerContext)
     const boardController = useContext(SelectedBoardContext);
+    const userController = useContext(UserControllerContext);
+    const folderIconUrl = userController.getFolders().find(f => f.name == props.board.foldername)?.iconUrl;
 
     function onSubmitNewName() {
         nameInput.current?.blur();
@@ -51,7 +54,7 @@ const BoardHeader: React.FC<HeaderData> = function(props)
                 </HeaderButton>
 
                 <HeaderTitleWrapper>
-                    <FolderIcon name="Test"/>
+                    <FolderIcon name="Test" iconUrl={folderIconUrl}/>
                     {props.board.foldername}
                 </HeaderTitleWrapper>
                 <HeaderTitleWrapper>

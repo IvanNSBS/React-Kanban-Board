@@ -9,7 +9,7 @@ class DataManager {
 
     constructor() {
         this._user = new User('');
-        const serverFolder = new BoardsFolder('Server Folder', undefined);
+        const serverFolder = new BoardsFolder('Server Folder', 'https://t.ctcdn.com.br/3iFzcXuWD-pKeFYpp7AXgRoOYrE=/512x288/smart/i320336.jpeg');
         const board = new Board('Server Folder Board', serverFolder.name, 
         'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/16a027a140eec15f3d668010445fc62e/photo-1534631528984-63174ca557d0.jpg')
 
