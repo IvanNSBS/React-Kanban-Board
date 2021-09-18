@@ -30,8 +30,9 @@ const CreateList: React.FC<ActivateCreate> = function(props)
 
         if(name === "")
             return;
-            
+        
         props.createList(name);
+        setName("");
         props.setIsActive(false);
     }
 
