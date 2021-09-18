@@ -5,6 +5,8 @@ const Languages = {
 
 const Texts = {
     btn_txt_create: 'btn_txt_create',
+    btn_txt_edit: 'btn_txt_edit',
+    btn_txt_delete: 'btn_txt_delete',
     txt_create_new_board: 'txt_create_new_board',
     txt_sidebar_display_board: 'txt_sidebar_display_board',
     txt_sidebar_all_boards: 'txt_sidebar_all_boards',
@@ -35,6 +37,14 @@ const Localization: Record<string, Record<string, string>> =
     'btn_txt_create': {
         'ptBr': 'Criar',
         'enUs': 'Create'
+    },
+    'btn_txt_edit': {
+        'ptBr': 'Editar',
+        'enUs': 'Edit'
+    },
+    'btn_txt_delete': {
+        'ptBr': 'Excluir',
+        'enUs': 'Delete'
     },
     'txt_sidebar_display_board': {
         'ptBr': 'Mostrar Quadros',

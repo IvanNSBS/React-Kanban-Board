@@ -15,17 +15,20 @@ const FolderEditor: React.FC<Editor> = function(props)
     const [iconUrl, setIconUrl] = useState<string | undefined>(props.iconUrl);
     const localizer = useContext(LocalizerContext);
 
+    const namePh = localizer.getTextById(localizer.texts.input_create_folder_placeholder);
+    const urlPh = localizer.getTextById(localizer.texts.input_create_folder_icon_placeholder);
+
     return(
         <st.FromWrapper>
             <st.InputsWrapper>
-                <st.StringInputs defaultValue={"Server Folder"}/>
-                <st.StringInputs defaultValue={"htto://asdasdas.com"}/>
+                <st.StringInputs placeholder={namePh} value={name} onChange={e => setName(e.target.value)}/>
+                <st.StringInputs placeholder={urlPh} value={iconUrl} onChange={e => setIconUrl(e.target.value)}/>
             </st.InputsWrapper>
 
             <st.ButtonsWrapper>
                 <div>
                     <st.EditBtn type='button'>
-                        {localizer.getTextById(localizer.texts.btn_txt_create)}
+                        {localizer.getTextById(localizer.texts.btn_txt_edit)}
                     </st.EditBtn>
                     <st.CancelBtn type='button'>
                         <MdClose/>
@@ -33,7 +36,7 @@ const FolderEditor: React.FC<Editor> = function(props)
                 </div>
 
                 <st.DeleteBtn type='button'>
-                    Excluir
+                    {localizer.getTextById(localizer.texts.btn_txt_delete)}
                 </st.DeleteBtn>
             </st.ButtonsWrapper>
         </st.FromWrapper>
