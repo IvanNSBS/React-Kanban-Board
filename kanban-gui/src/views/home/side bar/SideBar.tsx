@@ -4,8 +4,6 @@ import FolderSideBar from "./FolderSideBar";
 import FolderCreator from './FolderCreator';
 import * as styles from './SideBar.styles';
 import { LocalizerContext } from "../../../contexts/Localizer";
-import { eventsHandlers } from "../../../controllers/EventManager";
-import { FolderEvents } from "../../../controllers/UserController";
 import user_actions_status from "../../../../../data/request_statuses/user_statuses";
 
 const SideBar: React.FC = function() 
