@@ -36,7 +36,7 @@ const BoardScreen: React.FC = function()
 
 
     const cardsLists = selectedBoardController.selectedBoard?.cardsCollection.map((card, idx) => {
-        return(<CardList name={card.name} index={idx}/>)
+        return(<CardList key={idx} name={card.name} index={idx}/>)
     })
 
     return(
