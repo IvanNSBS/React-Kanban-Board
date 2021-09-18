@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AiOutlineStar } from 'react-icons/ai';
-import { BsThreeDotsVertical } from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
 import * as styles from './BoardCard.styles';
 import Board from '../../../../../data/board/board';
 import { UserControllerContext } from '../../../contexts/UserController';
@@ -31,14 +31,20 @@ const BoardCard: React.FC<BoardData> = function(props) {
         history.push(`/board/${props.board.foldername}/${props.board.name}`);
     }
 
+    const onClickDelete = function(e: React.MouseEvent) {
+        e.preventDefault();
+        e.stopPropagation(); 
+        userController.deleteBoard(props.board);
+    }
+
     return(
         <styles.ListItem isFavorited={userController.isBoardStarred(props.board)} 
                          onClick={onClickBoard} style={{backgroundImage: `url('${props.board.backgroundImgUrl}')`, backgroundSize:'cover'}}>
             <styles.TitleContainer>
                 <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
 
-                <styles.FavoriteButton>
-                    <BsThreeDotsVertical/>
+                <styles.FavoriteButton onClick={onClickDelete}>
+                    <BsTrash/>
                 </styles.FavoriteButton>
 
             </styles.TitleContainer>

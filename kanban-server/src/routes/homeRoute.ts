@@ -64,32 +64,43 @@ homeRoute.put('/boards', function(req: express.Request, res: express.Response) {
     res.status(200).send(`Changed Folder name from <${prevFolderName}> to <${newFolderName}>.\nChanged Icon Url to <${newFolderIconUrl}>`);
 })
 
-homeRoute.delete('/folder/:folderName', function(req: express.Request, res: express.Response) { 
+homeRoute.delete('/folders/:folderName', function(req: express.Request, res: express.Response) { 
     const folderName = req.params.folderName;
     const folder = dataManager.user.folders.find(f => f.name === folderName);
     
-    console.log('Folder Name: ' + folderName);
     if(folder === undefined) {
         res.status(406).send("Folder Doesn't exist")
         return;
     }
 
     dataManager.user.folders = dataManager.user.folders.filter(f => f.name !== folderName);
+    dataManager.user.starredBoards = dataManager.user.starredBoards
+        .filter(st => folder.boards
+            .find(b => b.name === st.name && b.foldername === st.foldername) === undefined )
     res.status(200).send(`Folder <${folderName}> deleted.`)
 })
 
-homeRoute.delete('/boards/:boardName', function(req: express.Request, res: express.Response) { 
-    // const folderName = req.params.folderName;
-    // const folder = dataManager.user.folders.find(f => f.name === folderName);
-    
-    // console.log('Folder Name: ' + folderName);
-    // if(folder === undefined) {
-    //     res.status(406).send("Folder Doesn't exist")
-    //     return;
-    // }
+homeRoute.delete('/boards/:boardName/:folderName', function(req: express.Request, res: express.Response) { 
+    const folderName = req.params.folderName;
+    const boardName = req.params.boardName;
 
-    // dataManager.user.folders = dataManager.user.folders.filter(f => f.name !== folderName);
-    // res.status(200).send(`Folder <${folderName}> deleted.`)
+    const folder = dataManager.user.folders.find(f => f.name === folderName);
+    if(folder === undefined) {
+        res.status(406).send("Folder Doesn't exist")
+        return;
+    }
+
+    const board = folder.boards.find(b => b.name === boardName);
+    if(board === undefined) { 
+        res.status(406).send("Board Doesn't exist")
+        return;
+    }
+
+    folder.boards = folder.boards.filter(b => b.name !== boardName);
+    dataManager.user.starredBoards = dataManager.user.starredBoards
+        .filter(st => st.name !== board.name && st.foldername !== board.foldername);
+
+    res.status(200).send(`Board <${boardName}> from folder <${folderName}> deleted.`)
 })
 
 export default homeRoute;

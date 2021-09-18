@@ -68,7 +68,7 @@ export default class UserController {
     }
 
     public isBoardStarred(board: Board): boolean {
-        return this._user.starredBoards.filter(a => a.name === board.name).length > 0;
+        return this._user.starredBoards.filter(a => a.name === board.name && a.foldername === board.foldername).length > 0;
     }
 
     public toggleStarredBoard(board: Board): Board[] {
@@ -134,11 +134,41 @@ export default class UserController {
         eventsHandlers.invoke(FolderEvents.foldersChanged);
         if(hasStarredBoard) {
             this._user.starredBoards = this._user.starredBoards.
-                filter( b => starredBoards.find(st => st.name === b.name) === undefined )
+                filter( b => starredBoards
+                    .find(st => st.name === b.name && st.foldername === b.foldername) === undefined )
             eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
         }
 
         axios.delete(UrlManager.folders+`/${folderName}`).catch((e: AxiosError) => {
+            alert(e.response?.data);
+        });
+    }
+
+    public deleteBoard(boardToDelete: Board) 
+    {
+        const folderName = boardToDelete.foldername;
+        const boardName = boardToDelete.name;
+
+        const folder = this.getFolders().find(f => f.name === folderName);
+        if(folder === undefined)
+            return;
+
+        const board = folder.boards.find(b => b.name === boardName);
+        if(board === undefined)
+            return;
+
+        const idx = folder.boards.findIndex(b => b.name === boardName);
+        this._user.folders[idx].boards = this._user.folders[idx].boards.filter( b => b.name !== board.name);
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
+        
+        if(this.isBoardStarred(board))
+        {
+            this._user.starredBoards = this._user.starredBoards
+                .filter(st => st.name !== board.name &&  st.foldername !== board.foldername);
+            eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
+        }
+
+        axios.delete(UrlManager.boards+`/${boardName}/${folderName}`).catch((e: AxiosError) => {
             alert(e.response?.data);
         });
     }
