@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AiOutlineStar } from 'react-icons/ai';
-import { BsTrash } from 'react-icons/bs';
+import { MdDeleteForever } from 'react-icons/md';
 import * as styles from './BoardCard.styles';
 import Board from '../../../../../data/board/board';
 import { UserControllerContext } from '../../../contexts/UserController';
@@ -8,7 +8,6 @@ import { LocalizerContext } from '../../../contexts/Localizer';
 import { useHistory } from 'react-router-dom';
 import SelectedBoardContext from '../../../contexts/SelectedBoard';
 import Palette from '../../../common/colorpalette';
-import { withTheme } from 'styled-components';
 
 export interface BoardData{
     board: Board;
@@ -46,7 +45,7 @@ const BoardCard: React.FC<BoardData> = function(props) {
                 <styles.LabelFont weight="bold" size="18px">{props.board.name}</styles.LabelFont>
 
                 <styles.BoardCardBtn onClick={onClickDelete} fillColor={Palette.text} dfColor={'white'}>
-                    <BsTrash/>
+                    <MdDeleteForever/>
                 </styles.BoardCardBtn>
 
             </styles.TitleContainer>
