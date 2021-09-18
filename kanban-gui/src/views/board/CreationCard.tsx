@@ -10,6 +10,11 @@ const CreationCard: React.FC = function(props)
     const textArea = useRef<HTMLTextAreaElement>(null);
     const localizer = useContext(LocalizerContext);
     
+    function onClickAdd(e: React.MouseEvent) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
     useEffect(() => {
         textArea.current?.focus();
         if(textArea.current !== null){
@@ -29,7 +34,7 @@ const CreationCard: React.FC = function(props)
                 </CardCreator>
             </ListCard>
             <st.ButtonsContainer>
-                <st.AddListBtn >
+                <st.AddListBtn onClick={onClickAdd}>
                     {localizer.getTextById(localizer.texts.btn_add_card)}
                 </st.AddListBtn>
                 <st.CancelButton>
