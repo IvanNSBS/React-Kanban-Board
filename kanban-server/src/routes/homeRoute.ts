@@ -55,7 +55,6 @@ homeRoute.put('/boards', function(req: express.Request, res: express.Response) {
 
     const folder = dataManager.user.folders.find(f => f.name === prevFolderName);
     if(folder === undefined) {
-        console.log("Folder doesn't exist...")
         res.status(406).send("Folder Doesn't exist")
         return;
     }
@@ -63,6 +62,20 @@ homeRoute.put('/boards', function(req: express.Request, res: express.Response) {
     folder.name = newFolderName;
     folder.iconUrl = newFolderIconUrl;
     res.status(200).send(`Changed Folder name from <${prevFolderName}> to <${newFolderName}>.\nChanged Icon Url to <${newFolderIconUrl}>`);
+})
+
+homeRoute.delete('/boards/:folderName', function(req: express.Request, res: express.Response) { 
+    const folderName = req.params.folderName;
+    const folder = dataManager.user.folders.find(f => f.name === folderName);
+    
+    console.log('Folder Name: ' + folderName);
+    if(folder === undefined) {
+        res.status(406).send("Folder Doesn't exist")
+        return;
+    }
+
+    dataManager.user.folders = dataManager.user.folders.filter(f => f.name !== folderName);
+    res.status(200).send(`Folder <${folderName}> deleted.`)
 })
 
 export default homeRoute;

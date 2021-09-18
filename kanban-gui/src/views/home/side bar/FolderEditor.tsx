@@ -7,6 +7,7 @@ interface Editor {
     name: string;
     iconUrl?: string;
     finish(newName: string, newIconUrl?: string): void;
+    delete(): void;
     cancel(): void;
 }
 
@@ -28,6 +29,11 @@ const FolderEditor: React.FC<Editor> = function(props)
     {
         e.preventDefault();
         props.finish(name, iconUrl);
+    }
+
+    function tryDelete() {
+        if(confirm(localizer.getTextById(localizer.texts.txt_confirm_delete)))
+            props.delete();
     }
 
     return(
@@ -54,7 +60,7 @@ const FolderEditor: React.FC<Editor> = function(props)
                     </st.CancelBtn>
                 </st.ButtonsWrapper>
 
-                <st.DeleteBtn type='button'>
+                <st.DeleteBtn type='button' onClick={props.delete}>
                     {localizer.getTextById(localizer.texts.btn_txt_delete)}
                 </st.DeleteBtn>
             </st.ButtonsWrapper>

@@ -28,6 +28,10 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
     const cancelEdit = function() {
         setIsEditing(false);
     }
+    
+    const deleteFolder = function() {
+        userController.deleteFolder(props.name);
+    }
 
     if(!isEditing)
         return(
@@ -65,6 +69,7 @@ const FolderSideBar: React.FC<{name: string, iconUrl?: string}> = function(props
         <FolderEditor name={props.name} 
                       iconUrl={props.iconUrl} 
                       finish={finishEdit}
+                      delete={deleteFolder}
                       cancel={cancelEdit}>
         </FolderEditor> 
     );

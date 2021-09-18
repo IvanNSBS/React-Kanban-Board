@@ -25,7 +25,8 @@ const Texts = {
     input_add_new_list: 'input_add_new_list',
     input_ph_insert_list_title: 'input_ph_insert_list_title',
     btn_add_card: 'btn_add_card',
-    input_ph_insert_card_title: 'input_ph_insert_card_title'
+    input_ph_insert_card_title: 'input_ph_insert_card_title',
+    txt_confirm_delete: 'txt_confirm_delete'
 }
 
 const Localization: Record<string, Record<string, string>> = 
@@ -117,6 +118,10 @@ const Localization: Record<string, Record<string, string>> =
     'input_ph_insert_card_title': {
         'ptBr': 'Insira um título para o cartão...',
         'enUs': 'Insert a title for the cartd...'
+    },
+    'txt_confirm_delete': {
+        'ptBr': 'Você tem certeza de que quer deletar este elemento?',
+        'enUs': 'Are you sure you want to delete this element?'
     }
 };
 

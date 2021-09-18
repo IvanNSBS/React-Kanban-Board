@@ -122,10 +122,23 @@ export default class UserController {
     }
 
     public deleteFolder(folderName: string){
-        const folderIdx = this.getFolders().findIndex(f => f.name === folderName);
-        if(folderIdx === -1)
+        const folder = this.getFolders().find(f => f.name === folderName);
+        if(folder === undefined)
             return;
 
-        // axios.delete(UrlManager.boards+`/${folderIdx}`);
+        const starredBoards = folder.boards.filter( b => this.isBoardStarred(b) ); 
+        const hasStarredBoard = starredBoards.length > 0;
+        this._user.folders = this._user.folders.filter(f => f.name !== folderName);
+        
+        eventsHandlers.invoke(FolderEvents.foldersChanged);
+        if(hasStarredBoard) {
+            this._user.starredBoards = this._user.starredBoards.
+                filter( b => starredBoards.find(st => st.name === b.name) === undefined )
+            eventsHandlers.invoke(FolderEvents.starredBoardsChanged);
+        }
+
+        axios.delete(UrlManager.boards+`/${folderName}`).catch((e: AxiosError) => {
+            alert(e.response?.data);
+        });
     }
 }
