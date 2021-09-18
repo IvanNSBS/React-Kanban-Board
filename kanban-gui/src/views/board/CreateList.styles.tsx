@@ -70,7 +70,7 @@ const ListNameInput = styled.textarea`
     border: 2px solid ${Palette.boardCard};
     border-radius: 4px;
     height: 30px;
-    padding: 1px 8px;
+    padding: 4px 8px;
 
     resize: none;
     font-family: Arial, Helvetica, sans-serif;

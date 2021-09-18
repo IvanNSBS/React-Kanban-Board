@@ -37,13 +37,10 @@ const CreateList: React.FC<ActivateCreate> = function(props)
     }
 
     useEffect(() => {
-        if(textArea.current !== null)
+        if(textArea.current !== null && name !== "")
         {
-            if(name !== "")
-            {
-                textArea.current.style.height = 'auto';
-                textArea.current.style.height = textArea.current.scrollHeight + 'px';
-            }
+            textArea.current.style.height = 'auto';
+            textArea.current.style.height = textArea.current.scrollHeight + 'px';
         }
     }, [name])
 
