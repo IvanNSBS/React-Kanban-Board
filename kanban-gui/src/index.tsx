@@ -9,6 +9,7 @@ import BackgroundStyle from './global styles/GlobalBody.style'
 import { LocalizerContext, localizer} from './contexts/Localizer'
 import SelectedBoardContext from './contexts/SelectedBoard';
 import SelectedBoardController from './controllers/SelectedBoardController';
+import Board from '../../data/board/board';
 
 const homePath = "/";
 const boardViewPath = "/board/:folderName/:boardName";
@@ -22,7 +23,7 @@ const AppRouter: React.FC = function()
                 <BrowserRouter>
                     <Header/>
                     
-                    <SelectedBoardContext.Provider value={ new SelectedBoardController(null) }>
+                    <SelectedBoardContext.Provider value={ new SelectedBoardController(new Board('', '')) }>
                         <Switch>
                             <Route path={homePath} component={Home} exact/>
                             <Route path={boardViewPath} component={BoardScreen}/>

@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router";
-import Board from "../../../../data/board/board";
-import * as styles from './BoardScreen.styles';
-import SelectedBoardContext from "../../contexts/SelectedBoard";
 import { eventsHandlers } from "../../controllers/EventManager";
-import { BoardEvents } from "../../controllers/SelectedBoardController";
+import { UserControllerContext } from "../home/Home";
+
+import SelectedBoardController from "../../controllers/SelectedBoardController";
+import Board from "../../../../data/board/board";
+import SelectedBoardContext from "../../contexts/SelectedBoard";
 import CardList from "./CardList";
 import BoardHeader from "./BoardHeader";
 import CreateList from "./CreateList";
-import { UserControllerContext } from "../home/Home";
+import * as styles from './BoardScreen.styles';
 
 interface UrlParams {
     folderName: string;
@@ -21,6 +22,7 @@ const BoardScreen: React.FC = function()
     const [board, setBoard] = useState<Board | null>(null);
     const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const userController = useContext(UserControllerContext);
+
     const selectedBoardController = useContext(SelectedBoardContext);
     
     function onClickBackground() {
@@ -30,6 +32,8 @@ const BoardScreen: React.FC = function()
 
     function validateParamsAndSetBoard() 
     {
+        console.log("Folder Name: " + folderName);
+        console.log("Folders: " + JSON.stringify(userController.getFolders()));
         const folder = userController.getFolders().find(f => f.name == folderName);
         if(folder === undefined){
             console.log("Invalid folder name param")
@@ -47,42 +51,35 @@ const BoardScreen: React.FC = function()
 
     useEffect(() => {
         validateParamsAndSetBoard();
-        const updateSelected = function(){
-            const board = selectedBoardController.selectedBoard;
-            setBoard(board);
-        }
-        eventsHandlers.addSubscriber(BoardEvents.board_selected, updateSelected);
-        return(
-            eventsHandlers.removeSubscriber(BoardEvents.board_selected, updateSelected)
-        )
     }, [])
-
-
-    const cardsLists = selectedBoardController.selectedBoard?.cardsCollection.map((card, idx) => {
+    
+    if(board === null)
+        return <>Invalid URL</>
+    
+    const cardsLists = board.cardsCollection.map((card, idx) => {
         return(<CardList key={idx} name={card.name} index={idx}/>)
     })
 
-    if(board === null)
-        return <>Invalid URL</>
-
     return(
-        <styles.BoardBackground 
-            bgImgUrl={board?.backgroundImgUrl} 
-            onClick={onClickBackground}>
+        <SelectedBoardContext.Provider value={ new SelectedBoardController(board) }>
+            <styles.BoardBackground 
+                bgImgUrl={board?.backgroundImgUrl} 
+                onClick={onClickBackground}>
 
-            <BoardHeader board={board}/>
-            
-            <styles.BoardsAreaWrapper>
-                <styles.CardsContainer>
-                    {cardsLists}
-                    <CreateList 
-                                isActive={isCreatingFolder} 
-                                setIsActive={val => setIsCreatingFolder(val)}
-                                createList={val => selectedBoardController.addList(val)}>
-                    </CreateList>
-                </styles.CardsContainer>
-            </styles.BoardsAreaWrapper>
-        </styles.BoardBackground>
+                <BoardHeader board={board}/>
+                
+                <styles.BoardsAreaWrapper>
+                    <styles.CardsContainer>
+                        {cardsLists}
+                        <CreateList 
+                                    isActive={isCreatingFolder} 
+                                    setIsActive={val => setIsCreatingFolder(val)}
+                                    createList={val => selectedBoardController.addList(val)}>
+                        </CreateList>
+                    </styles.CardsContainer>
+                </styles.BoardsAreaWrapper>
+            </styles.BoardBackground>
+        </SelectedBoardContext.Provider>
     )
 } 
 

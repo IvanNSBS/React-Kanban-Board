@@ -12,9 +12,9 @@ export const BoardEvents = {
 
 export default class SelectedBoardController
 {
-    private _selectedBoard: Board | null;
+    private _selectedBoard: Board;
 
-    constructor(board: Board | null){
+    constructor(board: Board){
         this._selectedBoard = board;
         
         // axios.get(UrlManager.home).then(res => {
@@ -26,7 +26,7 @@ export default class SelectedBoardController
     }   
 
     public get selectedBoard() { return this._selectedBoard; }
-    public set selectedBoard(value: Board | null) { 
+    public set selectedBoard(value: Board) { 
         this._selectedBoard = value; 
         eventsHandlers.invoke(BoardEvents.board_selected);
     }
