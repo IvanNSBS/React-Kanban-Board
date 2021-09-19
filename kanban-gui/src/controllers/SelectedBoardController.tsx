@@ -138,5 +138,17 @@ export default class SelectedBoardController
 
         this.selectedBoard.cardsCollection[listIdx].cards = cardList.filter((c, idx) => idx !== cardIdx);
         eventsHandlers.invoke(BoardEvents.card_list_elements_changed);
+
+        const params = {
+            folderName: this.selectedBoard.foldername,
+            boardName: this.selectedBoard.name,
+            listIndex: listIdx,
+            cardIndex: cardIdx
+        }
+
+        axios.delete(UrlManager.postBoardCard + `/${JSON.stringify(params)}`)
+        .catch((e: AxiosError) => {
+            alert(e.response?.data)
+        })
     }
 }

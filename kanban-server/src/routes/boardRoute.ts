@@ -172,11 +172,11 @@ boardRoute.delete('/list/:listData', function (req: express.Request, res: expres
 
 
 boardRoute.delete('/list/card/:cardData', function (req: express.Request, res: express.Response) {
-    const cardData = JSON.parse(req.params.listData);
+    const cardData = JSON.parse(req.params.cardData);
     const folderName = cardData.folderName;
     const boardName  = cardData.boardName;
     const listIndex  = cardData.listIndex;
-    const cardIndex  = cardData.listIndex;
+    const cardIndex  = cardData.cardIndex;
 
     const board = validateBoard(folderName, boardName, res);
     if(board === undefined)
