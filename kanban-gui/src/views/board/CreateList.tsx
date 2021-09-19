@@ -3,11 +3,11 @@ import { LocalizerContext } from "../../contexts/Localizer";
 import { AddListBtn, CancelButton, ContentWrapper, InactiveText, ListNameInput, ActiveContentWrapper, ButtonsContainer } from "./CreateList.styles";
 import { GoPlus } from 'react-icons/go';
 import { VscChromeClose } from 'react-icons/vsc';
+import SelectedBoardContext from "../../contexts/SelectedBoard";
 
 interface ActivateCreate {
     isActive: boolean;
     setIsActive(val: boolean): void;
-    createList(name: string): void;
 }
 
 const CreateList: React.FC<ActivateCreate> = function(props) 
@@ -15,6 +15,7 @@ const CreateList: React.FC<ActivateCreate> = function(props)
     const textArea = useRef<HTMLTextAreaElement>(null);
     const [name, setName] = useState<string>("");
     const localizer = useContext(LocalizerContext);
+    const boardController = useContext(SelectedBoardContext);
 
     const inactiveText = localizer.getTextById(localizer.texts.input_add_new_list);
     const activeText = localizer.getTextById(localizer.texts.input_ph_insert_list_title);
@@ -31,7 +32,7 @@ const CreateList: React.FC<ActivateCreate> = function(props)
         if(name === "")
             return;
         
-        props.createList(name);
+        boardController.addList(name);
         setName("");
         props.setIsActive(false);
     }

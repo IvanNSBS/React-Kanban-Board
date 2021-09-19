@@ -57,8 +57,6 @@ export default class SelectedBoardController
         const newCard = new Card(cardTitle);
         this.selectedBoard.cardsCollection[cardListidx].cards = this.selectedBoard.cardsCollection[cardListidx].cards.concat(newCard);
 
-        console.log("Card Title: " + newCard.title)
-
         const params = {
             folderName: this.selectedBoard.foldername,
             boardName: this.selectedBoard.name,
@@ -120,8 +118,8 @@ export default class SelectedBoardController
             listIndex: listIdx,
         }
 
-        const newCardList = new CardsList('dereg');
-        this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.concat( newCardList );
+        this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.filter((c, idx) => idx !== listIdx);
+        console.log(this.selectedBoard.cardsCollection);
 
         axios.delete(UrlManager.postBoardList + `/${JSON.stringify(params)}`)
         .catch((e: AxiosError) => {

@@ -21,10 +21,13 @@ const CardListTitle: React.FC<CardListData> = function(props)
         props.changeName(name);
     }
 
-    function deleteCard() {
+    function deleteCard(e: React.MouseEvent) {
+        e.stopPropagation();
+        e.preventDefault();
+
         const deleteTxt = localizer.getTextById(texts.txt_confirm_delete);
         if(confirm(deleteTxt))
-            boardController.addList('props.index');
+            boardController.deleteList(0);
     }
 
     return(

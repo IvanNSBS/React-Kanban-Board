@@ -19,12 +19,14 @@ interface UrlParams {
 const BoardScreen: React.FC = function() 
 {
     const { folderName, boardName } = useParams<UrlParams>();
-    const [board, setBoard] = useState<Board | null>(null);
+    const [boardController, setBoardController] = useState<SelectedBoardController | null>(null);
     const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const userController = useContext(UserControllerContext);
-
-    const selectedBoardController = useContext(SelectedBoardContext);
     
+    useEffect(() => {
+        validateParamsAndSetBoard();
+    }, [])
+
     function onClickBackground() {
         setIsCreatingFolder(false);
         eventsHandlers.invoke("bg_click_board_screen");
@@ -43,36 +45,29 @@ const BoardScreen: React.FC = function()
             return;
         }
 
-        setBoard(foundBoard);
-        selectedBoardController.selectedBoard = foundBoard;
+        setBoardController(new SelectedBoardController(foundBoard));
     }
-
-    useEffect(() => {
-        validateParamsAndSetBoard();
-    }, [])
     
-    if(board === null)
+    if(boardController === null)
         return <>Invalid URL</>
-    
-    const cardsLists = board.cardsCollection.map((card, idx) => {
-        return(<CardList key={idx} name={card.name} index={idx}/>)
+
+    const cardsLists = boardController.selectedBoard.cardsCollection.map((card, idx) => {
+        return(<CardList key={card.name} name={card.name} index={idx}/>)
     })
 
     return(
-        <SelectedBoardContext.Provider value={ new SelectedBoardController(board) }>
+        <SelectedBoardContext.Provider value={ boardController }>
             <styles.BoardBackground 
-                bgImgUrl={board?.backgroundImgUrl} 
+                bgImgUrl={boardController.selectedBoard?.backgroundImgUrl} 
                 onClick={onClickBackground}>
-
-                <BoardHeader board={board}/>
                 
+                <BoardHeader board={boardController.selectedBoard}/>
                 <styles.BoardsAreaWrapper>
                     <styles.CardsContainer>
                         {cardsLists}
                         <CreateList 
                                     isActive={isCreatingFolder} 
-                                    setIsActive={val => setIsCreatingFolder(val)}
-                                    createList={val => selectedBoardController.addList(val)}>
+                                    setIsActive={val => setIsCreatingFolder(val)}>
                         </CreateList>
                     </styles.CardsContainer>
                 </styles.BoardsAreaWrapper>

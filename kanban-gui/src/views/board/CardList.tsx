@@ -6,6 +6,7 @@ import Card from './Card';
 import CreationCard from "./CreationCard";
 import CardListTitle from "./CardListTitle";
 import SelectedBoardContext from "../../contexts/SelectedBoard";
+import SelectedBoardController from "../../controllers/SelectedBoardController";
 
 interface CardListData {
     index: number;

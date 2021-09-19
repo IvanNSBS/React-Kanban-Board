@@ -18,7 +18,7 @@ const LoadingScreen: React.FC<Load> = function({onLoadComplete})
 
     useEffect(() => {
         async function fetchUser() {
-            await new Promise(r => setTimeout(r, 2000));
+            await new Promise(r => setTimeout(r, 200));
             await axios.get(UrlManager.user)
             .then(res => {
                 const user: User = res.data as User;
