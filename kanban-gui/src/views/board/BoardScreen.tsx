@@ -10,6 +10,7 @@ import CardList from "./CardList";
 import BoardHeader from "./BoardHeader";
 import CreateList from "./CreateList";
 import * as styles from './BoardScreen.styles';
+import CardsList from "../../../../data/board/cardList";
 
 interface UrlParams {
     folderName: string;
@@ -20,6 +21,7 @@ const BoardScreen: React.FC = function()
 {
     const { folderName, boardName } = useParams<UrlParams>();
     const [boardController, setBoardController] = useState<SelectedBoardController | null>(null);
+    const [cardLists, setCardLists] = useState<CardsList[]>([]);
     const [isCreatingFolder, setIsCreatingFolder] = useState<boolean>(false);
     const userController = useContext(UserControllerContext);
     
@@ -27,10 +29,24 @@ const BoardScreen: React.FC = function()
         validateParamsAndSetBoard();
     }, [])
 
+    useEffect(() => {
+        tryUpdateCards();
+        eventsHandlers.addSubscriber('cards_lists_changed', tryUpdateCards);
+
+        return () => eventsHandlers.removeSubscriber('cards_lists_changed', tryUpdateCards)
+        
+    }, [boardController])
+
     function onClickBackground() {
         setIsCreatingFolder(false);
         eventsHandlers.invoke("bg_click_board_screen");
     }
+
+    const tryUpdateCards = () => {
+        if(boardController !== null) {
+            setCardLists(boardController.selectedBoard.cardsCollection)
+        }
+    };
 
     function validateParamsAndSetBoard() 
     {
@@ -51,7 +67,7 @@ const BoardScreen: React.FC = function()
     if(boardController === null)
         return <>Invalid URL</>
 
-    const cardsLists = boardController.selectedBoard.cardsCollection.map((card, idx) => {
+    const cardsRender = cardLists.map((card, idx) => {
         return(<CardList key={card.name+{idx}} cardList={card} index={idx}/>)
     })
 
@@ -64,7 +80,7 @@ const BoardScreen: React.FC = function()
                 <BoardHeader board={boardController.selectedBoard}/>
                 <styles.BoardsAreaWrapper>
                     <styles.CardsContainer>
-                        {cardsLists}
+                        {cardsRender}
                         <CreateList 
                                     isActive={isCreatingFolder} 
                                     setIsActive={val => setIsCreatingFolder(val)}>

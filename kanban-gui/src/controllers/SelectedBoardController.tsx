@@ -15,6 +15,7 @@ export default class SelectedBoardController
 
     constructor(board: Board) {
         this._selectedBoard = board;
+        eventsHandlers.invoke('cards_lists_changed');
     }   
 
     public get selectedBoard() { return this._selectedBoard; }
@@ -26,6 +27,7 @@ export default class SelectedBoardController
 
         const newCardList = new CardsList(title);
         this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.concat( newCardList );
+        eventsHandlers.invoke('cards_lists_changed');
 
         const params = {
             folderName: this.selectedBoard.foldername,
@@ -106,6 +108,7 @@ export default class SelectedBoardController
     public deleteList(listIdx: number) 
     {
         this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.filter((c, idx) => idx !== listIdx);
+        eventsHandlers.invoke('cards_lists_changed');
 
         const params = {
             folderName: this.selectedBoard.foldername,

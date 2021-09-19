@@ -10,7 +10,8 @@ class EventHandlers
         if(!this._events.has(eventId))
             this._events.set(eventId, []);
         
-        this._events.get(eventId)?.push(callBack);
+        if(this._events.get(eventId)?.filter(c => c === callBack).length == 0)
+            this._events.get(eventId)?.push(callBack);
     }
 
     public removeSubscriber(eventId: string, callBack: Function) {
