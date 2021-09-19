@@ -6,7 +6,8 @@ import CardsList from "../../../data/board/cardList";
 import Card from "../../../data/cards/card";
 
 export const BoardEvents = {
-    board_selected: 'board_selected'
+    board_selected: 'board_selected',
+    card_list_elements_changed: 'card_list_elements_changed'
 }
 
 export default class SelectedBoardController
@@ -54,6 +55,7 @@ export default class SelectedBoardController
 
         const newCard = new Card(cardTitle);
         this.selectedBoard.cardsCollection[cardListidx].cards = this.selectedBoard.cardsCollection[cardListidx].cards.concat(newCard);
+        eventsHandlers.invoke(BoardEvents.card_list_elements_changed);
 
         const params = {
             folderName: this.selectedBoard.foldername,
@@ -107,6 +109,9 @@ export default class SelectedBoardController
 
     public deleteList(listIdx: number) 
     {
+        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
+            return;
+
         this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.filter((c, idx) => idx !== listIdx);
         eventsHandlers.invoke('cards_lists_changed');
 
@@ -122,7 +127,16 @@ export default class SelectedBoardController
         })
     }
 
-    public deleteCard(listIdx: number, cardIdx: number) {
+    public deleteCard(listIdx: number, cardIdx: number) 
+    {
+        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
+            return;
 
+        const cardList = this.selectedBoard.cardsCollection[listIdx].cards;
+        if(cardIdx < 0 || cardIdx >= cardList.length)
+            return;
+
+        this.selectedBoard.cardsCollection[listIdx].cards = cardList.filter((c, idx) => idx !== cardIdx);
+        eventsHandlers.invoke(BoardEvents.card_list_elements_changed);
     }
 }

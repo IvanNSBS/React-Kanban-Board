@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import * as styles from './CardList.styles';
 import { LocalizerContext } from "../../contexts/Localizer";
 import { eventsHandlers } from "../../controllers/EventManager";
+import { BoardEvents } from "../../controllers/SelectedBoardController";
 import Card from './Card';
 import CreationCard from "./CreationCard";
 import CardListTitle from "./CardListTitle";
-import SelectedBoardContext from "../../contexts/SelectedBoard";
-import SelectedBoardController from "../../controllers/SelectedBoardController";
 import CardsList from "../../../../data/board/cardList";
+import SelectedBoardContext from "../../contexts/SelectedBoard";
 
 interface CardListData {
     index: number;
@@ -17,21 +17,31 @@ interface CardListData {
 const CardList: React.FC<CardListData> = function(props) 
 {
     const localizer = useContext(LocalizerContext);
+    const boardController = useContext(SelectedBoardContext);
     const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [cardList, setCardList] = useState(props.cardList.cards);
 
     useEffect(() => {
         const disableCreating = () => setIsCreating(false);
-
+        const updateCardList = () => setCardList(boardController.selectedBoard.cardsCollection[props.index].cards)
         eventsHandlers.addSubscriber('bg_click_board_screen', disableCreating);
+        eventsHandlers.addSubscriber(BoardEvents.card_list_elements_changed, updateCardList);
 
-        return(
+        return () => {
             eventsHandlers.removeSubscriber('bg_click_board_screen', disableCreating)
-        )
+            eventsHandlers.removeSubscriber(BoardEvents.card_list_elements_changed, updateCardList)
+        }
     }, [])
 
-    const listSize = props.cardList.cards.length;
-    const allCards = props.cardList.cards.map((card, idx) => {
-        return <Card key={idx} isLast={idx===listSize} title={card.title}></Card>
+    const listSize = cardList.length;
+    const allCards = cardList.map((card, idx) => {
+        return (
+            <Card key={idx} 
+                  isLast={idx===listSize-1 && !isCreating} 
+                  title={card.title} 
+                  delete={() => boardController.deleteCard(props.index, idx)}>
+            </Card>
+        )
     })
 
     return(

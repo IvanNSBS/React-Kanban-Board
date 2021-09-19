@@ -10,12 +10,18 @@ const Label: React.FC = function() {
     )
 }
 
-const Card: React.FC<{isLast?: boolean, title: string}> = function(props) 
+interface Card {
+    title: string;
+    isLast?: boolean;
+    delete(): void;
+}
+
+const Card: React.FC<Card> = function(props) 
 {
     return(
         <ListCard isLast={props.isLast}>
             <ContentWrapper>
-                <EditButton>
+                <EditButton onClick={props.delete}>
                     <FiTrash/>
                 </EditButton>
                 <Label/>
