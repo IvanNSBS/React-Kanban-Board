@@ -18,10 +18,6 @@ export default class SelectedBoardController
     }   
 
     public get selectedBoard() { return this._selectedBoard; }
-    public set selectedBoard(value: Board) { 
-        this._selectedBoard = value; 
-        eventsHandlers.invoke(BoardEvents.board_selected);
-    }
 
     public addList(title: string) 
     {
@@ -109,17 +105,13 @@ export default class SelectedBoardController
 
     public deleteList(listIdx: number) 
     {
-        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
-            return;
+        this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.filter((c, idx) => idx !== listIdx);
 
         const params = {
             folderName: this.selectedBoard.foldername,
             boardName: this.selectedBoard.name,
             listIndex: listIdx,
         }
-
-        this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.filter((c, idx) => idx !== listIdx);
-        console.log(this.selectedBoard.cardsCollection);
 
         axios.delete(UrlManager.postBoardList + `/${JSON.stringify(params)}`)
         .catch((e: AxiosError) => {

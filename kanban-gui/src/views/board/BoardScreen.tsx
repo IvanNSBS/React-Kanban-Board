@@ -52,7 +52,7 @@ const BoardScreen: React.FC = function()
         return <>Invalid URL</>
 
     const cardsLists = boardController.selectedBoard.cardsCollection.map((card, idx) => {
-        return(<CardList key={card.name} name={card.name} index={idx}/>)
+        return(<CardList key={card.name+{idx}} cardList={card} index={idx}/>)
     })
 
     return(

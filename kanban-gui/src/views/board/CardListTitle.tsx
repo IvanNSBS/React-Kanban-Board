@@ -7,7 +7,6 @@ import SelectedBoardContext from "../../contexts/SelectedBoard";
 interface CardListData {
     name: string;
     index: number;
-    changeName(newName: string): void;
 }
 
 const CardListTitle: React.FC<CardListData> = function(props) 
@@ -18,7 +17,7 @@ const CardListTitle: React.FC<CardListData> = function(props)
 
     function onStopEditing() {
         titleInput.current?.blur();
-        props.changeName(name);
+        boardController.changeListTitle(props.index, name);
     }
 
     function deleteCard(e: React.MouseEvent) {
@@ -27,7 +26,7 @@ const CardListTitle: React.FC<CardListData> = function(props)
 
         const deleteTxt = localizer.getTextById(texts.txt_confirm_delete);
         if(confirm(deleteTxt))
-            boardController.deleteList(0);
+            boardController.deleteList(props.index);
     }
 
     return(

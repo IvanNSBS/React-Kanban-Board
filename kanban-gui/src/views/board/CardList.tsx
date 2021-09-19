@@ -7,15 +7,15 @@ import CreationCard from "./CreationCard";
 import CardListTitle from "./CardListTitle";
 import SelectedBoardContext from "../../contexts/SelectedBoard";
 import SelectedBoardController from "../../controllers/SelectedBoardController";
+import CardsList from "../../../../data/board/cardList";
 
 interface CardListData {
     index: number;
-    name: string;
+    cardList: CardsList;
 }
 
 const CardList: React.FC<CardListData> = function(props) 
 {
-    const selectedBoardController = useContext(SelectedBoardContext);
     const localizer = useContext(LocalizerContext);
     const [isCreating, setIsCreating] = useState<boolean>(false);
 
@@ -29,9 +29,8 @@ const CardList: React.FC<CardListData> = function(props)
         )
     }, [])
 
-    const listSize = selectedBoardController.selectedBoard?.cardsCollection[props.index].cards.length;
-    const allCards = selectedBoardController.selectedBoard
-                     ?.cardsCollection[props.index].cards.map((card, idx) => {
+    const listSize = props.cardList.cards.length;
+    const allCards = props.cardList.cards.map((card, idx) => {
         return <Card key={idx} isLast={idx===listSize} title={card.title}></Card>
     })
 
@@ -39,9 +38,8 @@ const CardList: React.FC<CardListData> = function(props)
         <styles.ListWrapper>
             <styles.ListContent>
                 
-                <CardListTitle name={props.name} 
-                               index={props.index}
-                               changeName={val => selectedBoardController.changeListTitle(props.index, val)}>
+                <CardListTitle name={props.cardList.name} 
+                               index={props.index}>
                 </CardListTitle>
 
                 <styles.CardsContainer>

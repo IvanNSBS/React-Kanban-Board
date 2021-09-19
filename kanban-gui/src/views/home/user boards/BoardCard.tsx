@@ -28,7 +28,6 @@ const BoardCard: React.FC<BoardData> = function(props) {
     }
 
     const onClickBoard = function() {
-        selectedBoard.selectedBoard = props.board;
         history.push(`/board/${props.board.foldername}/${props.board.name}`);
     }
 
