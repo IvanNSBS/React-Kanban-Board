@@ -32,8 +32,6 @@ const BoardScreen: React.FC = function()
 
     function validateParamsAndSetBoard() 
     {
-        console.log("Folder Name: " + folderName);
-        console.log("Folders: " + JSON.stringify(userController.getFolders()));
         const folder = userController.getFolders().find(f => f.name == folderName);
         if(folder === undefined){
             console.log("Invalid folder name param")

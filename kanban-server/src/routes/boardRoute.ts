@@ -24,6 +24,31 @@ function findBoard(folderName: string, boardName: string): Board | undefined {
     return dataManager.user.folders.find(f => f.name === folderName)?.boards.find(b => b.name === boardName); 
 }
 
+function validateBoard(folderName: string, boardName: string, res: express.Response): Board | undefined {
+    const folder = dataManager.user.folders.find(f => f.name === folderName);
+    if(folder === undefined) {
+        res.status(406).send("Folder Doesn't Exist");
+        return undefined;
+    }
+
+    let board = folder.boards.find(b => b.name === boardName);
+    if(board === undefined){
+        res.status(406).send("Board Doesn't Exist");
+        return undefined;
+    }
+
+    return board;
+}
+
+function validateList(board: Board, index: number, res: express.Response) : CardsList | undefined {
+    if(index < 0 || index >= board.cardsCollection.length){
+        res.status(406).send("Invalid Card List Index");
+        return undefined;
+    }
+
+    return board.cardsCollection[index];
+}
+
 boardRoute.get('/:name/:boardName', function (req: express.Request, res: express.Response) {
     const folderName = req.params.name;
     const boardName = req.params.boardName;
@@ -126,5 +151,49 @@ boardRoute.put('/list/name', function (req: express.Request, res: express.Respon
 boardRoute.put('/list/card/name', function (req: express.Request, res: express.Response) {
     
 });
+
+boardRoute.delete('/list/:listData', function (req: express.Request, res: express.Response) {
+    const listData = JSON.parse(req.params.listData);
+    const folderName = listData.folderName;
+    const boardName = listData.boardName;
+    const listIndex = listData.listIndex;
+
+    const board = validateBoard(folderName, boardName, res);
+    if(board === undefined)
+        return;
+
+    const cardsCollection = validateList(board, listIndex, res);
+    if(cardsCollection === undefined)
+        return;
+
+    board.cardsCollection.splice(listIndex, 1);
+    res.status(200).send(`Deleted card with index <${listIndex}> on board <{${boardName}}> at folder <${folderName}>`);
+});
+
+
+boardRoute.delete('/list/card/:cardData', function (req: express.Request, res: express.Response) {
+    const cardData = JSON.parse(req.params.listData);
+    const folderName = cardData.folderName;
+    const boardName  = cardData.boardName;
+    const listIndex  = cardData.listIndex;
+    const cardIndex  = cardData.listIndex;
+
+    const board = validateBoard(folderName, boardName, res);
+    if(board === undefined)
+        return;
+
+    const cardsCollection = validateList(board, listIndex, res);
+    if(cardsCollection === undefined)
+        return;
+    
+    if(cardIndex < 0 || cardIndex >= cardsCollection.cards.length){
+        res.status(406).send("Invalid Card Index");
+        return;
+    }
+
+    cardsCollection.cards.splice(cardIndex, 1);
+    res.status(200).send(`Deleted card with index <${listIndex}> on board <{${boardName}}> at folder <${folderName}>`);
+});
+
 
 export default boardRoute;

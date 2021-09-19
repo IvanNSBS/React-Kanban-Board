@@ -24,7 +24,7 @@ const CardListTitle: React.FC<CardListData> = function(props)
     function deleteCard() {
         const deleteTxt = localizer.getTextById(texts.txt_confirm_delete);
         if(confirm(deleteTxt))
-            boardController.deleteList(props.index);
+            boardController.addList('props.index');
     }
 
     return(
@@ -36,7 +36,7 @@ const CardListTitle: React.FC<CardListData> = function(props)
                     onChange={e => setName(e.target.value)}
                     onBlur={onStopEditing}>
                 </CardTitleInput>
-                <button type='button'>
+                <button type='button' onClick={deleteCard}>
                     <FaTrash/>
                 </button>
             </ListHeader>

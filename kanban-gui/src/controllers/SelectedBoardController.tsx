@@ -36,8 +36,7 @@ export default class SelectedBoardController
             boardName: this.selectedBoard.name,
             listName: title
         }
-        axios.post(UrlManager.postBoardList, params).then(res => {
-        })
+        axios.post(UrlManager.postBoardList, params)
         .catch(e => {
             alert(e);
         })
@@ -104,17 +103,33 @@ export default class SelectedBoardController
         
         this.selectedBoard.name = newName;
         axios.put(UrlManager.putBoardTitle, params).catch((e:AxiosError) => alert(e.response?.data));
-    }
+}
 
     public moveCard(currentListIdx: number, newListIdx: number, newPosIdx: number) {
 
     }
 
-    public deleteList(listIdx: number) {
+    public deleteList(listIdx: number) 
+    {
+        if(listIdx < 0 || listIdx >= this.selectedBoard.cardsCollection.length)
+            return;
 
+        const params = {
+            folderName: this.selectedBoard.foldername,
+            boardName: this.selectedBoard.name,
+            listIndex: listIdx,
+        }
+
+        const newCardList = new CardsList('dereg');
+        this.selectedBoard.cardsCollection = this.selectedBoard.cardsCollection.concat( newCardList );
+
+        axios.delete(UrlManager.postBoardList + `/${JSON.stringify(params)}`)
+        .catch((e: AxiosError) => {
+            alert(e.response?.data)
+        })
     }
 
     public deleteCard(listIdx: number, cardIdx: number) {
-        
+
     }
 }
