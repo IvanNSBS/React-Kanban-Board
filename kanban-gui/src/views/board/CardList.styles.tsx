@@ -58,6 +58,11 @@ const ListHeader = styled.div`
             transition: 0.2s ease-in-out;
             background-color: #00000018;
         }
+
+        &:active { 
+            transition: 0.1s ease-in-out;
+            background-color: #00000040;
+        }
     }
 
     &:hover button {
