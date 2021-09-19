@@ -41,18 +41,28 @@ const ListHeader = styled.div`
         min-width: 32px;
         min-height: 32px;
         border-radius: 4px;
-        background-color: transparent;
 
         display: flex;
         align-items: center;
         align-content: center;
         justify-content:center;
 
+        opacity: 0;
+        transition: 0.2s ease-in-out;
+        fill: transparent;
+        background-color: transparent;
+
         &:hover {
-            cursor: pointer;
             opacity: 1;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
             background-color: #00000018;
         }
+    }
+
+    &:hover button {
+        opacity: 1;
+        transition: 0.15s ease-in-out;
     }
 `
 

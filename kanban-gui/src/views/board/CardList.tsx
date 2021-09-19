@@ -39,6 +39,7 @@ const CardList: React.FC<CardListData> = function(props)
             <styles.ListContent>
                 
                 <CardListTitle name={props.name} 
+                               index={props.index}
                                changeName={val => selectedBoardController.changeListTitle(props.index, val)}>
                 </CardListTitle>
 

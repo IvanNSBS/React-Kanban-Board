@@ -30,4 +30,4 @@ class Localizer{
 const localizer = new Localizer();
 const LocalizerContext = createContext(localizer);
 
-export { LocalizerContext, localizer};
+export { LocalizerContext, localizer, Texts as texts};

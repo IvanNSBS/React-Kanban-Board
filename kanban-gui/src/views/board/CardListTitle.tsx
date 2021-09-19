@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { CardTitleInput, ListHeader } from "./CardList.styles";
-import { BsThreeDots } from 'react-icons/bs'
+import { FaTrash } from 'react-icons/fa'
+import { localizer, texts } from "../../contexts/Localizer";
+import SelectedBoardContext from "../../contexts/SelectedBoard";
 
 interface CardListData {
     name: string;
+    index: number;
     changeName(newName: string): void;
 }
 
@@ -11,10 +14,17 @@ const CardListTitle: React.FC<CardListData> = function(props)
 {
     const titleInput = useRef<HTMLInputElement>(null);
     const [name, setName] = useState<string>(props.name);
-    
+    const boardController = useContext(SelectedBoardContext);
+
     function onStopEditing() {
         titleInput.current?.blur();
         props.changeName(name);
+    }
+
+    function deleteCard() {
+        const deleteTxt = localizer.getTextById(texts.txt_confirm_delete);
+        if(confirm(deleteTxt))
+            boardController.deleteList(props.index);
     }
 
     return(
@@ -26,7 +36,9 @@ const CardListTitle: React.FC<CardListData> = function(props)
                     onChange={e => setName(e.target.value)}
                     onBlur={onStopEditing}>
                 </CardTitleInput>
-                <button type='button'><BsThreeDots/></button>
+                <button type='button'>
+                    <FaTrash/>
+                </button>
             </ListHeader>
         </form>
     );

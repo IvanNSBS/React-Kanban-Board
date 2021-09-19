@@ -109,4 +109,12 @@ export default class SelectedBoardController
     public moveCard(currentListIdx: number, newListIdx: number, newPosIdx: number) {
 
     }
+
+    public deleteList(listIdx: number) {
+
+    }
+
+    public deleteCard(listIdx: number, cardIdx: number) {
+        
+    }
 }
