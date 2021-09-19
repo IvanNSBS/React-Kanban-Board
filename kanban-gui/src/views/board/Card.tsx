@@ -1,5 +1,6 @@
 import React from "react";
-import { CardText, ContentWrapper, LabelWrapper, ListCard } from "./Card.styles";
+import { CardText, ContentWrapper, LabelWrapper, ListCard, EditButton } from "./Card.styles";
+import { FiTrash } from 'react-icons/fi';
 
 const Label: React.FC = function() {
     return(
@@ -13,8 +14,10 @@ const Card: React.FC<{isLast?: boolean, title: string}> = function(props)
 {
     return(
         <ListCard isLast={props.isLast}>
-            {/* <div>Edit</div> */}
             <ContentWrapper>
+                <EditButton>
+                    <FiTrash/>
+                </EditButton>
                 <Label/>
                 <CardText>
                     {props.title}

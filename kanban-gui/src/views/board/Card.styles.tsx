@@ -50,6 +50,16 @@ const CardCreator = styled.textarea`
 const ContentWrapper = styled.div`
     padding: 6px 8px 2px;
     overflow: hidden;
+
+    & button svg {
+        color: transparent;
+        transition: 0.1s ease-out;
+    }
+
+    &:hover button svg {
+        color: ${Palette.cardTextCol};
+        transition: 0.1s ease-out;
+    }
 `
 
 const LabelWrapper = styled.div`
@@ -93,4 +103,41 @@ const CardText = styled.span`
     user-select: none;
 `
 
-export { ListCard, CardCreator, ContentWrapper, LabelWrapper, CardText }
+const EditButton = styled.button`
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    z-index: 5;
+    background-color: transparent;
+    border-radius: 3px;
+
+    border: 0;
+    margin: 0;
+    opacity: 0.7;
+
+    top: 3px;
+    right: 3px;
+
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.85;
+        filter: brightness(0.9);
+        background-color: ${Palette.cardListBg};
+        transition: 0.1s ease-out;
+    }
+
+    &:active {
+        opacity: 1;
+        filter: brightness(0.8);
+        transition: 0.1s ease-out;
+        background-color: ${Palette.cardListBg};
+    }
+
+    & svg {
+        margin: 0;
+        border: 0;
+    }
+`
+
+export { ListCard, CardCreator, ContentWrapper, LabelWrapper, CardText, EditButton }

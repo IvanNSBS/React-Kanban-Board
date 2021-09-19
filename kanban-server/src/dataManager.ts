@@ -3,6 +3,7 @@ import BoardsFolder from '../../data/account/boardsFolder';
 import Board from '../../data/board/board';
 import user_actions_status from '../../data/request_statuses/user_statuses'
 import CardsList from '../../data/board/cardList';
+import Card from '../../data/cards/card';
 
 class DataManager {
     private _user: User;
@@ -12,6 +13,9 @@ class DataManager {
         const serverFolder = new BoardsFolder('Server Folder', 'https://t.ctcdn.com.br/3iFzcXuWD-pKeFYpp7AXgRoOYrE=/512x288/smart/i320336.jpeg');
         const board = new Board('Server Folder Board', serverFolder.name, 
         'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/16a027a140eec15f3d668010445fc62e/photo-1534631528984-63174ca557d0.jpg')
+
+        board.cardsCollection.push(new CardsList('Test'))
+        board.cardsCollection[0].cards.push(new Card('Adicionar botão provisório de DELETE de um card. Deve ser posteriormente substituído pelo botão de edição'))
 
         this._user.folders.push(serverFolder);
         serverFolder.boards.push(board);
